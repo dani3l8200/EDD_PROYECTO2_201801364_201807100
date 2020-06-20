@@ -10,7 +10,7 @@ package Vehicle;
  * @author dani3l8200
  */
 public class Vehicle {
-    private int licensePlate;
+    private String licensePlate;
     private String brand;
     private String model;
     private int year;
@@ -18,11 +18,11 @@ public class Vehicle {
     private double price;
     private Type type;
     
-     public int getLicensePlate() {
+     public String getLicensePlate() {
         return licensePlate;
     }
 
-    public void setLicensePlate(int licensePlate) {
+    public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
 
@@ -76,7 +76,7 @@ public class Vehicle {
         this.type = type;
     }
  
-    public Vehicle(int licensePlate, String brand, String model, int year, String color, double price, Type type) {
+    public Vehicle(String licensePlate, String brand, String model, int year, String color, double price, Type type) {
         this.licensePlate = licensePlate;
         this.brand = brand;
         this.model = model;
