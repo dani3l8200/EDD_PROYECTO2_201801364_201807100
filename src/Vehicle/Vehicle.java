@@ -9,14 +9,14 @@ package Vehicle;
  *
  * @author dani3l8200
  */
-public class Vehicle {
+public class Vehicle implements Comparable<Vehicle> {
     private String licensePlate;
     private String brand;
     private String model;
     private int year;
     private String color;
     private double price;
-    private Type type;
+    private String type;
     
      public String getLicensePlate() {
         return licensePlate;
@@ -68,15 +68,15 @@ public class Vehicle {
 
 
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
  
-    public Vehicle(String licensePlate, String brand, String model, int year, String color, double price, Type type) {
+    public Vehicle(String licensePlate, String brand, String model, int year, String color, double price, String type) {
         this.licensePlate = licensePlate;
         this.brand = brand;
         this.model = model;
@@ -87,8 +87,13 @@ public class Vehicle {
     }
     @Override
     public String toString() {
-        return "Vehicle{" + "licensePlate=" + licensePlate + ", brand=" + brand + ", model=" + model + ", year=" + year + ", color=" + color + ", price=" + price + ", type=" + type + '}';
+        return "\"" + licensePlate + "\"" ;
+     
     }
+    @Override
+	public int compareTo(Vehicle o) {
+		return this.licensePlate.compareTo(o.licensePlate);
+	}
 }
 
 enum Type {
