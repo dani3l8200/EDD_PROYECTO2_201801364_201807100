@@ -87,7 +87,7 @@ public class Vehicle implements Comparable<Vehicle> {
     }
     @Override
     public String toString() {
-        return "\"" + licensePlate + "\"" ;
+        return  licensePlate + "\\n" + brand + "\\n"+color;
      
     }
     @Override
