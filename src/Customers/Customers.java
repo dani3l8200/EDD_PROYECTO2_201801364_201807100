@@ -25,18 +25,28 @@ public class Customers{
     private String name;
     private String last_name;
     private String gender;
+    private String date;
     private int phone;
     private String direction;
     
     public Customers(){}
 
-    public Customers(String DPI, String name, String last_name, String gender, int phone, String direction) {
+    public Customers(String DPI, String name, String last_name, String gender,String date, int phone, String direction) {
         this.DPI = DPI;
         this.name = name;
         this.last_name = last_name;
         this.gender = gender;
         this.phone = phone;
         this.direction = direction;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
     
     

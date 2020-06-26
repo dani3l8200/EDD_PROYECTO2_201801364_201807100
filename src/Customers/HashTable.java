@@ -66,13 +66,14 @@ public class HashTable{
         return newTable;
     }
     
-    public void EditNode(String _dpi,String _name, String _last_name,String _gender, int _phone,String _direction){
+    public void EditNode(String _dpi,String _name, String _last_name,String _gender,String _date,int _phone,String _direction){
         Customers editCustomer = search(_dpi);
         if(editCustomer == null)
             return;
         editCustomer.setName(_name);
         editCustomer.setLast_name(_last_name);
         editCustomer.setGender(_gender);
+        editCustomer.setDate(_date);
         editCustomer.setPhone(_phone);
         editCustomer.setDirection(_direction);
     }
