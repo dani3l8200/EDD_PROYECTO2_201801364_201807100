@@ -15,7 +15,7 @@ public class Vehicle implements Comparable<Vehicle> {
     private String model;
     private int year;
     private String color;
-    private double price;
+    private String price;
     private String type;
     
      public String getLicensePlate() {
@@ -58,11 +58,11 @@ public class Vehicle implements Comparable<Vehicle> {
         this.color = color;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -76,7 +76,7 @@ public class Vehicle implements Comparable<Vehicle> {
         this.type = type;
     }
  
-    public Vehicle(String licensePlate, String brand, String model, int year, String color, double price, String type) {
+    public Vehicle(String licensePlate, String brand, String model, int year, String color, String price, String type) {
         this.licensePlate = licensePlate;
         this.brand = brand;
         this.model = model;
@@ -85,9 +85,14 @@ public class Vehicle implements Comparable<Vehicle> {
         this.price = price;
         this.type = type;
     }
+
+    public Vehicle(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+    
     @Override
     public String toString() {
-        return  licensePlate + "\\n" + brand + "\\n"+color;
+        return  licensePlate;
      
     }
     @Override
@@ -96,6 +101,3 @@ public class Vehicle implements Comparable<Vehicle> {
 	}
 }
 
-enum Type {
-  AUTOMATIC,MECHANICAL
-}
