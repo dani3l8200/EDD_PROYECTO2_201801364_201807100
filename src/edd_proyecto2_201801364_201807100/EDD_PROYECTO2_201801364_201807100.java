@@ -7,7 +7,7 @@ package edd_proyecto2_201801364_201807100;
 
 /**
  *
- * @author dani3l8200
+ * @author dani3l8200 and Dabs
  */
 public class EDD_PROYECTO2_201801364_201807100 {
 
