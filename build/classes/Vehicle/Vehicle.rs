@@ -1,2 +1,0 @@
-Vehicle.Type
-Vehicle.Vehicle
