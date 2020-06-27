@@ -37,13 +37,12 @@ public class DoublyLinkedListCircular {
             start = n;
             last = start;
         }else{
-            n.setPrev(last);
-            last.setNext(n);
-            start.setPrev(n);
-            n.setNext(start);
+            n.next = start;
+            start.prev = n;
             start = n;
         }
         size++;
+        sortList(true);
     }
     
     public void insertLast(Drivers drivers){
@@ -51,18 +50,16 @@ public class DoublyLinkedListCircular {
         if(n != null)
             return;
         n = new node_Driver(drivers);
-        if(start == null){
-           
+        if(start == null){          
             start = n;
             last = start;
         }else{
-            n.setPrev(last);
-            last.setNext(n);
-            start.setPrev(n);
-            n.setNext(start);
-            last = start;
+            last.next = n;
+            n.prev = last;
+            last = n;           
         }
        size++;
+       sortList(true);
     }
     
     public void delete(String DPI){
@@ -70,10 +67,8 @@ public class DoublyLinkedListCircular {
         node_Driver p = Search(DPI);
         node_Driver q = start; 
         if(q.getDriver().getDPI().equals(DPI)){
-            node_Driver last1 = q.getPrev();
+            last = q.getPrev();
             node_Driver temp = p.getNext();
-            last1.setNext(q.getNext());
-            temp.setPrev(last1);
             start = temp;
             size--;
             return;
@@ -83,30 +78,29 @@ public class DoublyLinkedListCircular {
             q = q.getNext();
         }
         if(q.getDriver().getDPI().equals(DPI)){
-            node_Driver prev1 = q.getPrev();
-            node_Driver next1 = q.getNext();
-            prev1.setNext(q.getNext());
-            next1.getNext().setPrev(prev1);
+            last = q.getPrev();
+            last.next = q.next;
             size--;
-            return;
+            
         }else{
             System.out.println("Elemento no encontrado");
         }
-       /* if(p != null){
-            node_Driver temp = start; 
-            while(temp.getNext() != start && temp.getNext() != p){
-                temp = temp.getNext();
-            } 
-            if(temp.getNext() != start){
-                temp.setNext(p.getNext());
-                if(p.getNext() != start){
-                    p.getNext().setPrev(temp);
-                }
-                size--;
-            }
-        }*/
-        
+       
     }
+    
+    public void EditDrivers(String _dpi,String _name, String _last_name,Character type_Of_License ,String _gender,int _phone,String _direction){
+        Drivers driver = SearchForUpdate(_dpi);
+        if(driver == null)
+            return;
+        driver.setDPI(_dpi);
+        driver.setName(_name);
+        driver.setLast_Name(_last_name);
+        driver.setType_Of_License(type_Of_License);
+        driver.setGender(_gender);
+        driver.setPhone(_phone);
+        driver.setDirection(_direction);
+    }
+    
     
     public node_Driver Search(String DPI){
         node_Driver temp = start;
@@ -117,29 +111,88 @@ public class DoublyLinkedListCircular {
             return temp;
         return null;
     }
+    
+    public Drivers SearchForUpdate(String DPI){
+        node_Driver temp = Search(DPI);
+        if(temp == null)
+            return null;
+        return temp.getDriver();
+    }
+    
      public void print() {
-        System.out.print("\nCircular Doubly Linked List = ");
-        node_Driver ptr = start;
-        if (size == 0)
-        {
-            System.out.print("empty\n");
+          node_Driver next = start;
+        if(size==0){
+            System.out.println("Lista vacia");
             return;
         }
-        if (start.getNext()== start)
-        {
-            System.out.print(start.getDriver()+ " <-> "+ptr.getDriver()+ "\n");
-            return;
+        while (next != null) {
+            System.out.print(next.getDriver() + " ");
+            System.out.println();
+            next = next.next; 
         }
-        System.out.print(start.getDriver()+ " <-> ");
-        ptr = start.getNext();
-        while (ptr.getNext()!= start)
-        {
-            System.out.print(ptr.getDriver()+ " <-> ");
-            ptr = ptr.getNext();
-        }
-        System.out.print(ptr.getDriver());
-       
-       
+        System.out.println();
+   
+    }
+    public String generateDot(){
+        String myreport1 = "";
+        
+        if(start != null){
+            myreport1 += "digraph report1 {\n";
+            myreport1 += "\t  rankdir=LR;\n\t graph[bgcolor = orange]\n\t node [shape=record,width=0.25,height =0.25,style=filled, fillcolor=lemonchiffon1];\n\t\t";
+            myreport1 += "edge [color=black,tailclip=false];\n\tnodesep=1.5;\n\tranksep = 0.4; \n\t splines=true; \n\t"; 
+            node_Driver p = start;
+            
+            for(int i = 0;i<size;i++){
+                myreport1 += "pos" + i;
+		myreport1 += "[fillcolor=yellow,label = ";
+		myreport1 += "\"{<ref1>|<data> ";
+		myreport1 += "DPI " + p.getDriver().getDPI() + "\\n" + "Name " + p.getDriver().getName() + "\\n" +"Last Name : " +p.getDriver().getLast_Name() + "\\n"+  "Type License : " + p.getDriver().getType_Of_License() + "\\n"+ "Gender: " + p.getDriver().getGender() + "\\n"+ "Phone: " + p.getDriver().getPhone() + "\\n"+ "Direction: " + p.getDriver().getDirection()+ " | <ref> }\"];\n\t";          
+                p = p.next;
+            }
+            
+            for(int i = 0; i<size-1;i++){
+		myreport1 += "pos" + i + ":ref:c -> pos" + (i+1) +":ref1:c"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
 
+                myreport1 += "pos" + (i+1) + ":ref1:n -> pos" + (i) +":ref:n"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
+
+            }
+            for(int i = 0; i<= size-1;i++){
+			if(i == size-1){
+                            myreport1 += "pos0:ref1:n ->  pos" + (i) + ":ref:n[dir=forward,arrowhead=vee];\n\t";
+                            myreport1 += "pos0:ref1:s ->  pos" + (i) + ":ref:s[splines=\"false\",dir=back,arrowhead=vee];\n\t";
+                        }
+            }
+            myreport1 += "}";
+        }
+        return myreport1;
+    }
+    
+    public void sortList(boolean asc){
+        node_Driver p, q;
+        Drivers drivers;
+        if(start == last && start == null){
+            return;
+        }else{
+            if(asc == true){
+                p = start;
+                while(p != null){
+                    for(q = p.next; q != null; q = q.next){
+                        if(q == start){
+                            break;
+                        }
+                        if(p.getDriver().getDPI().compareTo(q.getDriver().getDPI())> 0){
+                            drivers = p.getDriver();
+                            p.setDriver(q.getDriver());
+                            q.setDriver(drivers);
+                        }
+                    }
+                    p = p.getNext();
+                    if(p == last){
+                        break;
+                    }
+                }
+            }
+        }
+        
     }
 }

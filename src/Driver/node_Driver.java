@@ -10,7 +10,7 @@ package Driver;
  * @author dani3l8200
  */
 public class node_Driver {
-    private node_Driver prev, next;
+    public node_Driver prev, next;
     private Drivers driver;
     public node_Driver(Drivers driver) {
        this.driver = driver;
