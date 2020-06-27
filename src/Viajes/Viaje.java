@@ -34,6 +34,16 @@ public class Viaje {
         Siguiente = null;
     }
     
+    public Viaje(int Dia, int Mes, int Año, int Hora, int Minuto, String Placa){
+        this.Dia = Dia;
+        this.Mes = Mes;
+        this.Año = Año;
+        this.Hora = Hora;
+        this.Minuto = Minuto;
+        this.Vehiculo = new Vehicle(Placa);
+        Siguiente = null;
+    }
+    
     public String OptenerClave(){
         return (Vehiculo.getLicensePlate() + DobleNum(Dia) + DobleNum(Mes) + DobleNum(Año) + DobleNum(Hora) + ":" +  DobleNum(Minuto));
     }

@@ -67,6 +67,26 @@ public class BlockChain {
         }
         return SB.toString();
     }
+    
+    public String GenerarDot(){
+        try {
+            String Dot = "digraph D {\n\n";
+            if(Cabeza!=null){
+                Dot += "\t BC" + Encriptar(Cabeza.OptenerClave()) + "[label=\"" + Encriptar(Cabeza.OptenerClave()) + "\"]\n";
+                Viaje Aux = Cabeza;
+                while(Aux.getSiguiente() != null){
+                    Dot += "\tBC" + Encriptar(Aux.getSiguiente().OptenerClave()) + "[label=\"" + Encriptar(Aux.getSiguiente().OptenerClave()) + "\"]\n";
+                    Dot += "\tBC" + Encriptar(Aux.OptenerClave()) + " -> BC" + Encriptar(Aux.getSiguiente().OptenerClave()) + "\n";
+                    Aux = Aux.getSiguiente();
+                }
+            }
+            Dot += "\n}";
+            return Dot;
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(BlockChain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
 
     public Viaje getCabeza() {
         return Cabeza;
