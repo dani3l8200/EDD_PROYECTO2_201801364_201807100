@@ -7,6 +7,7 @@ package edd_proyecto2_201801364_201807100;
 import Customers.HashTable;
 import Vehicle.*;
 import Viajes.*;
+import Huffman.*;
 
 /**
  *
@@ -20,6 +21,7 @@ public static BTree<Vehicle> tree = new BTree<Vehicle>();
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
         BlockChain Prueba = new BlockChain();
         Prueba.Insertar(new Viaje(3, 6, 20, 15, 7, "ABC"));
         Prueba.Insertar(new Viaje(7, 8, 15, 12, 17, "CTE"));
@@ -28,6 +30,14 @@ public static BTree<Vehicle> tree = new BTree<Vehicle>();
         Prueba.Insertar(new Viaje(12, 1, 12, 7, 20, "JES"));
         ImpresoraDot Impresora = new ImpresoraDot();
         Impresora.Imprimir("BlockChain", Prueba.GenerarDot());
+        */
+        String Texto = "Texto de relleno solo para probar el funcionamiento del codigo en la desincriptacion";
+        Codificador Prueba = new Codificador();
+        String Encriptado = Prueba.Generar(Texto);
+        System.out.println(Prueba.Desencriptar(Encriptado));
+        Texto = "Texto de encriptado No.2 para ver si se resetea";
+        Encriptado = Prueba.Generar(Texto);
+        System.out.println(Prueba.Desencriptar(Encriptado));
     }
     
 }
