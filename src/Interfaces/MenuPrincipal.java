@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//@author Dabs
 package Interfaces;
-
-/**
- *
- * @author Barillas
- */
 public class MenuPrincipal extends javax.swing.JFrame {
 
     /**
@@ -62,6 +53,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         ButtonRutas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonRutas.setText("Rutas");
+        ButtonRutas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonRutasActionPerformed(evt);
+            }
+        });
 
         ButtonViajes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonViajes.setText("Viajes");
@@ -138,6 +134,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void ButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonSalirActionPerformed
+
+    private void ButtonRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRutasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonRutasActionPerformed
 
     /**
      * @param args the command line arguments
