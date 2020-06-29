@@ -19,7 +19,7 @@ import Customers.HashTable;
 public class EDD_PROYECTO2_201801364_201807100 {
 
     public static HashTable TClientes;
-    public static BTree<Vehicle> AVehiculos = new BTree<>();;
+    public static BTree<Vehicle> AVehiculos;
     public static DoublyLinkedListCircular circular = new DoublyLinkedListCircular();
     public static CargaRutas CRutas;
     public static MenuClientes MClientes;

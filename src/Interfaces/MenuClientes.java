@@ -29,6 +29,7 @@ public class MenuClientes extends javax.swing.JFrame {
     
     public void Pintar(){
         Image ImagenGrafo = new ImageIcon("Clientes.png").getImage();
+        ImagenGrafo.flush();
         Icon Icono = new ImageIcon(ImagenGrafo);
         JLabelReporte.setIcon(Icono);
         JLabelReporte.repaint();
@@ -230,7 +231,7 @@ public class MenuClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JComboBoxAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboBoxAccionActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_JComboBoxAccionActionPerformed
 
     private void JTextFieldGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldGeneroActionPerformed
