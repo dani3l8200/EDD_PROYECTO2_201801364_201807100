@@ -27,11 +27,12 @@ public class ImpresoraDot {
             ProcessBuilder pbuilder;
             pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", RutaPNG, RutaDot );
 	    pbuilder.redirectErrorStream( true );
-            pbuilder.start();
+            pbuilder.start().waitFor();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
     public void ImprimirTxT(String Nombre, String Contenido){
         try {
             String RutaEDD = System.getProperty("user.dir") + "\\" + Nombre + ".edd";

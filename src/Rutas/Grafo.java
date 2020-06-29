@@ -16,9 +16,16 @@ public class Grafo {
     public boolean InsertarCamino(String First, String Second, int Tiempo){
         Nodo Primero = Nodos.Buscar(First);
         Nodo Segundo = Nodos.Buscar(Second);
+        if(Primero == null){
+            InsertarNodo(new Nodo(First));
+            Primero = Nodos.Buscar(First);
+        }
+        if(Segundo == null){
+            InsertarNodo(new Nodo(Second));
+            Segundo = Nodos.Buscar(Second);
+        }
         if(Primero != null && Segundo != null){
             Primero.getCaminos().Insertar(new Nodo(Second, Tiempo));
-            Segundo.getCaminos().Insertar(new Nodo(First, Tiempo));
             return true;
         }
         return false;
@@ -73,7 +80,6 @@ public class Grafo {
     
     public String GenerarDot(){
         String Dot = "digraph D {\n\n";
-        Lista Hecho = new Lista();
         Nodo AuxN = Nodos.getCabeza();
         while(AuxN != null){
             Dot += "\t" + AuxN.getNombre() + "[label=\"" + AuxN.getNombre() + "\"]\n";
@@ -82,12 +88,9 @@ public class Grafo {
         Dot+="\n";
         AuxN = Nodos.getCabeza();
         while(AuxN != null){
-            Hecho.Insertar(new Nodo(AuxN.getNombre()));
             Nodo AuxC = AuxN.getCaminos().getCabeza();
             while(AuxC != null){
-                if(Hecho.Buscar(AuxC.getNombre()) == null){
-                    Dot += "\t" + AuxN.getNombre() + " -> " + AuxC.getNombre() + " [arrowhead=none, label=\"" + AuxC.getTiempo() + "\"]\n";
-                }
+                Dot += "\t" + AuxN.getNombre() + " -> " + AuxC.getNombre() + " [label=\"" + AuxC.getTiempo() + "\"]\n";
                 AuxC = AuxC.getSiguiente();
             }
             AuxN = AuxN.getSiguiente();

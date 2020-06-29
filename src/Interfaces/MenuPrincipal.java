@@ -1,5 +1,10 @@
 //@author Dabs
 package Interfaces;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MClientes;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MVehiculos;
 public class MenuPrincipal extends javax.swing.JFrame {
 
     /**
@@ -7,6 +12,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        Image ImagenGrafo = new ImageIcon("Mapa.png").getImage();
+        Icon Icono = new ImageIcon(ImagenGrafo.getScaledInstance(JLabelReporte.getWidth(), JLabelReporte.getHeight(), Image.SCALE_SMOOTH));
+        JLabelReporte.setIcon(Icono);
+        JLabelReporte.repaint();
     }
 
     /**
@@ -18,7 +27,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JPanelImagen = new javax.swing.JPanel();
         ButtonClientes = new javax.swing.JButton();
         ButtonVehiculos = new javax.swing.JButton();
         ButtonConductores = new javax.swing.JButton();
@@ -28,25 +36,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ButtonSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        JLabelReporte = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout JPanelImagenLayout = new javax.swing.GroupLayout(JPanelImagen);
-        JPanelImagen.setLayout(JPanelImagenLayout);
-        JPanelImagenLayout.setHorizontalGroup(
-            JPanelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        JPanelImagenLayout.setVerticalGroup(
-            JPanelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
-        );
-
         ButtonClientes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonClientes.setText("Clientes");
+        ButtonClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonClientesActionPerformed(evt);
+            }
+        });
 
         ButtonVehiculos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonVehiculos.setText("Vehiculos");
+        ButtonVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonVehiculosActionPerformed(evt);
+            }
+        });
 
         ButtonConductores.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonConductores.setText("Conductores");
@@ -88,8 +96,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JPanelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JLabelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButtonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ButtonVehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
@@ -106,9 +114,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(JPanelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(JLabelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ButtonClientes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -124,7 +130,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ButtonSalir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -138,6 +144,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void ButtonRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRutasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonRutasActionPerformed
+
+    private void ButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonClientesActionPerformed
+        if(MClientes == null){
+            MClientes = new MenuClientes();
+        }
+        MClientes.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ButtonClientesActionPerformed
+
+    private void ButtonVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonVehiculosActionPerformed
+        if(MVehiculos == null){
+            MVehiculos = new MenuVehiculos();
+        }
+        MVehiculos.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ButtonVehiculosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,7 +204,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton ButtonSalir;
     private javax.swing.JButton ButtonVehiculos;
     private javax.swing.JButton ButtonViajes;
-    private javax.swing.JPanel JPanelImagen;
+    private javax.swing.JLabel JLabelReporte;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

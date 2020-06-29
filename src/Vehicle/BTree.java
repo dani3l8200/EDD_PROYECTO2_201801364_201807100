@@ -341,17 +341,16 @@ public class BTree <T extends Comparable<T>> {
        
        
         public String GenerateReportTreeB(){
+            String graph = "digraph btree {\n";
             if(root.n != 0){
-                String graph = "digraph btree {\n"
-                             + "rankdir=TB;\n"
+                        graph+= "rankdir=TB;\n"
                              + "graph[fontcolor=white, bgcolor=black, color=white];\n"
                              + "node[style=filled, fillcolor=lemonchiffon1, shape=record, height=.1];\n"
                              + "edge[color=white];\n"
-                             + root.generateDot()
-                             +  "}";
-                return graph;
+                             + root.generateDot();
             }
-            return null;
+            graph +=  "}";
+            return graph;
         }
         
 	/*

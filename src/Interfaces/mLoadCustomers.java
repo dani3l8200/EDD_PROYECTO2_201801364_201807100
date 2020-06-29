@@ -5,7 +5,7 @@
  */
 package Interfaces;
 import Customers.Customers;
-import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.hashtTable;
+//import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.hashtTable;
 import edd_proyecto2_201801364_201807100.ImpresoraDot;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -102,7 +102,7 @@ public class mLoadCustomers extends javax.swing.JFrame {
                            date = partes[4], phone = partes[5],direcction = partes[6];
                    
                    Customers s = new Customers(dpi,name,last_name,gender,date,Integer.parseInt(phone),direcction);
-                   hashtTable.InsertNode(s);
+                   //hashtTable.InsertNode(s);
                    linea = leer.readLine();
                }
                JOptionPane.showMessageDialog(null, "Llenado de Clientes Exitoso", "Clientes",JOptionPane.INFORMATION_MESSAGE);
@@ -118,7 +118,7 @@ public class mLoadCustomers extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ImpresoraDot graphviz = new ImpresoraDot();
-        graphviz.Imprimir("tablaHash",hashtTable.GenerateReportTablaHash());
+        //graphviz.Imprimir("tablaHash",hashtTable.GenerateReportTablaHash());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

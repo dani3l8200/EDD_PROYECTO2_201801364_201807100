@@ -5,7 +5,7 @@
  */
 package Interfaces;
 import Vehicle.Vehicle;
-import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.tree;
+//import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.tree;
 import edd_proyecto2_201801364_201807100.ImpresoraDot;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -102,7 +102,7 @@ public class mLoadVehicles extends javax.swing.JFrame {
                            color = partes[4], price = partes[5],type = partes[6];
                    
                    Vehicle s = new Vehicle(licensePlate, brand, model,Integer.parseInt(year) , color, price, type);
-                   tree.insert(s);
+                   //tree.insert(s);
                    linea = leer.readLine();
                }
                JOptionPane.showMessageDialog(null, "Llenado de Clientes Exitoso", "Clientes",JOptionPane.INFORMATION_MESSAGE);
@@ -117,8 +117,8 @@ public class mLoadVehicles extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          ImpresoraDot graphviz = new ImpresoraDot();
-         graphviz.Imprimir("Btree", tree.GenerateReportTreeB());
-         System.out.println(tree);
+        // graphviz.Imprimir("Btree", tree.GenerateReportTreeB());
+         //System.out.println(tree);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

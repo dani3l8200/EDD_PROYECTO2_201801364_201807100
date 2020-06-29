@@ -1,12 +1,27 @@
 //@author Dabs
 package Interfaces;
+
+import java.io.File;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import Rutas.Grafo;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
+
 public class CargaRutas extends javax.swing.JFrame {
 
+    FileNameExtensionFilter Filtro = new FileNameExtensionFilter("Archivo de texto", "txt");
+    
     /**
      * Creates new form CargaRutas
      */
     public CargaRutas() {
         initComponents();
+        JFileChooserCargar.setFileFilter(Filtro);
     }
 
     /**
@@ -18,21 +33,26 @@ public class CargaRutas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        FileChooserCargar = new javax.swing.JFileChooser();
+        JFileChooserCargar = new javax.swing.JFileChooser();
         ButtonCargar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        JLabelRuta = new javax.swing.JLabel();
         ButtonContinuar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ButtonCargar.setText("Cargar Archivo");
+        ButtonCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCargarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel1.setText("Carga de Rutas");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Sin Archivo Cargado");
+        JLabelRuta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabelRuta.setText("Sin Archivo Cargado");
 
         ButtonContinuar.setText("Continuar");
         ButtonContinuar.addActionListener(new java.awt.event.ActionListener() {
@@ -49,7 +69,7 @@ public class CargaRutas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JLabelRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ButtonCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(ButtonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -63,7 +83,7 @@ public class CargaRutas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JLabelRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -73,9 +93,49 @@ public class CargaRutas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonContinuarActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        if(Principal == null){
+            Principal = new MenuPrincipal();
+        }
+        Principal.setVisible(true);
     }//GEN-LAST:event_ButtonContinuarActionPerformed
 
+    private void ButtonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCargarActionPerformed
+        JFileChooserCargar.showOpenDialog(this);
+        File Archivo = JFileChooserCargar.getSelectedFile();
+        if(Archivo != null){
+            if (Archivo.exists()) {
+                JLabelRuta.setText(Archivo.toString());
+                CargarRutas(Archivo.toString());
+            }else{
+                JOptionPane.showMessageDialog(null, "La direccion de archivo no es valida, archivo inexistente", "Archivo inexistente", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ButtonCargarActionPerformed
+
+    public void CargarRutas(String Ruta){
+        String linea;
+        Mapa = new Grafo();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Ruta));
+            while ((linea = bufferedReader.readLine())!=null) {
+                String[] Entradas = linea.trim().split("%");
+                for(int i=0; i< Entradas.length; i++){
+                    String[] parts = Entradas[i].trim().split("/");
+                    if(parts.length == 3 ){
+                        Mapa.InsertarCamino(parts[0], parts[1], Integer.parseInt(parts[2]));
+                    }
+                }
+            }
+            Impresora.Imprimir("Mapa", Mapa.GenerarDot());
+            ButtonContinuar.setEnabled(true);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error Inesperado, intente de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -114,8 +174,8 @@ public class CargaRutas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCargar;
     private javax.swing.JButton ButtonContinuar;
-    private javax.swing.JFileChooser FileChooserCargar;
+    private javax.swing.JFileChooser JFileChooserCargar;
+    private javax.swing.JLabel JLabelRuta;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

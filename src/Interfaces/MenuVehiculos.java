@@ -5,6 +5,15 @@
  */
 package Interfaces;
 
+import Vehicle.BTree;
+import Vehicle.Vehicle;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AVehiculos;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Barillas
@@ -16,6 +25,21 @@ public class MenuVehiculos extends javax.swing.JFrame {
      */
     public MenuVehiculos() {
         initComponents();
+        GenerarImagen();
+    }
+    
+    public void GenerarImagen(){
+        if(AVehiculos == null){
+            AVehiculos = new BTree<Vehicle>();
+        }
+        Impresora.Imprimir("Vehiculos", AVehiculos.GenerateReportTreeB());
+    }
+    
+    public void Pintar(){
+        Image ImagenGrafo = new ImageIcon("Vehiculos.png").getImage();
+        Icon Icono = new ImageIcon(ImagenGrafo);
+        JLabelReporte.setIcon(Icono);
+        JLabelReporte.repaint();
     }
 
     /**
@@ -31,7 +55,6 @@ public class MenuVehiculos extends javax.swing.JFrame {
         JComboBoxAccion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         JButtonAccion = new javax.swing.JButton();
-        JPanelReporte = new javax.swing.JPanel();
         JTextFieldPlaca = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -47,6 +70,7 @@ public class MenuVehiculos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         JTextFieldTipo = new javax.swing.JTextField();
         JButtonRegresar = new javax.swing.JButton();
+        JLabelReporte = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,17 +89,6 @@ public class MenuVehiculos extends javax.swing.JFrame {
         jLabel2.setText("Accion:");
 
         JButtonAccion.setText("Realizar");
-
-        javax.swing.GroupLayout JPanelReporteLayout = new javax.swing.GroupLayout(JPanelReporte);
-        JPanelReporte.setLayout(JPanelReporteLayout);
-        JPanelReporteLayout.setHorizontalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
-        );
-        JPanelReporteLayout.setVerticalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         JTextFieldPlaca.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
@@ -134,6 +147,11 @@ public class MenuVehiculos extends javax.swing.JFrame {
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
+        JButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +160,7 @@ public class MenuVehiculos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -179,9 +198,7 @@ public class MenuVehiculos extends javax.swing.JFrame {
                                     .addComponent(JComboBoxAccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JPanelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(JLabelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -189,7 +206,6 @@ public class MenuVehiculos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(JPanelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -225,7 +241,8 @@ public class MenuVehiculos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(JTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(JLabelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JButtonRegresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -253,6 +270,11 @@ public class MenuVehiculos extends javax.swing.JFrame {
     private void JTextFieldTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextFieldTipoActionPerformed
+
+    private void JButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegresarActionPerformed
+        Principal.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_JButtonRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,7 +315,7 @@ public class MenuVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton JButtonAccion;
     private javax.swing.JButton JButtonRegresar;
     private javax.swing.JComboBox<String> JComboBoxAccion;
-    private javax.swing.JPanel JPanelReporte;
+    private javax.swing.JLabel JLabelReporte;
     private javax.swing.JTextField JTextFieldAño;
     private javax.swing.JTextField JTextFieldColor;
     private javax.swing.JTextField JTextFieldMarca;
