@@ -5,11 +5,13 @@ public class NodoArbol {
     private Letra Valor;
     private NodoArbol Izquierda;
     private NodoArbol Derecha;
+    public static String intento = "";
     
     public NodoArbol(){
         Valor = null;
         Izquierda = null;
         Derecha = null;
+        
     }
     
     public NodoArbol(Letra Valor){
@@ -27,9 +29,10 @@ public class NodoArbol {
                 Derecha.Mostrar(Continuidad + "1");
             }
         }else{
-            System.out.println(Valor.getCaracter() + " = " + Continuidad);
+           intento += Valor.getCaracter() + " = " + Continuidad + "\n";
         }
     }
+    
     
     public String Buscar(char Letra, String Continuidad){
         if(Valor==null){

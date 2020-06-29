@@ -28,7 +28,7 @@ public class Customers{
     private String date;
     private int phone;
     private String direction;
-    
+    private int generate_trips;
     public Customers(){}
 
     public Customers(String DPI, String name, String last_name, String gender,String date, int phone, String direction) {
@@ -49,7 +49,13 @@ public class Customers{
         this.date = date;
     }
     
-    
+    public int getGenerate_trips() {
+        return generate_trips;
+    }
+
+    public void setGenerate_trips() {
+       generate_trips += 1;
+    }
     
     public String getDPI() {
         return DPI;

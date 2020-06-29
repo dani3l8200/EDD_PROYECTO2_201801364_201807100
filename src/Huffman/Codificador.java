@@ -75,6 +75,35 @@ public class Codificador {
             }
         }
     }
+    public String Datos(String Texto){
+        Cabeza = null;
+       for(int i=0; i<Texto.length(); i++){
+            if(Buscar(Texto.toCharArray()[i], true) == null){
+                Insertar(new NodoLista(Texto.toCharArray()[i]));
+            }
+       }
+       String datos = "";
+        if(Cabeza!=null){
+            Ordenar();
+            NodoLista Aux = Cabeza;
+            while(Aux!=null){
+                datos += Aux.getArbol().getValor().getCaracter() + ", " + Aux.getArbol().getValor().getFrecuencia() + "\n";
+                Aux = Aux.getSiguiente();
+            }
+            while(getCont()!=1){
+                NodoArbol Nuevo = new NodoArbol();
+                Nuevo.setIzquierda(Sacar());
+                Nuevo.setDerecha(Sacar());
+                Insertar(new NodoLista(Nuevo));
+            }
+            Cabeza.getArbol().Mostrar("");
+            datos += "\nValor de cada letra:" +"\n"+ NodoArbol.intento +"\n";
+           
+        }
+        
+        
+        return datos;
+    }
     
     public String Generar(String Texto){
         Cabeza = null;
@@ -87,14 +116,14 @@ public class Codificador {
         if(Cabeza != null){
             Ordenar();
             Mostrar();
+             
             while(getCont()!=1){
                 NodoArbol Nuevo = new NodoArbol();
                 Nuevo.setIzquierda(Sacar());
                 Nuevo.setDerecha(Sacar());
                 Insertar(new NodoLista(Nuevo));
             }
-            Cabeza.getArbol().Mostrar("");
-            String Codigo = "";
+             String Codigo = "";   
             for(int i=0; i<Texto.length(); i++){
                 Codigo += Cabeza.getArbol().Buscar(Texto.toCharArray()[i], "");
             }
