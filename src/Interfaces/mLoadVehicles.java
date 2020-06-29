@@ -5,6 +5,7 @@
  */
 package Interfaces;
 import Vehicle.Vehicle;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AVehiculos;
 //import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.tree;
 import edd_proyecto2_201801364_201807100.ImpresoraDot;
 import java.awt.Color;
@@ -94,16 +95,16 @@ public class mLoadVehicles extends javax.swing.JFrame {
            try {
                BufferedReader leer = new BufferedReader(new FileReader(ar.getAbsolutePath()));
                
-               String linea = leer.readLine();
-               while(linea != null){
-                   String[] partes = linea.split("[:]+|;");
+               String linea = "";
+               while((linea = leer.readLine()) != null){
+                   String[] datos = linea.split(";");
+                   String[] partes = datos[0].split(":");
                    
-                   String licensePlate = partes[0], brand = partes[1], model = partes[2], year = partes[3],
-                           color = partes[4], price = partes[5],type = partes[6];
+             
                    
-                   Vehicle s = new Vehicle(licensePlate, brand, model,Integer.parseInt(year) , color, price, type);
-                   //tree.insert(s);
-                   linea = leer.readLine();
+                
+                   AVehiculos.insert(new Vehicle(partes[0], partes[1], partes[2],Integer.parseInt(partes[3]) , partes[4], partes[5], partes[6]));
+                   
                }
                JOptionPane.showMessageDialog(null, "Llenado de Clientes Exitoso", "Clientes",JOptionPane.INFORMATION_MESSAGE);
            } catch (Exception e) {
@@ -111,20 +112,21 @@ public class mLoadVehicles extends javax.swing.JFrame {
            } 
        }else if(comando.equals(JFileChooser.CANCEL_SELECTION)){
             dispose();
-            
+            MenuVehiculos menuv = new MenuVehiculos();
+            menuv.setVisible(true);
         }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         ImpresoraDot graphviz = new ImpresoraDot();
+         
         // graphviz.Imprimir("Btree", tree.GenerateReportTreeB());
-         //System.out.println(tree);
+        System.out.println(AVehiculos);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -29,7 +29,7 @@ public class BTree <T extends Comparable<T>> {
 			n = 0;
                       
 			leaf = true;
-			keys = (T[]) new Comparable[ORDER];
+			keys = (T[]) new Comparable[ORDER-1];
 			children = (BTree<T>.BTreeNode[]) Array.newInstance(BTreeNode.class, ORDER);
 		}
 
@@ -96,15 +96,16 @@ public class BTree <T extends Comparable<T>> {
                     }
                     
                     graph += "<f" + n + ">\"];\n\t";
-                  if(!leaf){
+                 
                     for (int i = 0; i <= n; i++){
-                          
+                        if(children[i] == null)
+                            continue;
                           graph += children[i].generateDot();
                        
                        
                           graph +=  "node" + keys[0] + ":f" + i + "-> node"+ children[i].keys[0] + ";\n";
                     }
-                  } 
+                   
                     return graph;
                 }
 	
@@ -365,16 +366,14 @@ public class BTree <T extends Comparable<T>> {
 	public void insert(T k) {
 		BTree<T>.BTreeNode r = root;
 		if (r.isFull()) {
-                       //insertNonFull(r, k);
 			BTreeNode s = new BTreeNode();
-                        
 			s.children[0] = r;
 			s.leaf = false;
-			 root = s;
+			root = s;
 
 			splitChild(s, 0, r);
 			System.out.println("SplitChild" + s);
-                        insertNonFull(s, k);
+			insertNonFull(s, k);
 		} else {
 			insertNonFull(r, k);
 		}
@@ -419,36 +418,27 @@ public class BTree <T extends Comparable<T>> {
 	 */
 
 	private void insertNonFull(BTree<T>.BTreeNode node, T k) {
-		
+		int i = node.n - 1;
 		if (node.leaf) {
-                        int i = 0;
-                        for( i = node.n-1;i>=0 && k.compareTo(node.keys[i]) < 0; i--){
-                     
-                            node.keys[i + 1] = node.keys[i];
-                        }
-                        
-                        // is god
+			for (; i >= 0 && k.compareTo(node.keys[i]) < 0; i--) {
+				node.keys[i + 1] = node.keys[i];
+			}
 			node.keys[i + 1] = k;
 			node.n++;
-                }if(!node.leaf){
-                        int i = 0;
-                        for( i = node.n-1; i>= 0 && k.compareTo(node.keys[i]) < 0 ;i--){}
+		} else {
+			for (; i >= 0 && k.compareTo(node.keys[i]) < 0; i--) {
+
+			}
 			i++;
 			BTree<T>.BTreeNode child = node.children[i];
 			if (child.isFull()) {
-                            // insertNonFull(node.children[i], k);
 				splitChild(node, i, child);
 				if (k.compareTo(node.keys[i]) > 0) {
 					i++;
 				}
-                        }
-                     insertNonFull(node.children[i], k);
-                        
-                }
-                        
-                        
-		
-
+			}
+			insertNonFull(node.children[i], k);
+		}
 	}
 
 	/*
@@ -494,18 +484,17 @@ public class BTree <T extends Comparable<T>> {
          */
 
 	private void splitChild(BTreeNode x, int i, BTreeNode y) {
-		BTreeNode z = new BTreeNode();
+                BTreeNode z = new BTreeNode();
 		z.leaf = y.leaf;
 		z.n = MIN_KEYS;
 
 		for (int j = 0; j < z.n; j++) {
-                    
-			z.keys[j] = y.keys[j + MIN_KEYS+1];
+			z.keys[j] = y.keys[j + MIN_KEYS + 1];
 		}
 
 		if (!y.leaf) {
 			for (int j = 0; j <= z.n; j++) {
-				z.children[j] = y.children[j + MIN_KEYS+1];
+				z.children[j] = y.children[j + MIN_KEYS + 1];
 			}
 		}
 		y.n = MIN_KEYS;
@@ -518,7 +507,6 @@ public class BTree <T extends Comparable<T>> {
 			x.keys[j + 1] = x.keys[j];
 		}
 		x.keys[i] = y.keys[MIN_KEYS];
-                
 		x.n++;
 	}
 
@@ -529,19 +517,19 @@ public class BTree <T extends Comparable<T>> {
 		return root.toString();
 	}
         
-       /*  public static void main(String[] args) {
+        public static void main(String[] args) {
 
-        BTree<Vehicle> tree = new BTree<>();
+        BTree<Integer> tree = new BTree<>();
 	
-      Vehicle s = new Vehicle("XA19291", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s1 = new Vehicle("BA1321", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s2 = new Vehicle("DA1321", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s3 = new Vehicle("CA1321", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s4 = new Vehicle("WA1321", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s5 = new Vehicle("QA1321", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s6 = new Vehicle("AQ9102", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s7 = new Vehicle("AC9102", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
-        Vehicle s8 = new Vehicle("AD9102", "Toyota","Corolla", 2005, "Negro", 2845.05,"Automatico");
+     /* Vehicle s = new Vehicle("XA19291", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s1 = new Vehicle("BA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s2 = new Vehicle("DA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s3 = new Vehicle("CA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s4 = new Vehicle("WA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s5 = new Vehicle("QA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s6 = new Vehicle("AQ9102", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s7 = new Vehicle("AC9102", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s8 = new Vehicle("AD9102", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
                 tree.insert(s);
                 tree.insert(s1);
                   tree.insert(s2);
@@ -551,9 +539,62 @@ public class BTree <T extends Comparable<T>> {
                          tree.insert(s6);
                          tree.insert(s7);
                          tree.insert(s8);
-                         tree.Delete(s3);
+                         tree.Delete(s3);*/
+            
+                tree.insert(0);
+                tree.insert(1);
+                tree.insert(2);
+                tree.insert(3);
+                tree.insert(4);
+                tree.insert(5);
+                tree.insert(6);
+                tree.insert(7);
+                tree.insert(8);
+                tree.insert(9);
+                tree.insert(10);
+                tree.insert(11);
+                tree.insert(12);
+                tree.insert(13);
+                tree.insert(14);
+                tree.insert(15);
+                tree.insert(16);
+                tree.insert(17);
+                tree.insert(18);
+                tree.insert(19);
+                tree.insert(20);
+                tree.insert(21);
+                tree.insert(22);
+                tree.insert(23);
+                tree.insert(24);
+                tree.insert(25);
+                tree.insert(26);
+                tree.insert(27);
+                tree.insert(28);
+                tree.insert(29);
+                tree.insert(30);
+                tree.insert(31);
+                tree.insert(32);
+                tree.insert(33);
+                tree.insert(34);
+                tree.insert(35);
+                tree.insert(36);
+                tree.insert(37);
+                tree.insert(38);
+                tree.insert(39);
+                tree.insert(40);
+                tree.insert(41);
+                tree.insert(42);
+                tree.insert(43);
+                tree.insert(44);
+                tree.insert(45);
+                tree.insert(46);
+                tree.insert(47);
+                tree.insert(48);
+                tree.insert(49);
+               
+            
                         
-                       System.out.println( tree.GenerateReportTreeB());;
-	}*/
+                       System.out.println(tree);;
+	}
 	
 }
