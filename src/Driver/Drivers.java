@@ -17,6 +17,7 @@ public class Drivers {
     private String Gender;
     private int Phone;
     private String Direction;
+    private int generate_income;
 
     public Drivers(String DPI, String Name, String Last_Name, Character type_Of_License, String Gender, int Phone, String Direction) {
         this.DPI = DPI;
@@ -31,6 +32,15 @@ public class Drivers {
     public Drivers(String DPI) {
         this.DPI = DPI;
     }
+
+    public int getGenerate_income() {
+        return generate_income;
+    }
+
+    public void setGenerate_income() {
+        generate_income += 1;
+    }
+    
 
     public String getDPI() {
         return DPI;

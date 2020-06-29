@@ -17,6 +17,7 @@ public class Vehicle implements Comparable<Vehicle> {
     private String color;
     private String price;
     private String type;
+    private int generate_trips;
     
      public String getLicensePlate() {
         return licensePlate;
@@ -26,6 +27,16 @@ public class Vehicle implements Comparable<Vehicle> {
         this.licensePlate = licensePlate;
     }
 
+    public int getGenerate_trips() {
+        return generate_trips;
+    }
+
+    public void setGenerate_trips() {
+       generate_trips += 1;
+    }
+    
+    
+    
     public String getBrand() {
         return brand;
     }
