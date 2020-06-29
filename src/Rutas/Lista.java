@@ -97,6 +97,21 @@ public class Lista {
         return Dot;
     }
     
+    public String SubGrafo(String Prefijo){
+        String Dot = "subgraph Rutas" + Prefijo + " {\n\n";
+        if(Cabeza!=null){
+            Dot += "\tRuta" + Prefijo + Cabeza.getNombre() + "[label=\"" + Cabeza.getNombre() + "\"]\n";
+            Nodo Aux = Cabeza;
+            while(Aux.getSiguiente() != null){
+                Dot += "\tRuta" + Prefijo + Aux.getSiguiente().getNombre() + "[label=\"" + Aux.getSiguiente().getNombre() + "\"]\n";
+                Dot += "\tRuta" + Prefijo + Aux.getNombre() + " -> Ruta" + Prefijo + Aux.getSiguiente().getNombre() + " [label=\"" + Aux.getSiguiente().getTiempo() + "\"]\n";
+                Aux = Aux.getSiguiente();
+            }
+        }
+        Dot += "\n}";
+        return Dot;
+    }
+    
     public int CantidadNodos(){
         int Cont = 0;
         Nodo Aux = Cabeza;

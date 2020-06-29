@@ -1,6 +1,12 @@
 //@author Dabs
 package edd_proyecto2_201801364_201807100;
 
+import Viajes.Viaje;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AVehiculos;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.LConductores;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.TClientes;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -58,5 +64,29 @@ public class ImpresoraDot {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public String DotGeneral(){
+        String Dot = "digraph D {\n\n";
+        if(BCViajes!=null && TClientes!=null && LConductores != null && Mapa!=null && AVehiculos!=null){
+            Dot += BCViajes.SubGrafo() + "\n";
+            Dot += TClientes.SubGrafo() + "\n";
+            Dot += LConductores.SubGrafo() + "\n";
+            Dot += Mapa.SubGrafo() + "\n";
+            Dot += AVehiculos.SubGrafo() + "\n";
+            if(BCViajes.getCabeza() != null){
+                Viaje Aux = BCViajes.getCabeza();
+                while(Aux.getSiguiente() != null){
+                    Dot += Aux.getRuta().SubGrafo(Aux.OptenerClave()) + "\n";
+                    Dot += "\tBC" + Aux.OptenerClave() + " -> Cliente" + Aux.getCliente().getDPI() + "\n";
+                    Dot += "\tBC" + Aux.OptenerClave() + " -> Conductor" + Aux.getConductor().getDPI() + "\n";
+                    Dot += "\tBC" + Aux.OptenerClave() + " -> nodeArbol" + Aux.getVehiculo().getLicensePlate() + "\n";
+                    Dot += "\tBC" + Aux.OptenerClave() + " -> Ruta" + Aux.OptenerClave() + Aux.getRuta().getCabeza().getNombre() + "\n";
+                    Aux = Aux.getSiguiente();
+                }
+            }
+        }
+        Dot += "\n}";
+        return Dot;
     }
 }

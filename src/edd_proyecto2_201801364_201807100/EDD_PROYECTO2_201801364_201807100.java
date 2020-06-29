@@ -10,7 +10,7 @@ import Driver.*;
 import Vehicle.*;
 import Rutas.*;
 import Interfaces.*;
-import Customers.HashTable;
+import Viajes.*;
 
 /**
  *
@@ -19,8 +19,7 @@ import Customers.HashTable;
 public class EDD_PROYECTO2_201801364_201807100 {
 
     public static HashTable TClientes;
-    public static BTree<Vehicle> AVehiculos;
-    public static DoublyLinkedListCircular circular = new DoublyLinkedListCircular();
+    public static DoublyLinkedListCircular LConductores;
     public static CargaRutas CRutas;
     public static MenuClientes MClientes;
     public static MenuConductores MConductores;
@@ -33,12 +32,15 @@ public class EDD_PROYECTO2_201801364_201807100 {
     public static NuevoViaje NViaje;
     public static ImpresoraDot Impresora;
     public static Grafo Mapa;
+    public static BTree<Vehicle> AVehiculos;
+    public static BlockChain BCViajes;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         TClientes = null;
+        LConductores = null;
         AVehiculos = null;
         MClientes = null;
         MConductores = null;
@@ -49,6 +51,7 @@ public class EDD_PROYECTO2_201801364_201807100 {
         MVehiculos = null;
         MViajes = null;
         NViaje = null;
+        BCViajes = null;
         Mapa = null;
         Impresora = new ImpresoraDot();
         CRutas = new CargaRutas();

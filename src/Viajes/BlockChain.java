@@ -182,6 +182,7 @@ public class BlockChain {
         }
         return Lvehicle;
     }
+    
     public BlockChain CopyDriversOtherList(){
         Ldriver = new BlockChain();
         Viaje aux = Cabeza;
@@ -444,6 +445,52 @@ public class BlockChain {
             Logger.getLogger(BlockChain.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
+    }
+    
+    public String SubGrafo(){
+        try {
+            String Dot = "subgraph BlockChain {\n\n";
+            if(Cabeza!=null){
+                Dot += "\t BC" + Encriptar(Cabeza.OptenerClave()) + "[label=\"" + Encriptar(Cabeza.OptenerClave()) + "\"]\n";
+                Viaje Aux = Cabeza;
+                while(Aux.getSiguiente() != null){
+                    Dot += "\tBC" + Encriptar(Aux.getSiguiente().OptenerClave()) + "[label=\"" + Encriptar(Aux.getSiguiente().OptenerClave()) + "\"]\n";
+                    Dot += "\tBC" + Encriptar(Aux.OptenerClave()) + " -> BC" + Encriptar(Aux.getSiguiente().OptenerClave()) + "\n";
+                    Aux = Aux.getSiguiente();
+                }
+            }
+            Dot += "\n}";
+            return Dot;
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(BlockChain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+    
+    public Viaje[] TopViajes(){
+        Viaje TopViajes[] = new Viaje[10];
+        for(int i=0; i<10; i++){
+            TopViajes[i] = null;
+        }
+        Viaje Aux = Cabeza;
+        while(Aux!=null){
+            for(int i=0; i<10; i++){
+                if(TopViajes[i] == null){
+                    TopViajes[i] = Aux;
+                    i=10;
+                }else{
+                    if(TopViajes[i].getRuta().CantidadNodos() < Aux.getRuta().CantidadNodos()){
+                        for(int j=9; j>i; j--){
+                            TopViajes[j] = TopViajes[j-1];
+                        }
+                        TopViajes[i] = Aux;
+                        i=10;
+                    }
+                }
+            }
+            Aux = Aux.getSiguiente();
+        }
+        return TopViajes;
     }
 
     public Viaje getCabeza() {

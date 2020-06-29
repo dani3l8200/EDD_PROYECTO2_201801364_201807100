@@ -125,6 +125,32 @@ public class HashTable{
         return graph;
     }
     
+    public String SubGrafo(){
+        String graph = "subgraph Clientes{\nrankdir=\"LR\";\n node[style=filled, fillcolor=lightskyblue,shape=rect];\n";
+               graph += "graph[label=\"CLIENTES\",fontcolor=black, bgcolor=greenyellow, color=black];\n parent[label=<\n<table border='1' cellborder='1'>\n";
+               
+        int i = 0;
+        for (DoublyLinkedList tn : tablaHash) {
+            graph += "<tr><td port='port_" + i + "' HEIGHT=\"100\">" + i + "</td></tr>";
+            i++;
+        }      
+        i = 0;
+        graph += "</table>\n>];";   
+        
+        for (DoublyLinkedList tn : tablaHash) {
+            if (tn != null) {
+                
+                    graph += tn.generateNode(i);
+                    graph += "parent:port_" + i + " -> Cliente" + tn.head.customers.getDPI()+ " [lhead=Clientes" + i + "];\n";
+                
+
+            }
+            i++;
+        }
+         graph += "}";
+        return graph;
+    }
+    
     public int size(){
         return 0;  
     }

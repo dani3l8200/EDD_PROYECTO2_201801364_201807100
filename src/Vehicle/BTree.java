@@ -108,6 +108,29 @@ public class BTree <T extends Comparable<T>> {
                    
                     return graph;
                 }
+                
+                
+                public String SubGrafo(){
+                    String graph = "";
+                     graph  += "nodeArbol" + keys[0] + "[label=\"";
+                    for(int i = 0; i < n; i++){
+                       
+                        graph += "<f"+ i + "> |" + keys[i] + "|"; 
+                    }
+                    
+                    graph += "<f" + n + ">\"];\n\t";
+                 
+                    for (int i = 0; i <= n; i++){
+                        if(children[i] == null)
+                            continue;
+                          graph += children[i].generateDot();
+                       
+                       
+                          graph +=  "nodeArbol" + keys[0] + ":f" + i + "-> nodeArbol"+ children[i].keys[0] + ";\n";
+                    }
+                   
+                    return graph;
+                }
 	
              
 	}
@@ -349,6 +372,19 @@ public class BTree <T extends Comparable<T>> {
                              + "node[style=filled, fillcolor=lemonchiffon1, shape=record, height=.1];\n"
                              + "edge[color=white];\n"
                              + root.generateDot();
+            }
+            graph +=  "}";
+            return graph;
+        }
+        
+        public String SubGrafo(){
+            String graph = "subgraph btree {\n";
+            if(root.n != 0){
+                        graph+= "rankdir=TB;\n"
+                             + "graph[fontcolor=white, bgcolor=black, color=white];\n"
+                             + "node[style=filled, fillcolor=lemonchiffon1, shape=record, height=.1];\n"
+                             + "edge[color=white];\n"
+                             + root.SubGrafo();
             }
             graph +=  "}";
             return graph;

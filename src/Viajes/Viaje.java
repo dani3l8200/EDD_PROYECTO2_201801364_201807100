@@ -44,6 +44,13 @@ public class Viaje {
         Siguiente = null;
     }
     
+    public Viaje(String Origen, String Destino, Lista Ruta){
+        this.Origen = Origen;
+        this.Destino = Destino;
+        this.Ruta = Ruta;
+        Siguiente = null;
+    }
+    
     public String OptenerClave(){
         return (Vehiculo.getLicensePlate() + DobleNum(Dia) + DobleNum(Mes) + DobleNum(Año) + DobleNum(Hora) + ":" +  DobleNum(Minuto));
     }

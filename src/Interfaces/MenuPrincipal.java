@@ -1,10 +1,14 @@
 //@author Dabs
 package Interfaces;
+import Viajes.BlockChain;
+import Viajes.Viaje;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MClientes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MVehiculos;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
 public class MenuPrincipal extends javax.swing.JFrame {
 
     /**

@@ -98,6 +98,27 @@ public class Grafo {
         Dot += "\n}";
         return Dot;
     }
+    
+    public String SubGrafo(){
+        String Dot = "subgraph Mapa {\n\n";
+        Nodo AuxN = Nodos.getCabeza();
+        while(AuxN != null){
+            Dot += "\tGrafo" + AuxN.getNombre() + "[label=\"" + AuxN.getNombre() + "\"]\n";
+            AuxN = AuxN.getSiguiente();
+        }
+        Dot+="\n";
+        AuxN = Nodos.getCabeza();
+        while(AuxN != null){
+            Nodo AuxC = AuxN.getCaminos().getCabeza();
+            while(AuxC != null){
+                Dot += "\tGrafo" + AuxN.getNombre() + " -> Grafo" + AuxC.getNombre() + " [label=\"" + AuxC.getTiempo() + "\"]\n";
+                AuxC = AuxC.getSiguiente();
+            }
+            AuxN = AuxN.getSiguiente();
+        }
+        Dot += "\n}";
+        return Dot;
+    }
 
     public Lista getNodos() {
         return Nodos;
