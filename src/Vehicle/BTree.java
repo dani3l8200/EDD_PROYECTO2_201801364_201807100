@@ -18,8 +18,6 @@ public class BTree <T extends Comparable<T>> {
         Vehicle vehicle;
 	public class BTreeNode {
 		int n;
-                int count = -1;
-             
 		boolean leaf;
 		BTreeNode children[];
 		T[] keys;
@@ -37,9 +35,6 @@ public class BTree <T extends Comparable<T>> {
 			return n == ORDER-1;
 		}
                 
-                public boolean isFullDelete(){
-                    return n == ORDER-2;
-                }
                 
                 
                 
@@ -52,10 +47,7 @@ public class BTree <T extends Comparable<T>> {
                     return -1;
                 }
         
-                public int counter(){
-                    count++;
-                    return count;
-                }
+               
 	
                	@Override
 		public String toString() {
@@ -156,7 +148,7 @@ public class BTree <T extends Comparable<T>> {
         */
         private void remove(BTree<T>.BTreeNode node, T k){
             System.out.println("The n is :" + node.n);
-            int aux = node.find(k);
+            int aux = node.find(search(k));
             System.out.println("The position is:"+ aux);
             if(aux != -1){
                 if(node.leaf){
@@ -362,7 +354,11 @@ public class BTree <T extends Comparable<T>> {
                 
 		return search(node.children[i], k);
 	}
-       
+        
+        public void searchForUpdate(T k, T k2){
+            Delete(search(k));
+            insert(k2);
+        }
        
         public String GenerateReportTreeB(){
             String graph = "digraph btree {\n";
@@ -555,17 +551,21 @@ public class BTree <T extends Comparable<T>> {
         
         public static void main(String[] args) {
 
-        BTree<Integer> tree = new BTree<>();
+        
+        BTree<Vehicle> tree = new BTree<>();
 	
-     /* Vehicle s = new Vehicle("XA19291", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s1 = new Vehicle("BA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s2 = new Vehicle("DA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s3 = new Vehicle("CA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s4 = new Vehicle("WA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s5 = new Vehicle("QA1321", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s6 = new Vehicle("AQ9102", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s7 = new Vehicle("AC9102", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
-        Vehicle s8 = new Vehicle("AD9102", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+      Vehicle s = new Vehicle("001DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s1 = new Vehicle("002DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s2 = new Vehicle("003DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s3 = new Vehicle("004DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s4 = new Vehicle("005DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s5 = new Vehicle("006DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s6 = new Vehicle("007DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s7 = new Vehicle("008DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s8 = new Vehicle("009DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+        Vehicle s9 = new Vehicle("010DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+         Vehicle s10 = new Vehicle("011DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
+         Vehicle s11 = new Vehicle("012DJH", "Toyota","Corolla", 2005, "Negro", "2845.05","Automatico");
                 tree.insert(s);
                 tree.insert(s1);
                   tree.insert(s2);
@@ -575,9 +575,13 @@ public class BTree <T extends Comparable<T>> {
                          tree.insert(s6);
                          tree.insert(s7);
                          tree.insert(s8);
-                         tree.Delete(s3);*/
-            
-                tree.insert(0);
+                         
+                         tree.insert(s9);
+                         tree.insert(s10);
+                         Vehicle s111 = new Vehicle("010DJH");
+                         tree.insert(s11);
+                         tree.Delete(tree.search(s111));
+            /*    tree.insert(0);
                 tree.insert(1);
                 tree.insert(2);
                 tree.insert(3);
@@ -626,11 +630,11 @@ public class BTree <T extends Comparable<T>> {
                 tree.insert(46);
                 tree.insert(47);
                 tree.insert(48);
-                tree.insert(49);
+                tree.insert(49);*/
                
             
                         
-                       System.out.println(tree);;
+                       System.out.println(tree.GenerateReportTreeB());;
 	}
 	
 }

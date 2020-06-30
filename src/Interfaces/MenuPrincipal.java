@@ -8,6 +8,7 @@ import java.awt.Image;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MClientes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MVehiculos;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MConductores;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -62,6 +63,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         ButtonConductores.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonConductores.setText("Conductores");
+        ButtonConductores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonConductoresActionPerformed(evt);
+            }
+        });
 
         ButtonRutas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonRutas.setText("Rutas");
@@ -164,6 +170,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MVehiculos.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_ButtonVehiculosActionPerformed
+
+    private void ButtonConductoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConductoresActionPerformed
+       if(MConductores == null){
+            MConductores = new MenuConductores();
+        }
+        MConductores.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ButtonConductoresActionPerformed
 
     /**
      * @param args the command line arguments

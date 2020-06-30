@@ -1,13 +1,19 @@
 //@author Dabs
 package Interfaces;
 
+import Customers.Customers;
 import Customers.HashTable;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.TClientes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import javax.sound.midi.Soundbank;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class MenuClientes extends javax.swing.JFrame {
 
@@ -63,6 +69,9 @@ public class MenuClientes extends javax.swing.JFrame {
         JButtonRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JLabelReporte = new javax.swing.JLabel();
+        jFileChooser1 = new javax.swing.JFileChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,6 +135,11 @@ public class MenuClientes extends javax.swing.JFrame {
         });
 
         JButtonAccion.setText("Realizar");
+        JButtonAccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonAccionActionPerformed(evt);
+            }
+        });
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
@@ -136,7 +150,18 @@ public class MenuClientes extends javax.swing.JFrame {
         });
 
         jScrollPane1.setAutoscrolls(true);
+
+        JLabelReporte.setText("     ");
         jScrollPane1.setViewportView(JLabelReporte);
+
+        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Fecha:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,17 +170,12 @@ public class MenuClientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(3, 3, 3)
-                                .addComponent(JTextFieldTelefono1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                                .addComponent(JTextFieldApellidos))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -179,9 +199,18 @@ public class MenuClientes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(JComboBoxAccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(JComboBoxAccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
+                                .addGap(3, 3, 3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JTextFieldTelefono1)
+                                    .addComponent(jTextField1))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -220,11 +249,14 @@ public class MenuClientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
-                            .addComponent(JTextFieldTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JButtonRegresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(JTextFieldTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JButtonRegresar))
         );
 
         pack();
@@ -250,6 +282,123 @@ public class MenuClientes extends javax.swing.JFrame {
         Principal.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_JButtonRegresarActionPerformed
+
+    private void JButtonAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonAccionActionPerformed
+        switch(JComboBoxAccion.getSelectedIndex()){
+            case 0:{
+                String DPI = JTextFieldDPI.getText(), Name = JTextFieldNombres.getText(), Last_Name = JTextFieldApellidos.getText(),
+                        Gender = JTextFieldGenero.getText(), Date = jTextField1.getText(), Phone = JTextFieldTelefono.getText(),
+                        Direction = JTextFieldTelefono1.getText();
+                if(DPI.equals("") && Name.equals("") && Last_Name.equals("") && Gender.equals("") && Date.equals("") && Phone.equals("") && Direction.equals("")){
+                     JOptionPane.showMessageDialog(null, "Llene todos los campos", "Clientes", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    try {
+                        TClientes.InsertNode(new Customers(DPI, Name, Last_Name, Gender, Date, Integer.parseInt(Phone), Direction));
+                        JOptionPane.showMessageDialog(null, "Cliente Agregado", "Clientes",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Cliente No Agregado", "Clientes",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                jTextField1.setText("");
+                JTextFieldTelefono1.setText("");
+                JTextFieldTelefono.setText("");
+                JTextFieldNombres.setText("");
+                JTextFieldGenero.setText("");
+                JTextFieldDPI.setText("");
+                JTextFieldApellidos.setText("");
+                System.out.println("posicion 0");
+                break;
+            }
+            case 1:{
+                String DPI = JTextFieldDPI.getText(), Name = JTextFieldNombres.getText(), Last_Name = JTextFieldApellidos.getText(),
+                        Gender = JTextFieldGenero.getText(), Date = jTextField1.getText(), Phone = JTextFieldTelefono.getText(),
+                        Direction = JTextFieldTelefono1.getText();
+                if(DPI.equals("") && Name.equals("") && Last_Name.equals("") && Gender.equals("") && Date.equals("") && Phone.equals("") && Direction.equals("")){
+                     JOptionPane.showMessageDialog(null, "Llene todos los campos", "Clientes", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    try {
+                        TClientes.EditNode(DPI, Name, Last_Name, Gender, Date, Integer.parseInt(Phone), Direction);
+                        JOptionPane.showMessageDialog(null, "Cliente Modificado", "Clientes",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Cliente No Modificado", "Clientes",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                jTextField1.setText("");
+                JTextFieldTelefono1.setText("");
+                JTextFieldTelefono.setText("");
+                JTextFieldNombres.setText("");
+                JTextFieldGenero.setText("");
+                JTextFieldDPI.setText("");
+                JTextFieldApellidos.setText("");
+                System.out.println("Posicion1");
+                break;
+            }
+            case 2:{
+                String DPI = JTextFieldDPI.getText();
+                if(DPI.equals("")){
+                     JOptionPane.showMessageDialog(null, "Llene el campo del DPI", "Clientes", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    try {
+                        TClientes.DeleteNode(DPI);
+                        JOptionPane.showMessageDialog(null, "Cliente Eliminado", "Clientes",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Cliente No Modificado", "Clientes",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                jTextField1.setText("");
+                JTextFieldTelefono1.setText("");
+                JTextFieldTelefono.setText("");
+                JTextFieldNombres.setText("");
+                JTextFieldGenero.setText("");
+                JTextFieldDPI.setText("");
+                JTextFieldApellidos.setText("");
+                System.out.println("Posicion2");
+                break;
+            }
+            case 3:
+                GenerarImagen();
+                Pintar();
+                System.out.println("Posicion3");
+                break;
+            case 4:
+                jFileChooser1.showOpenDialog(this);
+                File Archivo = jFileChooser1.getSelectedFile();
+                if(Archivo != null){
+                    if (Archivo.exists()) {
+                        try {
+                            BufferedReader leer = new BufferedReader(new FileReader(Archivo.getAbsolutePath()));
+                            String linea = "";
+                            while((linea = leer.readLine()) != null){
+                                 
+                                String[] partes = linea.split("[,]+|;");
+                                if(partes.length <= 7){
+                                    TClientes.InsertNode(new Customers(partes[0],partes[1], partes[2],partes[3],partes[4],Integer.parseInt(partes[5]),partes[6]));
+                                }else{
+                                    TClientes.InsertNode(new Customers(partes[0],partes[1],partes[2],partes[3],Integer.parseInt(partes[4]),partes[5]));
+                                }
+                            }
+                            JOptionPane.showMessageDialog(null, "Llenado de Clients Exitoso", "Clientes",JOptionPane.INFORMATION_MESSAGE);
+                            GenerarImagen();
+                            Pintar();
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        } 
+                    }else{
+                    JOptionPane.showMessageDialog(null, "La direccion de archivo no es valida, archivo inexistente", "Archivo inexistente", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
+                }
+                System.out.println("Posicion4");
+                break;
+            default:
+               break;
+        }
+    }//GEN-LAST:event_JButtonAccionActionPerformed
+
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,6 +446,7 @@ public class MenuClientes extends javax.swing.JFrame {
     private javax.swing.JTextField JTextFieldNombres;
     private javax.swing.JTextField JTextFieldTelefono;
     private javax.swing.JTextField JTextFieldTelefono1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -305,6 +455,8 @@ public class MenuClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

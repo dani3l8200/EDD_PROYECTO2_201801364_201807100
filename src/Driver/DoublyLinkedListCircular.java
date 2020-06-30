@@ -88,19 +88,19 @@ public class DoublyLinkedListCircular {
        
     }
     
-    public void EditDrivers(String _dpi,String _name, String _last_name,Character type_Of_License ,String _gender,int _phone,String _direction){
+    public void EditDrivers(String _dpi,String _newDPI,String _name, String _last_name,Character type_Of_License ,String _gender,String _date,int _phone,String _direction){
         Drivers driver = SearchForUpdate(_dpi);
         if(driver == null)
             return;
-        driver.setDPI(_dpi);
+        driver.setDPI(_newDPI);
         driver.setName(_name);
         driver.setLast_Name(_last_name);
         driver.setType_Of_License(type_Of_License);
         driver.setGender(_gender);
+        driver.setDate(_date);
         driver.setPhone(_phone);
         driver.setDirection(_direction);
     }
-    
     
     public node_Driver Search(String DPI){
         node_Driver temp = start;

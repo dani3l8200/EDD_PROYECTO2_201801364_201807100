@@ -5,6 +5,18 @@
  */
 package Interfaces;
 
+import Driver.DoublyLinkedListCircular;
+import Driver.Drivers;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AConductores;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
+import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Barillas
@@ -16,8 +28,23 @@ public class MenuConductores extends javax.swing.JFrame {
      */
     public MenuConductores() {
         initComponents();
+        GenerarImagen();
+        Pintar();
     }
-
+     public void GenerarImagen(){
+        if(AConductores == null){
+            AConductores = new DoublyLinkedListCircular();
+        }
+        Impresora.Imprimir("Conductores", AConductores.generateDot());
+    }
+    
+    public void Pintar(){
+        Image ImagenGrafo = new ImageIcon("Conductores.png").getImage();
+        ImagenGrafo.flush();
+        Icon Icono = new ImageIcon(ImagenGrafo);
+        JLabelReporte.setIcon(Icono);
+        JLabelReporte.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +54,7 @@ public class MenuConductores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         JComboBoxAccion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -43,10 +71,15 @@ public class MenuConductores extends javax.swing.JFrame {
         JTextFieldTelefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         JTextFieldTelefono1 = new javax.swing.JTextField();
-        JPanelReporte = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         JTextFieldApellidos1 = new javax.swing.JTextField();
         JButtonRegresar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JLabelReporte = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +99,11 @@ public class MenuConductores extends javax.swing.JFrame {
         jLabel2.setText("Accion:");
 
         JButtonAccion.setText("Realizar");
+        JButtonAccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonAccionActionPerformed(evt);
+            }
+        });
 
         JTextFieldDPI.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
@@ -78,6 +116,11 @@ public class MenuConductores extends javax.swing.JFrame {
         JTextFieldNombres.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         JTextFieldApellidos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTextFieldApellidosActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Apellidos:");
@@ -112,84 +155,92 @@ public class MenuConductores extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout JPanelReporteLayout = new javax.swing.GroupLayout(JPanelReporte);
-        JPanelReporte.setLayout(JPanelReporteLayout);
-        JPanelReporteLayout.setHorizontalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
-        );
-        JPanelReporteLayout.setVerticalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Licencia");
 
         JTextFieldApellidos1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldApellidos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTextFieldApellidos1ActionPerformed(evt);
+            }
+        });
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
+
+        JLabelReporte.setText("     ");
+        jScrollPane1.setViewportView(JLabelReporte);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Fecha:");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setText("DPI Nuevo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTextFieldApellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(3, 3, 3)
+                        .addComponent(JTextFieldTelefono1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTextFieldGenero))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTextFieldTelefono))
+                    .addComponent(JButtonAccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTextFieldApellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(3, 3, 3)
-                                .addComponent(JTextFieldTelefono1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTextFieldGenero))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTextFieldTelefono))
-                            .addComponent(JButtonAccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JTextFieldDPI)
-                                    .addComponent(JTextFieldNombres)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(JComboBoxAccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(10, 10, 10)
-                        .addComponent(JPanelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JTextFieldDPI)
+                            .addComponent(JTextFieldNombres)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JComboBoxAccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(JPanelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(JComboBoxAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,10 +273,19 @@ public class MenuConductores extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
-                            .addComponent(JTextFieldTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(JTextFieldTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JButtonRegresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -246,6 +306,130 @@ public class MenuConductores extends javax.swing.JFrame {
     private void JTextFieldGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldGeneroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextFieldGeneroActionPerformed
+
+    private void JButtonAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonAccionActionPerformed
+        switch(JComboBoxAccion.getSelectedIndex()){
+            case 0:{
+                String DPI = JTextFieldDPI.getText(),  Name = JTextFieldNombres.getText(), Last_Name = JTextFieldApellidos.getText(),
+                        Type_License = JTextFieldApellidos1.getText(), Gender = JTextFieldGenero.getText(), Date = jTextField1.getText(),
+                        Phone = JTextFieldTelefono.getText(), Direction = JTextFieldTelefono1.getText();
+                if(DPI.equals("") && Name.equals("") && Last_Name.equals("") && Type_License.equals("") && Gender.equals("") && Date.equals("") && Phone.equals("") && Direction.equals("")){
+                    JOptionPane.showMessageDialog(null, "Llene todos los campos", "Conductores", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    try {
+                        AConductores.insertLast(new Drivers(DPI, Name, Last_Name, Type_License.charAt(0), Gender, Date, Integer.parseInt(Phone), Direction));
+                        JOptionPane.showMessageDialog(null, "Conductor Agregado", "Conductores",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Conductor No Agregado", "Conductores",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                jTextField1.setText("");
+                JTextFieldTelefono1.setText("");
+                JTextFieldTelefono.setText("");
+                JTextFieldNombres.setText("");
+                JTextFieldGenero.setText("");
+                JTextFieldDPI.setText("");
+                JTextFieldApellidos1.setText("");
+                JTextFieldApellidos.setText("");
+                System.out.println("Posicion 1");
+                break;
+            }
+            case 1:{
+                String DPI = JTextFieldDPI.getText(), newDPI = jTextField2.getText(), Name = JTextFieldNombres.getText(), Last_Name = JTextFieldApellidos.getText(),
+                        Type_License = JTextFieldApellidos1.getText(), Gender = JTextFieldGenero.getText(), Date = jTextField1.getText(),
+                        Phone = JTextFieldTelefono.getText(), Direction = JTextFieldTelefono1.getText();
+                if(newDPI.equals("") && DPI.equals("") && Name.equals("") && Last_Name.equals("") && Type_License.equals("") && Gender.equals("") && Date.equals("") && Phone.equals("") && Direction.equals("")){
+                    JOptionPane.showMessageDialog(null, "Llene todos los campos", "Conductores", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    try {
+                        AConductores.EditDrivers(DPI,newDPI, Name, Last_Name, Type_License.charAt(0), Gender, Date, Integer.parseInt(Phone), Direction);
+                        JOptionPane.showMessageDialog(null, "Conductor Editado", "Conductores",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Conductor No Editado", "Conductores",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                jTextField1.setText("");
+                JTextFieldTelefono1.setText("");
+                JTextFieldTelefono.setText("");
+                JTextFieldNombres.setText("");
+                JTextFieldGenero.setText("");
+                JTextFieldDPI.setText("");
+                JTextFieldApellidos1.setText("");
+                JTextFieldApellidos.setText("");
+                jTextField2.setText("");
+                System.out.println("Posicion 2");
+                break;
+            }
+            case 2:{
+                String DPI = JTextFieldDPI.getText();
+                if(DPI.equals("")){
+                    JOptionPane.showMessageDialog(null, "Llene el Campo del DPI", "Conductores", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    try {
+                        AConductores.delete(DPI);
+                        JOptionPane.showMessageDialog(null, "Conductor Eliminado", "Conductores",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Conductor No Eliminado", "Conductores",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                jTextField1.setText("");
+                JTextFieldTelefono1.setText("");
+                JTextFieldTelefono.setText("");
+                JTextFieldNombres.setText("");
+                JTextFieldGenero.setText("");
+                JTextFieldDPI.setText("");
+                JTextFieldApellidos1.setText("");
+                JTextFieldApellidos.setText("");
+                jTextField2.setText("");
+                System.out.println("Posicion 3");
+                break;
+            }
+            case 3:
+                GenerarImagen();
+                Pintar();
+                System.out.println("Posicion 4");
+                break;
+            case 4:
+                jFileChooser1.showOpenDialog(this);
+                File Archivo = jFileChooser1.getSelectedFile();
+                if(Archivo != null){
+                    if (Archivo.exists()) {
+                        try {
+                            BufferedReader leer = new BufferedReader(new FileReader(Archivo.getAbsolutePath()));
+                            String linea = "";
+                            while((linea = leer.readLine()) != null){
+                                 
+                                String[] partes = linea.split("[\\%]+|;");
+                                
+                                    AConductores.insertLast(new Drivers(partes[0],partes[1],partes[2], partes[3].charAt(0), partes[4],partes[5],Integer.parseInt(partes[6]), partes[7]));
+                                
+                            }
+                            JOptionPane.showMessageDialog(null, "Llenado de Conductores Exitoso", "Conductores",JOptionPane.INFORMATION_MESSAGE);
+                            GenerarImagen();
+                            Pintar();
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        } 
+                    }else{
+                    JOptionPane.showMessageDialog(null, "La direccion de archivo no es valida, archivo inexistente", "Archivo inexistente", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
+                }
+                System.out.println("Posicon 5");
+                break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_JButtonAccionActionPerformed
+
+    private void JTextFieldApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTextFieldApellidosActionPerformed
+
+    private void JTextFieldApellidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldApellidos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTextFieldApellidos1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,7 +470,7 @@ public class MenuConductores extends javax.swing.JFrame {
     private javax.swing.JButton JButtonAccion;
     private javax.swing.JButton JButtonRegresar;
     private javax.swing.JComboBox<String> JComboBoxAccion;
-    private javax.swing.JPanel JPanelReporte;
+    private javax.swing.JLabel JLabelReporte;
     private javax.swing.JTextField JTextFieldApellidos;
     private javax.swing.JTextField JTextFieldApellidos1;
     private javax.swing.JTextField JTextFieldDPI;
@@ -294,7 +478,10 @@ public class MenuConductores extends javax.swing.JFrame {
     private javax.swing.JTextField JTextFieldNombres;
     private javax.swing.JTextField JTextFieldTelefono;
     private javax.swing.JTextField JTextFieldTelefono1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -303,5 +490,8 @@ public class MenuConductores extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

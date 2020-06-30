@@ -15,6 +15,7 @@ public class Drivers {
     private String Last_Name;
     private Character type_Of_License;
     private String Gender;
+    private String Date;
     private int Phone;
     private String Direction;
     private int generate_income;
@@ -27,6 +28,27 @@ public class Drivers {
         this.Gender = Gender;
         this.Phone = Phone;
         this.Direction = Direction;
+    }
+
+    public Drivers(String DPI, String Name, String Last_Name, Character type_Of_License, String Gender, String Date, int Phone, String Direction) {
+        this.DPI = DPI;
+        this.Name = Name;
+        this.Last_Name = Last_Name;
+        this.type_Of_License = type_Of_License;
+        this.Gender = Gender;
+        this.Date = Date;
+        this.Phone = Phone;
+        this.Direction = Direction;
+    }
+    
+    
+    
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String Date) {
+        this.Date = Date;
     }
 
     public Drivers(String DPI) {

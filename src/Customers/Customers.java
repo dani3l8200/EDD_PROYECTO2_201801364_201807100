@@ -41,6 +41,15 @@ public class Customers{
         this.date = date;
     }
 
+    public Customers(String DPI, String name, String last_name, String gender, int phone, String direction) {
+        this.DPI = DPI;
+        this.name = name;
+        this.last_name = last_name;
+        this.gender = gender;
+        this.phone = phone;
+        this.direction = direction;
+    }
+
     public String getDate() {
         return date;
     }

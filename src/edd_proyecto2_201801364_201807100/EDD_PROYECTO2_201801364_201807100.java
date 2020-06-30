@@ -19,7 +19,7 @@ import Viajes.*;
 public class EDD_PROYECTO2_201801364_201807100 {
 
     public static HashTable TClientes;
-    public static DoublyLinkedListCircular LConductores;
+    public static DoublyLinkedListCircular AConductores;
     public static CargaRutas CRutas;
     public static MenuClientes MClientes;
     public static MenuConductores MConductores;
@@ -40,7 +40,7 @@ public class EDD_PROYECTO2_201801364_201807100 {
      */
     public static void main(String[] args) {
         TClientes = null;
-        LConductores = null;
+        AConductores = null;
         AVehiculos = null;
         MClientes = null;
         MConductores = null;

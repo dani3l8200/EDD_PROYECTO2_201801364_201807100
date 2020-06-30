@@ -108,7 +108,7 @@ public class Vehicle implements Comparable<Vehicle> {
     }
     @Override
 	public int compareTo(Vehicle o) {
-		return this.licensePlate.compareTo(o.licensePlate);
+            return this.licensePlate.compareToIgnoreCase(o.licensePlate)  > 0 ? 1 : this.licensePlate.compareToIgnoreCase(o.getLicensePlate()) < 0 ? -1 : 0;
 	}
 }
 

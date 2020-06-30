@@ -1,0 +1,33 @@
+digraph report1 {
+	  rankdir=LR;
+	 graph[bgcolor = orange]
+	 node [shape=record,width=0.25,height =0.25,style=filled, fillcolor=lemonchiffon1];
+		edge [color=black,tailclip=false];
+	nodesep=1.5;
+	ranksep = 0.4; 
+	 splines=true; 
+	pos0[fillcolor=yellow,label = "{<ref1>|<data> DPI 1005957733221\nName Rolando\nLast Name : Lopez\nType License : C\nGender: Masculino\nPhone: 247789936\nDirection: 14 Ave. 15-96 Zona 6 | <ref> }"];
+	pos1[fillcolor=yellow,label = "{<ref1>|<data> DPI 3005952367401\nName Pedro\nLast Name : Ordonez\nType License : A\nGender: Masculino\nPhone: 24658966\nDirection: 14 Ave. 15-96 Zona 1 | <ref> }"];
+	pos2[fillcolor=yellow,label = "{<ref1>|<data> DPI 3033988367401\nName Fernanda\nLast Name : Lopez\nType License : C\nGender: Femenino\nPhone: 24778906\nDirection: 14 Ave. 15-96 Zona 4 | <ref> }"];
+	pos3[fillcolor=yellow,label = "{<ref1>|<data> DPI 4005952367401\nName Maria\nLast Name : Alfaro\nType License : A\nGender: Femenino\nPhone: 24888966\nDirection: 14 Ave. 15-96 Zona 7 | <ref> }"];
+	pos4[fillcolor=yellow,label = "{<ref1>|<data> DPI 5004153267401\nName Mario\nLast Name : Altan\nType License : B\nGender: Masculino\nPhone: 24448966\nDirection: 14 Ave. 15-96 Zona 3 | <ref> }"];
+	pos5[fillcolor=yellow,label = "{<ref1>|<data> DPI 6005952367401\nName Segio\nLast Name : Chacon\nType License : B\nGender: Masculino\nPhone: 24658966\nDirection: 14 Ave. 15-96 Zona 8 | <ref> }"];
+	pos6[fillcolor=yellow,label = "{<ref1>|<data> DPI 7805544360001\nName Luis\nLast Name : Ordonez\nType License : B\nGender: Masculino\nPhone: 24650066\nDirection: 14 Ave. 15-96 Zona 2 | <ref> }"];
+	pos7[fillcolor=yellow,label = "{<ref1>|<data> DPI 9805952367756\nName Virginia\nLast Name : Depaz\nType License : C\nGender: Femenino\nPhone: 17766966\nDirection: 14 Ave. 15-96 Zona 5 | <ref> }"];
+	pos0:ref:c -> pos1:ref1:c[arrowhead=vee, arrowtail=dot, dir=both];
+	pos1:ref1:n -> pos0:ref:n[arrowhead=vee, arrowtail=dot, dir=both];
+	pos1:ref:c -> pos2:ref1:c[arrowhead=vee, arrowtail=dot, dir=both];
+	pos2:ref1:n -> pos1:ref:n[arrowhead=vee, arrowtail=dot, dir=both];
+	pos2:ref:c -> pos3:ref1:c[arrowhead=vee, arrowtail=dot, dir=both];
+	pos3:ref1:n -> pos2:ref:n[arrowhead=vee, arrowtail=dot, dir=both];
+	pos3:ref:c -> pos4:ref1:c[arrowhead=vee, arrowtail=dot, dir=both];
+	pos4:ref1:n -> pos3:ref:n[arrowhead=vee, arrowtail=dot, dir=both];
+	pos4:ref:c -> pos5:ref1:c[arrowhead=vee, arrowtail=dot, dir=both];
+	pos5:ref1:n -> pos4:ref:n[arrowhead=vee, arrowtail=dot, dir=both];
+	pos5:ref:c -> pos6:ref1:c[arrowhead=vee, arrowtail=dot, dir=both];
+	pos6:ref1:n -> pos5:ref:n[arrowhead=vee, arrowtail=dot, dir=both];
+	pos6:ref:c -> pos7:ref1:c[arrowhead=vee, arrowtail=dot, dir=both];
+	pos7:ref1:n -> pos6:ref:n[arrowhead=vee, arrowtail=dot, dir=both];
+	pos0:ref1:n ->  pos7:ref:n[dir=forward,arrowhead=vee];
+	pos0:ref1:s ->  pos7:ref:s[splines="false",dir=back,arrowhead=vee];
+	}
