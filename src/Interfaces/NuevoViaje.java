@@ -5,6 +5,8 @@
  */
 package Interfaces;
 
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MViajes;
+
 /**
  *
  * @author Barillas
@@ -101,6 +103,11 @@ public class NuevoViaje extends javax.swing.JFrame {
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
+        JButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPanelReporteLayout = new javax.swing.GroupLayout(JPanelReporte);
         JPanelReporte.setLayout(JPanelReporteLayout);
@@ -238,6 +245,12 @@ public class NuevoViaje extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegresarActionPerformed
+        MViajes = new MenuViajes();
+        MViajes.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_JButtonRegresarActionPerformed
 
     /**
      * @param args the command line arguments

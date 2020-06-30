@@ -14,14 +14,18 @@ import javax.sound.midi.Soundbank;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MenuClientes extends javax.swing.JFrame {
 
+    FileNameExtensionFilter Filtro = new FileNameExtensionFilter("Archivo de texto", "txt");
+    
     /**
      * Creates new form MenuClientes
      */
     public MenuClientes() {
         initComponents();
+        JFileChooserCargar.setFileFilter(Filtro);
         GenerarImagen();
         Pintar();
     }
@@ -69,7 +73,7 @@ public class MenuClientes extends javax.swing.JFrame {
         JButtonRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JLabelReporte = new javax.swing.JLabel();
-        jFileChooser1 = new javax.swing.JFileChooser();
+        JFileChooserCargar = new javax.swing.JFileChooser();
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
@@ -154,14 +158,20 @@ public class MenuClientes extends javax.swing.JFrame {
         JLabelReporte.setText("     ");
         jScrollPane1.setViewportView(JLabelReporte);
 
-        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+        JFileChooserCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFileChooser1ActionPerformed(evt);
+                JFileChooserCargarActionPerformed(evt);
             }
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Fecha:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,7 +219,7 @@ public class MenuClientes extends javax.swing.JFrame {
                                     .addComponent(JTextFieldTelefono1)
                                     .addComponent(jTextField1))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -250,13 +260,14 @@ public class MenuClientes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
                             .addComponent(JTextFieldTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JButtonRegresar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JButtonRegresar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -361,8 +372,8 @@ public class MenuClientes extends javax.swing.JFrame {
                 System.out.println("Posicion3");
                 break;
             case 4:
-                jFileChooser1.showOpenDialog(this);
-                File Archivo = jFileChooser1.getSelectedFile();
+                JFileChooserCargar.showOpenDialog(this);
+                File Archivo = JFileChooserCargar.getSelectedFile();
                 if(Archivo != null){
                     if (Archivo.exists()) {
                         try {
@@ -396,9 +407,13 @@ public class MenuClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JButtonAccionActionPerformed
 
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+    private void JFileChooserCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JFileChooserCargarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
+    }//GEN-LAST:event_JFileChooserCargarActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,6 +454,7 @@ public class MenuClientes extends javax.swing.JFrame {
     private javax.swing.JButton JButtonAccion;
     private javax.swing.JButton JButtonRegresar;
     private javax.swing.JComboBox<String> JComboBoxAccion;
+    private javax.swing.JFileChooser JFileChooserCargar;
     private javax.swing.JLabel JLabelReporte;
     private javax.swing.JTextField JTextFieldApellidos;
     private javax.swing.JTextField JTextFieldDPI;
@@ -446,7 +462,6 @@ public class MenuClientes extends javax.swing.JFrame {
     private javax.swing.JTextField JTextFieldNombres;
     private javax.swing.JTextField JTextFieldTelefono;
     private javax.swing.JTextField JTextFieldTelefono1;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

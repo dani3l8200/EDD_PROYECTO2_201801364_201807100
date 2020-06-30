@@ -32,6 +32,7 @@ public class MenuVehiculos extends javax.swing.JFrame {
      */
     public MenuVehiculos() {
         initComponents();
+        JFileChooserCargar.setFileFilter(Filtro);
         GenerarImagen();
         Pintar();
     }

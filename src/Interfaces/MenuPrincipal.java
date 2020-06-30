@@ -9,6 +9,8 @@ import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_20180710
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MVehiculos;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MConductores;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MRutas;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -79,6 +81,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         ButtonViajes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonViajes.setText("Viajes");
+        ButtonViajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonViajesActionPerformed(evt);
+            }
+        });
 
         ButtonReportes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonReportes.setText("Reportes");
@@ -152,7 +159,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonSalirActionPerformed
 
     private void ButtonRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRutasActionPerformed
-        // TODO add your handling code here:
+        if(MRutas == null){
+            MRutas = new MenuRutas();
+        }
+        MRutas.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_ButtonRutasActionPerformed
 
     private void ButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonClientesActionPerformed
@@ -178,6 +189,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MConductores.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_ButtonConductoresActionPerformed
+
+    private void ButtonViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonViajesActionPerformed
+        if(MViajes == null){
+            MViajes = new MenuViajes();
+        }
+        MViajes.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ButtonViajesActionPerformed
 
     /**
      * @param args the command line arguments

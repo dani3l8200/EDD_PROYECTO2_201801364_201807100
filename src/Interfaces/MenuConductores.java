@@ -9,6 +9,7 @@ import Driver.DoublyLinkedListCircular;
 import Driver.Drivers;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AConductores;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.io.FileReader;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -23,11 +25,14 @@ import javax.swing.JOptionPane;
  */
 public class MenuConductores extends javax.swing.JFrame {
 
+    FileNameExtensionFilter Filtro = new FileNameExtensionFilter("Archivo de texto", "txt");
+    
     /**
      * Creates new form MenuConductores
      */
     public MenuConductores() {
         initComponents();
+        JFileChooserCargar.setFileFilter(Filtro);
         GenerarImagen();
         Pintar();
     }
@@ -54,7 +59,7 @@ public class MenuConductores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFileChooser1 = new javax.swing.JFileChooser();
+        JFileChooserCargar = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         JComboBoxAccion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -85,7 +90,7 @@ public class MenuConductores extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("---Conductores---");
+        jLabel1.setText("-----Conductores-----");
         jLabel1.setToolTipText("");
 
         JComboBoxAccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Modificar", "Eliminar", "Mostrar", "Carga Masiva" }));
@@ -167,6 +172,11 @@ public class MenuConductores extends javax.swing.JFrame {
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
+        JButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRegresarActionPerformed(evt);
+            }
+        });
 
         JLabelReporte.setText("     ");
         jScrollPane1.setViewportView(JLabelReporte);
@@ -192,11 +202,7 @@ public class MenuConductores extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTextFieldApellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(3, 3, 3)
-                        .addComponent(JTextFieldTelefono1))
+                        .addComponent(JTextFieldApellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,7 +215,7 @@ public class MenuConductores extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                        .addComponent(JTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -223,24 +229,26 @@ public class MenuConductores extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JComboBoxAccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1)
+                            .addComponent(JTextFieldTelefono1)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(JComboBoxAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -282,10 +290,10 @@ public class MenuConductores extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JButtonRegresar)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -390,8 +398,8 @@ public class MenuConductores extends javax.swing.JFrame {
                 System.out.println("Posicion 4");
                 break;
             case 4:
-                jFileChooser1.showOpenDialog(this);
-                File Archivo = jFileChooser1.getSelectedFile();
+                JFileChooserCargar.showOpenDialog(this);
+                File Archivo = JFileChooserCargar.getSelectedFile();
                 if(Archivo != null){
                     if (Archivo.exists()) {
                         try {
@@ -430,6 +438,11 @@ public class MenuConductores extends javax.swing.JFrame {
     private void JTextFieldApellidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldApellidos1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextFieldApellidos1ActionPerformed
+
+    private void JButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegresarActionPerformed
+        Principal.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_JButtonRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -470,6 +483,7 @@ public class MenuConductores extends javax.swing.JFrame {
     private javax.swing.JButton JButtonAccion;
     private javax.swing.JButton JButtonRegresar;
     private javax.swing.JComboBox<String> JComboBoxAccion;
+    private javax.swing.JFileChooser JFileChooserCargar;
     private javax.swing.JLabel JLabelReporte;
     private javax.swing.JTextField JTextFieldApellidos;
     private javax.swing.JTextField JTextFieldApellidos1;
@@ -478,7 +492,6 @@ public class MenuConductores extends javax.swing.JFrame {
     private javax.swing.JTextField JTextFieldNombres;
     private javax.swing.JTextField JTextFieldTelefono;
     private javax.swing.JTextField JTextFieldTelefono1;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

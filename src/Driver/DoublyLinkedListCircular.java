@@ -135,10 +135,8 @@ public class DoublyLinkedListCircular {
     }
      
     public String generateDot(){
-        String myreport1 = "";
-        
+        String myreport1 = "digraph report1 {\n";
         if(start != null){
-            myreport1 += "digraph report1 {\n";
             myreport1 += "\t  rankdir=LR;\n\t graph[bgcolor = orange]\n\t node [shape=record,width=0.25,height =0.25,style=filled, fillcolor=lemonchiffon1];\n\t\t";
             myreport1 += "edge [color=black,tailclip=false];\n\tnodesep=1.5;\n\tranksep = 0.4; \n\t splines=true; \n\t"; 
             node_Driver p = start;
@@ -163,8 +161,8 @@ public class DoublyLinkedListCircular {
                             myreport1 += "pos0:ref1:s ->  pos" + (i) + ":ref:s[splines=\"false\",dir=back,arrowhead=vee];\n\t";
                         }
             }
-            myreport1 += "}";
         }
+        myreport1 += "}";
         return myreport1;
     }
     

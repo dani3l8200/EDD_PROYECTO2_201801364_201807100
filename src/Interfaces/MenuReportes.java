@@ -27,7 +27,6 @@ public class MenuReportes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JPanelReporte = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         JComboBoxReporte = new javax.swing.JComboBox<>();
         JButtonHuffman = new javax.swing.JButton();
@@ -35,25 +34,15 @@ public class MenuReportes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         JButtonCompleta = new javax.swing.JButton();
+        JButtonRutaViaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout JPanelReporteLayout = new javax.swing.GroupLayout(JPanelReporte);
-        JPanelReporte.setLayout(JPanelReporteLayout);
-        JPanelReporteLayout.setHorizontalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
-        );
-        JPanelReporteLayout.setVerticalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("-------Reportes-------");
+        jLabel1.setText("-----------Reportes-----------");
 
-        JComboBoxReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Top 10 Viajes Mas Largos", "Top 10 Clientes Con Mas Viajes", "Top 10 Conductores Con Mas Ingresos", "Top 10 Vehiculos", "Ruta De Viaje" }));
+        JComboBoxReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Top 10 Viajes Mas Largos", "Top 10 Clientes Con Mas Viajes", "Top 10 Conductores Con Mas Ingresos", "Top 10 Vehiculos" }));
 
         JButtonHuffman.setText("Encriptar / Desencriptar");
 
@@ -72,43 +61,47 @@ public class MenuReportes extends javax.swing.JFrame {
             }
         });
 
+        JButtonRutaViaje.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        JButtonRutaViaje.setText("Ruta de Viaje");
+        JButtonRutaViaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRutaViajeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JComboBoxReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JButtonHuffman, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JComboBoxReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JButtonHuffman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 21, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1))
+                        .addComponent(JButtonCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JPanelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JButtonCompleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JComboBoxReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JButtonHuffman, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(JPanelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(JButtonCompleta)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JComboBoxReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JButtonHuffman, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JButtonCompleta)
+                    .addComponent(JButtonRutaViaje))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JButtonRegresar)
                 .addContainerGap())
@@ -120,6 +113,10 @@ public class MenuReportes extends javax.swing.JFrame {
     private void JButtonCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonCompletaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JButtonCompletaActionPerformed
+
+    private void JButtonRutaViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRutaViajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JButtonRutaViajeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,8 +158,8 @@ public class MenuReportes extends javax.swing.JFrame {
     private javax.swing.JButton JButtonCompleta;
     private javax.swing.JButton JButtonHuffman;
     private javax.swing.JButton JButtonRegresar;
+    private javax.swing.JButton JButtonRutaViaje;
     private javax.swing.JComboBox<String> JComboBoxReporte;
-    private javax.swing.JPanel JPanelReporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
