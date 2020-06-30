@@ -13,7 +13,7 @@ public class BlockChain {
     private static BlockChain Ldriver,Lvehicle,Lcustomers;
     public Viaje Cabeza;
     public int count_drivers, count_vehicles,count_customers;
-
+    public static String report4 = "";
     public BlockChain(){
         Cabeza = null;
         count_drivers = 0;
@@ -348,6 +348,37 @@ public class BlockChain {
         }
     }
     
+    public void GenerateReportTopViajes(boolean decOrcom){
+       
+        Codificador Prueba = new Codificador();
+        TopViajes();
+        String report4Aux = report4;
+        if(decOrcom == true){
+         
+            String total =  "TEXTO COMPRIMIDO\n";
+            String aux = Prueba.Datos(report4Aux);
+            total += "\nTodo codificado\n" + Prueba.Generar(report4Aux) + "\n\nFrecuencias y valores de cada caracter:\n";
+            
+            total += aux;
+           
+            
+            ImpresoraDot Impresora = new ImpresoraDot();
+            Impresora.ImprimirTxT("ReporteTopCustomers", total);
+        }else{
+            try {
+                String aux  = "TEXTO DECODIFICADO\n\n";
+                String decode =  Prueba.Generar(report4Aux);
+                aux += Prueba.Desencriptar(decode);
+             
+                 ImpresoraDot Impresora = new ImpresoraDot();
+                Impresora.ImprimirTxT("ReporteTopCustomersDescomprimido",aux );
+            } catch (Exception e) {
+                System.err.println("No hay texto para codificar");
+            }
+        }
+        report4 = "";
+    }
+    
     public void OrderListDriver(){
         Viaje p, q;
         Driver.Drivers driver;
@@ -487,6 +518,16 @@ public class BlockChain {
                         i=10;
                     }
                 }
+            }
+            Aux = Aux.getSiguiente();
+        }
+        Aux = Cabeza;
+        int count = 1;
+         while(Aux != null){
+            for(int i =0; i<10; i++){
+                report4 += count + ". "  +TopViajes[i].getDia() + " " + TopViajes[i].getOrigen() + " " + TopViajes[i].getDestino()+" "+ TopViajes[i].getRuta().TiempoTotal() +" "+ TopViajes[i].getConductor().getName()+ " " + TopViajes[i].getCliente().getName()
+                    + " " + TopViajes[i].getVehiculo().getBrand()+ "\n";
+                 count++;
             }
             Aux = Aux.getSiguiente();
         }

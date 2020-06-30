@@ -14,6 +14,7 @@ import java.util.Arrays;
 public class BTree <T extends Comparable<T>> {
     private static final int ORDER = 6;
 	private static final int MIN_KEYS = 2;
+         private static String s = "";
 	BTreeNode root;
         Vehicle vehicle;
 	public class BTreeNode {
@@ -75,13 +76,26 @@ public class BTree <T extends Comparable<T>> {
 			return sb.toString();
 		}
                 
-               
+               public String traverse() {
+                    
+                    int i = 0;
+                    for (; i < n; i++) {
+                        if(leaf == false)
+                          children[i].traverse();
+                        s +=  keys[i].toString();
+                       
+                    }
+                     if (!leaf) 
+			   children[i].traverse();
+                     return s;
+                   
+                }
                 
                 public String generateDot(){
                     String graph = "";
                 
                    
-                     graph  += "node" + keys[0] + "[label=\"";
+                     graph  += "node" + keys[0].hashCode() + "[label=\"";
                     for(int i = 0; i < n; i++){
                        
                         graph += "<f"+ i + "> |" + keys[i] + "|"; 
@@ -95,7 +109,7 @@ public class BTree <T extends Comparable<T>> {
                           graph += children[i].generateDot();
                        
                        
-                          graph +=  "node" + keys[0] + ":f" + i + "-> node"+ children[i].keys[0] + ";\n";
+                          graph +=  "node" + keys[0].hashCode() + ":f" + i + "-> node"+ children[i].keys[0].hashCode() + ";\n";
                     }
                    
                     return graph;
@@ -146,6 +160,15 @@ public class BTree <T extends Comparable<T>> {
          * el recorrido a la derecha y el otro seria de corriendo una rama mas 
          * con el nextChild. 
         */
+        
+        public void traverse(){
+            if(this.root != null){
+                System.out.println(root.traverse());
+                
+            }
+            System.out.println();
+        }
+        
         private void remove(BTree<T>.BTreeNode node, T k){
             System.out.println("The n is :" + node.n);
             int aux = node.find(search(k));
