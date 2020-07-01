@@ -82,7 +82,6 @@ public class NuevoViaje extends javax.swing.JFrame {
         JTextFieldDestino = new javax.swing.JTextField();
         JButtonBuscarRuta = new javax.swing.JButton();
         JButtonNuevo = new javax.swing.JButton();
-        JButtonRegresar = new javax.swing.JButton();
         JTextFieldDia = new javax.swing.JTextField();
         JTextFieldMes = new javax.swing.JTextField();
         JTextFieldAño = new javax.swing.JTextField();
@@ -93,6 +92,7 @@ public class NuevoViaje extends javax.swing.JFrame {
         JTextFieldPlaca = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         JLabelReporte = new javax.swing.JLabel();
+        JButtonRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,14 +151,6 @@ public class NuevoViaje extends javax.swing.JFrame {
             }
         });
 
-        JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        JButtonRegresar.setText("Regresar");
-        JButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JButtonRegresarActionPerformed(evt);
-            }
-        });
-
         JTextFieldDia.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         JTextFieldDia.setEnabled(false);
         JTextFieldDia.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +181,13 @@ public class NuevoViaje extends javax.swing.JFrame {
         JTextFieldPlaca.setEnabled(false);
 
         jScrollPane1.setViewportView(JLabelReporte);
+
+        JButtonRegresar.setText("Regresar");
+        JButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -293,18 +292,12 @@ public class NuevoViaje extends javax.swing.JFrame {
                         .addComponent(JButtonNuevo))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JButtonRegresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void JButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegresarActionPerformed
-        MViajes = new MenuViajes();
-        MViajes.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_JButtonRegresarActionPerformed
 
     private void JButtonBuscarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonBuscarRutaActionPerformed
         Origen = JTextFieldOrigen.getText();
@@ -387,6 +380,11 @@ public class NuevoViaje extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_JButtonNuevoActionPerformed
+
+    private void JButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegresarActionPerformed
+        MViajes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_JButtonRegresarActionPerformed
 
     /**
      * @param args the command line arguments
