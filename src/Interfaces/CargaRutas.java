@@ -111,7 +111,7 @@ public class CargaRutas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "La direccion de archivo no es valida, archivo inexistente", "Archivo inexistente", JOptionPane.ERROR_MESSAGE);
             }
         }else{
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_ButtonCargarActionPerformed
 

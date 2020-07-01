@@ -5,7 +5,26 @@
  */
 package Interfaces;
 
+import Customers.Customers;
+import Customers.HashTable;
+import Driver.DoublyLinkedListCircular;
+import Driver.Drivers;
+import Rutas.Lista;
+import Vehicle.BTree;
+import Vehicle.Vehicle;
+import Viajes.BlockChain;
+import Viajes.Viaje;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AConductores;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AVehiculos;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MViajes;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.TClientes;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +32,30 @@ import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_20180710
  */
 public class NuevoViaje extends javax.swing.JFrame {
 
+    String Origen;
+    String Destino;
+    Lista RutaViaje;
+    
     /**
      * Creates new form NuevoViaje
      */
     public NuevoViaje() {
         initComponents();
+    }
+    
+    public void GenerarImagen(Lista Ruta){
+        if(Ruta == null){
+            Ruta = new Lista();
+        }
+        Impresora.Imprimir("RutaN", Ruta.GenerarDot());
+    }
+    
+    public void Pintar(){
+        Image ImagenGrafo = new ImageIcon("RutaN.png").getImage();
+        ImagenGrafo.flush();
+        Icon Icono = new ImageIcon(ImagenGrafo);
+        JLabelReporte.setIcon(Icono);
+        JLabelReporte.repaint();
     }
 
     /**
@@ -45,7 +83,6 @@ public class NuevoViaje extends javax.swing.JFrame {
         JButtonBuscarRuta = new javax.swing.JButton();
         JButtonNuevo = new javax.swing.JButton();
         JButtonRegresar = new javax.swing.JButton();
-        JPanelReporte = new javax.swing.JPanel();
         JTextFieldDia = new javax.swing.JTextField();
         JTextFieldMes = new javax.swing.JTextField();
         JTextFieldAño = new javax.swing.JTextField();
@@ -54,6 +91,8 @@ public class NuevoViaje extends javax.swing.JFrame {
         JTextFieldCliente = new javax.swing.JTextField();
         JTextFieldConductor = new javax.swing.JTextField();
         JTextFieldPlaca = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JLabelReporte = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,9 +136,20 @@ public class NuevoViaje extends javax.swing.JFrame {
 
         JButtonBuscarRuta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         JButtonBuscarRuta.setText("Buscar Ruta");
+        JButtonBuscarRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonBuscarRutaActionPerformed(evt);
+            }
+        });
 
         JButtonNuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         JButtonNuevo.setText("Nuevo Viaje");
+        JButtonNuevo.setEnabled(false);
+        JButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonNuevoActionPerformed(evt);
+            }
+        });
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
@@ -109,32 +159,36 @@ public class NuevoViaje extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout JPanelReporteLayout = new javax.swing.GroupLayout(JPanelReporte);
-        JPanelReporte.setLayout(JPanelReporteLayout);
-        JPanelReporteLayout.setHorizontalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-        JPanelReporteLayout.setVerticalGroup(
-            JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         JTextFieldDia.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldDia.setEnabled(false);
+        JTextFieldDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTextFieldDiaActionPerformed(evt);
+            }
+        });
 
         JTextFieldMes.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldMes.setEnabled(false);
 
         JTextFieldAño.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldAño.setEnabled(false);
 
         JTextFieldHora.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldHora.setEnabled(false);
 
         JTextFieldMinuto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldMinuto.setEnabled(false);
 
         JTextFieldCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldCliente.setEnabled(false);
 
         JTextFieldConductor.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldConductor.setEnabled(false);
 
         JTextFieldPlaca.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        JTextFieldPlaca.setEnabled(false);
+
+        jScrollPane1.setViewportView(JLabelReporte);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,13 +218,13 @@ public class NuevoViaje extends javax.swing.JFrame {
                                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 1, Short.MAX_VALUE)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(JTextFieldDestino)
                                     .addComponent(JTextFieldOrigen)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
                                         .addComponent(JTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
@@ -183,14 +237,14 @@ public class NuevoViaje extends javax.swing.JFrame {
                                             .addComponent(JTextFieldConductor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(JTextFieldPlaca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JPanelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -237,7 +291,7 @@ public class NuevoViaje extends javax.swing.JFrame {
                             .addComponent(JTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JButtonNuevo))
-                    .addComponent(JPanelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JButtonRegresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -251,6 +305,88 @@ public class NuevoViaje extends javax.swing.JFrame {
         MViajes.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_JButtonRegresarActionPerformed
+
+    private void JButtonBuscarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonBuscarRutaActionPerformed
+        Origen = JTextFieldOrigen.getText();
+        Destino = JTextFieldDestino.getText();
+        RutaViaje = Mapa.CaminoMinimo(Origen, Destino);
+        boolean Estado = true;
+        if (RutaViaje == null || RutaViaje.getCabeza() == null) {
+            Estado = false;
+            JOptionPane.showMessageDialog(null, "Ciudad invalida o sin conexiones", "Sin Ruta", JOptionPane.ERROR_MESSAGE);
+        }
+        JTextFieldDia.setEnabled(Estado);
+        JTextFieldMes.setEnabled(Estado);
+        JTextFieldAño.setEnabled(Estado);
+        JTextFieldHora.setEnabled(Estado);
+        JTextFieldMinuto.setEnabled(Estado);
+        JTextFieldCliente.setEnabled(Estado);
+        JTextFieldConductor.setEnabled(Estado);
+        JTextFieldPlaca.setEnabled(Estado);
+        JButtonNuevo.setEnabled(Estado);
+        JTextFieldDia.setText("");
+        JTextFieldMes.setText("");
+        JTextFieldAño.setText("");
+        JTextFieldHora.setText("");
+        JTextFieldMinuto.setText("");
+        JTextFieldCliente.setText("");
+        JTextFieldConductor.setText("");
+        JTextFieldPlaca.setText("");
+        GenerarImagen(RutaViaje);
+        Pintar();
+    }//GEN-LAST:event_JButtonBuscarRutaActionPerformed
+
+    private void JTextFieldDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldDiaActionPerformed
+        
+    }//GEN-LAST:event_JTextFieldDiaActionPerformed
+
+    private void JButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonNuevoActionPerformed
+        try{
+            int Dia = Integer.parseInt(JTextFieldDia.getText());
+            int Mes = Integer.parseInt(JTextFieldMes.getText());
+            int Año = Integer.parseInt(JTextFieldAño.getText());
+            int Hora = Integer.parseInt(JTextFieldHora.getText());
+            int Minuto = Integer.parseInt(JTextFieldMinuto.getText());
+            String Cliente = JTextFieldCliente.getText();
+            String Conductor = JTextFieldConductor.getText();
+            String Placa = JTextFieldPlaca.getText();
+            if(TClientes == null){
+                TClientes = new HashTable();
+            }
+            Customers Client = TClientes.search(Cliente);
+            if(AConductores == null){
+                AConductores = new DoublyLinkedListCircular();
+            }
+            Drivers ConductorAux = AConductores.SearchForUpdate(Conductor);
+            if(AVehiculos == null){
+                AVehiculos = new BTree();
+            }
+            Vehicle Auto = AVehiculos.search(new Vehicle(Placa));
+            if(Client != null){
+                if(ConductorAux != null){
+                    if(Auto != null){
+                        if(BCViajes == null){
+                            BCViajes = new BlockChain();
+                        }
+                        BCViajes.Insertar(new Viaje(Origen, Destino, Dia, Mes, Año, Hora, Minuto, Client, ConductorAux, Auto, RutaViaje));
+                        JOptionPane.showMessageDialog(null, "Viaje registrado con exito", "REgistrado",JOptionPane.INFORMATION_MESSAGE);
+                        MViajes = new MenuViajes();
+                        MViajes.setVisible(true);
+                        this.setVisible(false);
+                        dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Auto no registrado", "No registrado",JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Conductor no registrado", "No registrado",JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Cliente no registrado", "No registrado",JOptionPane.ERROR_MESSAGE);
+            }
+        }catch(Exception E){
+            
+        }
+    }//GEN-LAST:event_JButtonNuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,7 +427,7 @@ public class NuevoViaje extends javax.swing.JFrame {
     private javax.swing.JButton JButtonBuscarRuta;
     private javax.swing.JButton JButtonNuevo;
     private javax.swing.JButton JButtonRegresar;
-    private javax.swing.JPanel JPanelReporte;
+    private javax.swing.JLabel JLabelReporte;
     private javax.swing.JTextField JTextFieldAño;
     private javax.swing.JTextField JTextFieldCliente;
     private javax.swing.JTextField JTextFieldConductor;
@@ -313,5 +449,6 @@ public class NuevoViaje extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -150,7 +150,7 @@ public class BTree <T extends Comparable<T>> {
                 
                 public String SubGrafo(){
                     String graph = "";
-                     graph  += "nodeArbol" + keys[0] + "[label=\"";
+                     graph  += "nodeArbol" + keys[0].hashCode() + "[label=\"";
                     for(int i = 0; i < n; i++){
                        
                         graph += "<f"+ i + "> |" + keys[i] + "|"; 
@@ -164,7 +164,7 @@ public class BTree <T extends Comparable<T>> {
                           graph += children[i].generateDot();
                        
                        
-                          graph +=  "nodeArbol" + keys[0] + ":f" + i + "-> nodeArbol"+ children[i].keys[0] + ";\n";
+                          graph +=  "nodeArbol" + keys[0].hashCode() + ":f" + i + "-> nodeArbol"+ children[i].keys[0].hashCode() + ";\n";
                     }
                    
                     return graph;

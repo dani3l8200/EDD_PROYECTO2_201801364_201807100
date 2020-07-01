@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.awt.Desktop;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 public class ImpresoraDot {
     
@@ -66,24 +67,23 @@ public class ImpresoraDot {
         }
     }
     
-    public String DotGeneral(){
-        String Dot = "digraph D {\n\n";
+    public String DotGeneral() throws NoSuchAlgorithmException{
+        String Dot = "digraph D {\n compound=true;\n\n";
         if(BCViajes!=null && TClientes!=null && AConductores != null && Mapa!=null && AVehiculos!=null){
             Dot += BCViajes.SubGrafo() + "\n";
-            Dot += TClientes.SubGrafo() + "\n";
-            Dot += AConductores.SubGrafo() + "\n";
-            Dot += Mapa.SubGrafo() + "\n";
-            Dot += AVehiculos.SubGrafo() + "\n";
+            //Dot += TClientes.SubGrafo() + "\n";
+            //Dot += AConductores.SubGrafo() + "\n";
+            //Dot += Mapa.SubGrafo() + "\n";
+            //Dot += AVehiculos.SubGrafo() + "\n";
             if(BCViajes.getCabeza() != null){
                 Viaje Aux = BCViajes.getCabeza();
                 while(Aux.getSiguiente() != null){
-                    Dot += Aux.getRuta().SubGrafo(Aux.OptenerClave()) + "\n";
-                    Dot += "\tBC" + Aux.OptenerClave() + " -> Cliente" + Aux.getCliente().getDPI() + "\n";
-                    Dot += "\tBC" + Aux.OptenerClave() + " -> Conductor" + Aux.getConductor().getDPI() + "\n";
-                    Dot += "\tBC" + Aux.OptenerClave() + " -> nodeArbol" + Aux.getVehiculo().getLicensePlate() + "\n";
-                    Dot += "\tBC" + Aux.OptenerClave() + " -> Ruta" + Aux.OptenerClave() + Aux.getRuta().getCabeza().getNombre() + "\n";
+                    //Dot += Aux.getRuta().SubGrafo(BCViajes.Encriptar(Aux.OptenerClave())) + "\n";
+                    //Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave()) + " -> Cliente" + Aux.getCliente().getDPI() + "\n";
+                    //Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave()) + " -> Conductor" + Aux.getConductor().getDPI() + "\n";
+                    //Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave()) + " -> nodeArbol" + AVehiculos.search(Aux.getVehiculo()).hashCode() + "\n";
+                    //Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave()) + " -> Ruta" + BCViajes.Encriptar(Aux.OptenerClave()) + Aux.getRuta().getCabeza().getNombre() + "\n";
                     Aux = Aux.getSiguiente();
-                 
                 }
             }
         }

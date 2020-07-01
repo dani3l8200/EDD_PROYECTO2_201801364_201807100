@@ -5,6 +5,9 @@
  */
 package Interfaces;
 
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MEstructuras;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
+
 /**
  *
  * @author Barillas
@@ -48,6 +51,11 @@ public class MenuReportes extends javax.swing.JFrame {
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
+        JButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRegresarActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -81,8 +89,9 @@ public class MenuReportes extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JButtonHuffman, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(JButtonCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -99,10 +108,10 @@ public class MenuReportes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JButtonCompleta)
-                    .addComponent(JButtonRutaViaje))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JButtonCompleta, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JButtonRegresar)
                 .addContainerGap())
         );
@@ -111,12 +120,19 @@ public class MenuReportes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JButtonCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonCompletaActionPerformed
-        // TODO add your handling code here:
+        MEstructuras = new MenuEstructuras();
+        MEstructuras.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_JButtonCompletaActionPerformed
 
     private void JButtonRutaViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRutaViajeActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_JButtonRutaViajeActionPerformed
+
+    private void JButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegresarActionPerformed
+        Principal.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_JButtonRegresarActionPerformed
 
     /**
      * @param args the command line arguments

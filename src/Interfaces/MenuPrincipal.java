@@ -9,6 +9,7 @@ import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_20180710
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MVehiculos;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MConductores;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MReportes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MRutas;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
@@ -89,6 +90,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         ButtonReportes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonReportes.setText("Reportes");
+        ButtonReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonReportesActionPerformed(evt);
+            }
+        });
 
         ButtonSalir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButtonSalir.setText("Salir");
@@ -197,6 +203,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MViajes.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_ButtonViajesActionPerformed
+
+    private void ButtonReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonReportesActionPerformed
+        if(MReportes==null){
+            MReportes = new MenuReportes();
+        }
+        MReportes.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ButtonReportesActionPerformed
 
     /**
      * @param args the command line arguments

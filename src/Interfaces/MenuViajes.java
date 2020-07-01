@@ -9,6 +9,7 @@ import Customers.HashTable;
 import Viajes.BlockChain;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.NViaje;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
 import java.awt.Image;
 import javax.swing.Icon;
@@ -66,6 +67,11 @@ public class MenuViajes extends javax.swing.JFrame {
 
         JButtonNuevo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonNuevo.setText("Nuevo Viaje");
+        JButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonNuevoActionPerformed(evt);
+            }
+        });
 
         JScrollPane1.setViewportView(JLabelReporte);
 
@@ -100,6 +106,14 @@ public class MenuViajes extends javax.swing.JFrame {
         Principal.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_JButtonRegresarActionPerformed
+
+    private void JButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonNuevoActionPerformed
+        if(NViaje == null){
+            NViaje = new NuevoViaje();
+        }
+        NViaje.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_JButtonNuevoActionPerformed
 
     /**
      * @param args the command line arguments
