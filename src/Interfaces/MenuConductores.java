@@ -93,7 +93,7 @@ public class MenuConductores extends javax.swing.JFrame {
         jLabel1.setText("-----Conductores-----");
         jLabel1.setToolTipText("");
 
-        JComboBoxAccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Modificar", "Eliminar", "Mostrar", "Carga Masiva" }));
+        JComboBoxAccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Modificar", "Eliminar", "Graphviz", "Carga Masiva", "Mostrar" }));
         JComboBoxAccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JComboBoxAccionActionPerformed(evt);
@@ -425,6 +425,13 @@ public class MenuConductores extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
                 }
                 System.out.println("Posicon 5");
+                break;
+            case 5:
+                try {
+                    AConductores.generatePDF();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             default:
                 break;

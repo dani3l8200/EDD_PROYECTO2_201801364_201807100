@@ -148,12 +148,13 @@
     <Component class="javax.swing.JComboBox" name="JComboBoxAccion">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="6">
             <StringItem index="0" value="Agregar"/>
             <StringItem index="1" value="Modificar"/>
             <StringItem index="2" value="Eliminar"/>
-            <StringItem index="3" value="Mostrar"/>
+            <StringItem index="3" value="Graphviz"/>
             <StringItem index="4" value="Carga Masiva"/>
+            <StringItem index="5" value="Mostrar"/>
           </StringArray>
         </Property>
       </Properties>

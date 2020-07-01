@@ -79,7 +79,7 @@ public class MenuClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        JComboBoxAccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Modificar", "Eliminar", "Mostrar", "Carga Masiva" }));
+        JComboBoxAccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Modificar", "Eliminar", "Graphviz", "Carga Masiva", "Mostrar" }));
         JComboBoxAccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JComboBoxAccionActionPerformed(evt);
@@ -387,6 +387,7 @@ public class MenuClientes extends javax.swing.JFrame {
                                 }else{
                                     TClientes.InsertNode(new Customers(partes[0],partes[1],partes[2],partes[3],Integer.parseInt(partes[4]),partes[5]));
                                 }
+                                
                             }
                             JOptionPane.showMessageDialog(null, "Llenado de Clients Exitoso", "Clientes",JOptionPane.INFORMATION_MESSAGE);
                             GenerarImagen();
@@ -401,6 +402,13 @@ public class MenuClientes extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
                 }
                 System.out.println("Posicion4");
+                break;
+            case 5:
+                try {
+                   TClientes.generatePDF();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             default:
                break;

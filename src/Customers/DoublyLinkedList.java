@@ -6,12 +6,14 @@
 package Customers;
 import Customers.Customers;
 import java.math.BigInteger;
+
 /**
  *
  * @author dani3l8200
- * @param <T>
+ *
  */
 public class DoublyLinkedList {
+    
     class NodeCustomers{
         public NodeCustomers next;
         public NodeCustomers prev;

@@ -93,7 +93,7 @@ public class MenuVehiculos extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("-----Vehiculos-----");
 
-        JComboBoxAccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Modificar", "Eliminar", "Mostrar", "Carga Masiva" }));
+        JComboBoxAccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agregar", "Modificar", "Eliminar", "Graphviz", "Carga Masiva", "Mostrar" }));
         JComboBoxAccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JComboBoxAccionActionPerformed(evt);
@@ -408,6 +408,14 @@ public class MenuVehiculos extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo", "Sin Archivo", JOptionPane.ERROR_MESSAGE);
                 }
+                break;
+            case 5:
+                try {
+                    AVehiculos.generarPDF();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Archivo inexistente", JOptionPane.ERROR_MESSAGE);
+            }
+                
             default:
             break;
         }

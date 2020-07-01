@@ -4,8 +4,23 @@
  * and open the template in the editor.
  */
 package Vehicle;
+import com.itextpdf.text.BaseColor;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 /**
  *
  * @author dani3l8200
@@ -14,7 +29,10 @@ import java.util.Arrays;
 public class BTree <T extends Comparable<T>> {
     private static final int ORDER = 6;
 	private static final int MIN_KEYS = 2;
-         private static String s = "";
+        private static final PdfPTable tabla = new PdfPTable(new float[]{20,20,20,20,20,20,20});
+        private static PdfPCell  titleCell;
+        private static Paragraph column1,column2,column3,column4,column5,column6,column7,
+                                  data1,data2,data3,data4,data5,data6,data7;
 	BTreeNode root;
         Vehicle vehicle;
 	public class BTreeNode {
@@ -76,18 +94,32 @@ public class BTree <T extends Comparable<T>> {
 			return sb.toString();
 		}
                 
-               public String traverse() {
-                    
+               public void traverse() {
+                    String[] test;
                     int i = 0;
                     for (; i < n; i++) {
                         if(leaf == false)
                           children[i].traverse();
-                        s +=  keys[i].toString();
+                       test = keys[i].toString().split("\\\\n");
+                       data1 = new Paragraph(test[0],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data2 = new Paragraph(test[1],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data3 = new Paragraph(test[2],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data4 = new Paragraph(test[3],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data5 = new Paragraph(test[4],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data6 = new Paragraph(test[5],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data7 = new Paragraph(test[6],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                        tabla.addCell(data1);
+                        tabla.addCell(data2);
+                        tabla.addCell(data3);
+                        tabla.addCell(data4);
+                        tabla.addCell(data5);
+                        tabla.addCell(data6);
+                        tabla.addCell(data7);
                        
                     }
                      if (!leaf) 
 			   children[i].traverse();
-                     return s;
+                     
                    
                 }
                 
@@ -161,14 +193,63 @@ public class BTree <T extends Comparable<T>> {
          * con el nextChild. 
         */
         
-        public void traverse(){
-            if(this.root != null){
-                System.out.println(root.traverse());
-                
-            }
-            System.out.println();
-        }
         
+        
+        public void generarPDF(){
+            String RutaEDD = System.getProperty("user.dir") + "\\" + "TablaVehiculos" + ".pdf";
+            try {
+                FileOutputStream archivo = new FileOutputStream(RutaEDD);
+                File Archivo = new File(RutaEDD);
+                Document doc = new Document();
+                PdfWriter.getInstance(doc, archivo);
+                doc.open();
+                doc.add(new Paragraph("Vehicles",FontFactory.getFont(FontFactory.HELVETICA,20,BaseColor.RED)));
+                doc.add(new Paragraph(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date())));
+                doc.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
+                tabla.setWidthPercentage(100);
+                titleCell = new PdfPCell(new Paragraph("Table Vehicles"));
+                titleCell.setColspan(8);
+                titleCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                titleCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                tabla.deleteBodyRows();
+                tabla.addCell(titleCell);
+                column1 = new Paragraph( "License Plate",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                column2 = new Paragraph("Brand",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                column3 = new Paragraph("Model",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                column4 = new Paragraph("Year",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                column5 = new Paragraph("Color",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                column6 = new Paragraph("Price",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                column7 = new Paragraph("Type",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                tabla.addCell(column1);
+                tabla.addCell(column2);
+                tabla.addCell(column3);
+                tabla.addCell(column4);
+                tabla.addCell(column5);
+                tabla.addCell(column6);
+                tabla.addCell(column7);
+                try {
+                    if(root != null)
+                        root.traverse();
+                } catch (Exception e) {
+                     JOptionPane.showMessageDialog(null, e.getMessage());
+                }       
+                doc.add(tabla);
+                doc.close();
+                JOptionPane.showMessageDialog(null, "Tabla con todos los vehiculos generada");
+                try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(Archivo.exists()) desktop.open(Archivo);
+                } catch (Exception a) {
+                    JOptionPane.showMessageDialog(null,a.getCause());
+                }
+            } catch (Exception ex) {
+                 JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
         private void remove(BTree<T>.BTreeNode node, T k){
             System.out.println("The n is :" + node.n);
             int aux = node.find(search(k));
@@ -601,9 +682,9 @@ public class BTree <T extends Comparable<T>> {
                          
                          tree.insert(s9);
                          tree.insert(s10);
-                         Vehicle s111 = new Vehicle("010DJH");
                          tree.insert(s11);
-                         tree.Delete(tree.search(s111));
+                         System.out.println();
+                        tree.generarPDF();
             /*    tree.insert(0);
                 tree.insert(1);
                 tree.insert(2);
@@ -657,7 +738,7 @@ public class BTree <T extends Comparable<T>> {
                
             
                         
-                       System.out.println(tree.GenerateReportTreeB());;
+                 //      System.out.println(tree.GenerateReportTreeB());;
 	}
 	
 }
