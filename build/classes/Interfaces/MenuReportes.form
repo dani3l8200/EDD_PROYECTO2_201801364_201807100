@@ -26,7 +26,6 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="JComboBoxReporte" max="32767" attributes="0"/>
                   <Component id="JButtonRegresar" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Component id="JButtonHuffman" alignment="0" max="32767" attributes="0"/>
@@ -37,6 +36,8 @@
                       <Component id="JButtonRutaViaje" min="-2" pref="224" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="JComboBoxReporte" alignment="1" max="32767" attributes="0"/>
+                  <Component id="JVerifyAction" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -49,10 +50,12 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="JComboBoxReporte" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="JVerifyAction" min="-2" pref="26" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="JButtonHuffman" min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="JButtonHuffman" min="-2" pref="34" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="271" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="259" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="JButtonRutaViaje" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -94,6 +97,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Encriptar / Desencriptar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonHuffmanActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JButtonRegresar">
       <Properties>
@@ -142,6 +148,19 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonRutaViajeActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="JVerifyAction">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Encode"/>
+            <StringItem index="1" value="Decoder"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

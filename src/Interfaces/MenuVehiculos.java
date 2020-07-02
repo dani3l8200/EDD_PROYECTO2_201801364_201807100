@@ -171,6 +171,11 @@ public class MenuVehiculos extends javax.swing.JFrame {
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mecanico", "Automatico" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Placa Modify");
@@ -425,6 +430,10 @@ public class MenuVehiculos extends javax.swing.JFrame {
         GenerarImagen();
         Pintar();
     }//GEN-LAST:event_JComboBoxAccionActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

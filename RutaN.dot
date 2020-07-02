@@ -1,9 +1,7 @@
 digraph D {
 
-	Madrid[label="Madrid"]
 	Zaragoza[label="Zaragoza"]
-	Madrid -> Zaragoza [label="325"]
-	Barcelona[label="Barcelona"]
-	Zaragoza -> Barcelona [label="296"]
+	Madrid[label="Madrid"]
+	Zaragoza -> Madrid [label="325"]
 
 }

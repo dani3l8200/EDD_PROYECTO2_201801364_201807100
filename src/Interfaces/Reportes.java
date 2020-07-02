@@ -5,6 +5,8 @@
  */
 package Interfaces;
 
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
+
 /**
  *
  * @author Barillas
@@ -35,6 +37,7 @@ public class Reportes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         JButtonCompleta = new javax.swing.JButton();
+        JVerifyAction = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,7 +49,7 @@ public class Reportes extends javax.swing.JFrame {
         );
         JPanelReporteLayout.setVerticalGroup(
             JPanelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -54,8 +57,18 @@ public class Reportes extends javax.swing.JFrame {
         jLabel1.setText("-------Reportes-------");
 
         JComboBoxReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Top 10 Viajes Mas Largos", "Top 10 Clientes Con Mas Viajes", "Top 10 Conductores Con Mas Ingresos", "Top 10 Vehiculos", "Ruta De Viaje" }));
+        JComboBoxReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JComboBoxReporteActionPerformed(evt);
+            }
+        });
 
         JButtonHuffman.setText("Encriptar / Desencriptar");
+        JButtonHuffman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonHuffmanActionPerformed(evt);
+            }
+        });
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
@@ -72,6 +85,8 @@ public class Reportes extends javax.swing.JFrame {
             }
         });
 
+        JVerifyAction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Encode", "Decoder" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,10 +98,11 @@ public class Reportes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JComboBoxReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JButtonHuffman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 21, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1))
+                            .addComponent(JVerifyAction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JPanelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(JButtonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -97,17 +113,19 @@ public class Reportes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JComboBoxReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JVerifyAction, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JButtonHuffman, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(JPanelReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JPanelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JButtonCompleta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JButtonRegresar)
@@ -120,6 +138,73 @@ public class Reportes extends javax.swing.JFrame {
     private void JButtonCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonCompletaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JButtonCompletaActionPerformed
+
+    private void JButtonHuffmanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonHuffmanActionPerformed
+       switch(JComboBoxReporte.getSelectedIndex()){
+           case 0:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopViajes(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopViajes(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           case 1:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopCustomers(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopCustomers(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           case 2:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopDrivers(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopDrivers(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           case 3:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopVehicles(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopVehicles(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           default:
+               break;
+       }
+    }//GEN-LAST:event_JButtonHuffmanActionPerformed
+
+    private void JComboBoxReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JComboBoxReporteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JComboBoxReporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +247,7 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JButton JButtonRegresar;
     private javax.swing.JComboBox<String> JComboBoxReporte;
     private javax.swing.JPanel JPanelReporte;
+    private javax.swing.JComboBox<String> JVerifyAction;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

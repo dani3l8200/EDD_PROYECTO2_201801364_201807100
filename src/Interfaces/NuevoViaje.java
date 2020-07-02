@@ -362,7 +362,21 @@ public class NuevoViaje extends javax.swing.JFrame {
                             BCViajes = new BlockChain();
                         }
                         BCViajes.Insertar(new Viaje(Origen, Destino, Dia, Mes, Año, Hora, Minuto, Client, ConductorAux, Auto, RutaViaje));
+                        BCViajes.BuscarCliente(Client.getDPI()).getCliente().setGenerate_trips();
+                        BCViajes.BuscarConductor(ConductorAux.getDPI()).getConductor().setGenerate_income();
+                        BCViajes.BuscarVehiculo(Auto.getLicensePlate()).getVehiculo().setGenerate_trips();
+                        System.out.println(BCViajes.BuscarCliente(Client.getDPI()).getCliente().getGenerate_trips());
+                        System.out.println(BCViajes.BuscarConductor(ConductorAux.getDPI()).getConductor().getGenerate_income());
+                        System.out.println(BCViajes.BuscarVehiculo(Auto.getLicensePlate()).getVehiculo().getGenerate_trips());
                         JOptionPane.showMessageDialog(null, "Viaje registrado con exito", "REgistrado",JOptionPane.INFORMATION_MESSAGE);
+                        JTextFieldDia.setText("");
+                        JTextFieldMes.setText("");
+                        JTextFieldAño.setText("");
+                        JTextFieldHora.setText("");
+                        JTextFieldMinuto.setText("");
+                        JTextFieldCliente.setText("");
+                        JTextFieldConductor.setText("");
+                        JTextFieldPlaca.setText("");
                         MViajes = new MenuViajes();
                         MViajes.setVisible(true);
                         this.setVisible(false);

@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MEstructuras;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
 
@@ -38,6 +39,7 @@ public class MenuReportes extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         JButtonCompleta = new javax.swing.JButton();
         JButtonRutaViaje = new javax.swing.JButton();
+        JVerifyAction = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,6 +50,11 @@ public class MenuReportes extends javax.swing.JFrame {
         JComboBoxReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Top 10 Viajes Mas Largos", "Top 10 Clientes Con Mas Viajes", "Top 10 Conductores Con Mas Ingresos", "Top 10 Vehiculos" }));
 
         JButtonHuffman.setText("Encriptar / Desencriptar");
+        JButtonHuffman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonHuffmanActionPerformed(evt);
+            }
+        });
 
         JButtonRegresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         JButtonRegresar.setText("Regresar");
@@ -77,6 +84,8 @@ public class MenuReportes extends javax.swing.JFrame {
             }
         });
 
+        JVerifyAction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Encode", "Decoder" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,7 +93,6 @@ public class MenuReportes extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JComboBoxReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JButtonRegresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JButtonHuffman, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -93,7 +101,9 @@ public class MenuReportes extends javax.swing.JFrame {
                         .addComponent(JButtonCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JComboBoxReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JVerifyAction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,10 +113,12 @@ public class MenuReportes extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JComboBoxReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JVerifyAction, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JButtonHuffman, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JButtonHuffman, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -133,6 +145,69 @@ public class MenuReportes extends javax.swing.JFrame {
         Principal.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_JButtonRegresarActionPerformed
+
+    private void JButtonHuffmanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonHuffmanActionPerformed
+       switch(JComboBoxReporte.getSelectedIndex()){
+           case 0:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopViajes(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopViajes(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           case 1:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopCustomers(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopCustomers(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           case 2:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopDrivers(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopDrivers(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           case 3:{
+               try {  
+                    if(BCViajes != null){
+                        if(JVerifyAction.getSelectedIndex() == 0){
+                            BCViajes.GenerateReportTopVehicles(true);
+                    }else if(JVerifyAction.getSelectedIndex() == 1){
+                       BCViajes.GenerateReportTopVehicles(false);
+                    }
+               }
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+           }
+           default:
+               break;
+       }
+    }//GEN-LAST:event_JButtonHuffmanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,6 +251,7 @@ public class MenuReportes extends javax.swing.JFrame {
     private javax.swing.JButton JButtonRegresar;
     private javax.swing.JButton JButtonRutaViaje;
     private javax.swing.JComboBox<String> JComboBoxReporte;
+    private javax.swing.JComboBox<String> JVerifyAction;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

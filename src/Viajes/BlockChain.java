@@ -236,8 +236,12 @@ public class BlockChain {
             CopyDriversOtherList();
         
         while(Ldriver.getCabeza() != null && count_drivers <= 10){
-            report1 += count + ". " + Ldriver.getCabeza().getOrigen() +" "+ Ldriver.getCabeza().getConductor().getName() + " " + Ldriver.getCabeza().getConductor().getLast_Name()
-                    + " " + Ldriver.getCabeza().getConductor().getGender() + "\n";
+            report1 += count + ". " + "Origen: " +Ldriver.getCabeza().getOrigen() +" "
+                    + "Destino: " +Ldriver.getCabeza().getDestino() + " " 
+                    + "Nombre Conductor: "+ Ldriver.getCabeza().getConductor().getName() + " " 
+                    + "Apellidos: "+Ldriver.getCabeza().getConductor().getLast_Name()
+                    + " " + "Direccion "+ Ldriver.getCabeza().getConductor().getDirection()
+                    + " " + "No. veces generado dinero: "+ Ldriver.getCabeza().getConductor().getGenerate_income() +"\n";
             count++;
             count_drivers++;
             Ldriver.Cabeza = Ldriver.Cabeza.getSiguiente();
@@ -276,8 +280,12 @@ public class BlockChain {
             CopyVehiclesOtherList();
         
         while(Lvehicle.getCabeza() != null && count_vehicles <= 10){
-            report2 += count + ". " + Lvehicle.getCabeza().getOrigen() +" "+ Lvehicle.getCabeza().getVehiculo().getLicensePlate()+ " " + Lvehicle.getCabeza().getVehiculo().getBrand()
-                    + " " + Lvehicle.getCabeza().getVehiculo().getYear()+ "\n";
+            report2 += count + ". " +"No. de viajes: " + Lvehicle.getCabeza().getVehiculo().getGenerate_trips()+" "
+                    +"Placa: " +Lvehicle.getCabeza().getVehiculo().getLicensePlate()+ " "
+                    +"Marca: " +Lvehicle.getCabeza().getVehiculo().getBrand()
+                    + " " +"Modelo: "+ Lvehicle.getCabeza().getVehiculo().getModel()
+                    + " " + "Year: "+Lvehicle.getCabeza().getVehiculo().getColor()
+                    + " "+ "Precio: "+Lvehicle.getCabeza().getVehiculo().getPrice()+ "\n";
             count++;
             count_vehicles++;
             Lvehicle.Cabeza = Lvehicle.Cabeza.getSiguiente();
@@ -316,8 +324,13 @@ public class BlockChain {
             CopyCustomersOtherList();
         
         while(Lcustomers.getCabeza() != null && count_customers <= 10){
-            report3 += count + ". " + Lcustomers.getCabeza().getOrigen() +" "+ Lcustomers.getCabeza().getCliente().getDPI()+ " " + Lcustomers.getCabeza().getCliente().getName()
-                    + " " + Lcustomers.getCabeza().getCliente().getDirection()+ "\n";
+            report3 += count + ". "+"No. Pedidos de Viajes: "+Lcustomers.getCabeza().getCliente().getGenerate_trips()+" " +"Origen: " +Lcustomers.getCabeza().getOrigen() +" "
+                    +"Destino" + Lcustomers.getCabeza().getDestino() + " "
+                    +"DPI: "+Lcustomers.getCabeza().getCliente().getDPI()+ " "
+                    + "Nombre; "+  Lcustomers.getCabeza().getCliente().getName()
+                    +  " " + "Apellidos"+ Lcustomers.getCabeza().getCliente().getLast_name()+ " " 
+                    + "Conductor: "+ Lcustomers.getCabeza().getConductor().getName() + " "
+                    + "DPI: " + Lcustomers.getCabeza().getConductor().getDPI()+ "\n";
             count++;
             count_customers++;
             Lcustomers.Cabeza = Lcustomers.Cabeza.getSiguiente();
