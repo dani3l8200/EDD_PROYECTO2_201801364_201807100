@@ -27,10 +27,10 @@ import javax.swing.JOptionPane;
 public class DoublyLinkedListCircular {
     private node_Driver start;
     private node_Driver last;
-    private static final PdfPTable tabla = new PdfPTable(new float[]{20,20,20,20,20,20,20,20});
-        private static PdfPCell  titleCell;
-        private static Paragraph column1,column2,column3,column4,column5,column6,column7,column8,
-                                  data1,data2,data3,data4,data5,data6,data7,data8;
+    private static final PdfPTable tabla = new PdfPTable(9);
+    private static PdfPCell  titleCell;
+    private static Paragraph column1,column2,column3,column4,column5,column6,column7,column8,column9,
+                                  data1,data2,data3,data4,data5,data6,data7,data8,data9;
     public int size;
     public DoublyLinkedListCircular(){
         start = null;
@@ -154,8 +154,9 @@ public class DoublyLinkedListCircular {
     }
      
     public void generatePDF(){
-        String RutaEDD = System.getProperty("user.dir") + "\\" + "TablaVehiculos" + ".pdf";
+        String RutaEDD = System.getProperty("user.dir") + "\\" + "TablasConductores" + ".pdf";
         try {
+            int i = 1;
             FileOutputStream archivo = new FileOutputStream(RutaEDD);
                 File Archivo = new File(RutaEDD);
                 Document doc = new Document();
@@ -166,19 +167,20 @@ public class DoublyLinkedListCircular {
                 doc.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
                 tabla.setWidthPercentage(100);
                 titleCell = new PdfPCell(new Paragraph("Table Drivers"));
-                titleCell.setColspan(8);
+                titleCell.setColspan(9);
                 titleCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 titleCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
                 tabla.deleteBodyRows();
                 tabla.addCell(titleCell);
-                column1 = new Paragraph("DPI",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
-                column2 = new Paragraph("Name",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
-                column3 = new Paragraph("Last Name",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
-                column4 = new Paragraph("Type of License",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
-                column5 = new Paragraph("Gender",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
-                column6 = new Paragraph("Date",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
-                column7 = new Paragraph("Phone",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
-                column8 = new Paragraph("Direction",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.YELLOW));
+                column1 = new Paragraph("ID",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column2 = new Paragraph("DPI",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column3 = new Paragraph("Name",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column4 = new Paragraph("Last Name",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column5 = new Paragraph("Type of License",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column6 = new Paragraph("Gender",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column7 = new Paragraph("Date",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column8 = new Paragraph("Phone",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
+                column9 = new Paragraph("Direction",FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD,BaseColor.YELLOW));
                 tabla.addCell(column1);
                 tabla.addCell(column2);
                 tabla.addCell(column3);
@@ -187,17 +189,21 @@ public class DoublyLinkedListCircular {
                 tabla.addCell(column6);
                 tabla.addCell(column7);
                 tabla.addCell(column8);
+                tabla.addCell(column9);
+                
                 try {
                     node_Driver next = start;
+                    
                     while (next != null) {
-                       data1 = new Paragraph(next.getDriver().getDPI(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data2 = new Paragraph(next.getDriver().getName(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data3 = new Paragraph(next.getDriver().getLast_Name(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data4 = new Paragraph(String.valueOf(next.getDriver().getType_Of_License()),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data5 = new Paragraph(next.getDriver().getGender(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data6 = new Paragraph(next.getDriver().getDate(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data7 = new Paragraph(Integer.toString(next.getDriver().getPhone()),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data8 = new Paragraph(next.getDriver().getDirection(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data1 = new Paragraph(Integer.toString(i),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data2 = new Paragraph(next.getDriver().getDPI(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data3 = new Paragraph(next.getDriver().getName(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data4 = new Paragraph(next.getDriver().getLast_Name(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data5 = new Paragraph(String.valueOf(next.getDriver().getType_Of_License()),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data6 = new Paragraph(next.getDriver().getGender(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data7 = new Paragraph(next.getDriver().getDate(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data8 = new Paragraph(Integer.toString(next.getDriver().getPhone()),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data9 = new Paragraph(next.getDriver().getDirection(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));               
                        tabla.addCell(data1);
                        tabla.addCell(data2);
                        tabla.addCell(data3);
@@ -206,11 +212,15 @@ public class DoublyLinkedListCircular {
                        tabla.addCell(data6);
                        tabla.addCell(data7);
                        tabla.addCell(data8);
+                       tabla.addCell(data9);
+                       i++;
                        next = next.next; 
+                        
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                   }
+                
                  doc.add(tabla);
                 doc.close();
                 JOptionPane.showMessageDialog(null, "Tabla con todos los vehiculos generada");

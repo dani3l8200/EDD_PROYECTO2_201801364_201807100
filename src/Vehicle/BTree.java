@@ -29,10 +29,11 @@ import javax.swing.JOptionPane;
 public class BTree <T extends Comparable<T>> {
     private static final int ORDER = 6;
 	private static final int MIN_KEYS = 2;
-        private static final PdfPTable tabla = new PdfPTable(new float[]{20,20,20,20,20,20,20});
+        private static final PdfPTable tabla = new PdfPTable(new float[]{7,20,20,20,20,20,20,20});
         private static PdfPCell  titleCell;
-        private static Paragraph column1,column2,column3,column4,column5,column6,column7,
-                                  data1,data2,data3,data4,data5,data6,data7;
+        private static Paragraph column1,column2,column3,column4,column5,column6,column7,column8,
+                                  data1,data2,data3,data4,data5,data6,data7,data8;
+        private static int counterPDF = 1;
 	BTreeNode root;
         Vehicle vehicle;
 	public class BTreeNode {
@@ -97,17 +98,19 @@ public class BTree <T extends Comparable<T>> {
                public void traverse() {
                     String[] test;
                     int i = 0;
+                    
                     for (; i < n; i++) {
                         if(leaf == false)
                           children[i].traverse();
                        test = keys[i].toString().split("\\\\n");
-                       data1 = new Paragraph(test[0],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data2 = new Paragraph(test[1],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data3 = new Paragraph(test[2],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data4 = new Paragraph(test[3],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data5 = new Paragraph(test[4],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data6 = new Paragraph(test[5],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
-                       data7 = new Paragraph(test[6],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data1 = new Paragraph(Integer.toString(counterPDF),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data2 = new Paragraph(test[0],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data3 = new Paragraph(test[1],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data4 = new Paragraph(test[2],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data5 = new Paragraph(test[3],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data6 = new Paragraph(test[4],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data7 = new Paragraph(test[5],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data8 = new Paragraph(test[6],FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
                         tabla.addCell(data1);
                         tabla.addCell(data2);
                         tabla.addCell(data3);
@@ -115,7 +118,8 @@ public class BTree <T extends Comparable<T>> {
                         tabla.addCell(data5);
                         tabla.addCell(data6);
                         tabla.addCell(data7);
-                       
+                        tabla.addCell(data8);
+                       counterPDF++;
                     }
                      if (!leaf) 
 			   children[i].traverse();
@@ -170,10 +174,10 @@ public class BTree <T extends Comparable<T>> {
         */
         
         
-        
-        public void generarPDF(){
+         public void generarPDF(){
             String RutaEDD = System.getProperty("user.dir") + "\\" + "TablaVehiculos" + ".pdf";
             try {
+                counterPDF = 1;
                 FileOutputStream archivo = new FileOutputStream(RutaEDD);
                 File Archivo = new File(RutaEDD);
                 Document doc = new Document();
@@ -189,13 +193,14 @@ public class BTree <T extends Comparable<T>> {
                 titleCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
                 tabla.deleteBodyRows();
                 tabla.addCell(titleCell);
-                column1 = new Paragraph( "License Plate",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
-                column2 = new Paragraph("Brand",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
-                column3 = new Paragraph("Model",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
-                column4 = new Paragraph("Year",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
-                column5 = new Paragraph("Color",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
-                column6 = new Paragraph("Price",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
-                column7 = new Paragraph("Type",FontFactory.getFont(FontFactory.TIMES_ROMAN,16,Font.BOLD,BaseColor.BLUE));
+                column1 = new Paragraph( "ID",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));         
+                column2 = new Paragraph( "License Plate",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));
+                column3 = new Paragraph("Brand",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));
+                column4 = new Paragraph("Model",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));
+                column5 = new Paragraph("Year",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));
+                column6 = new Paragraph("Color",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));
+                column7 = new Paragraph("Price",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));
+                column8 = new Paragraph("Type",FontFactory.getFont(FontFactory.TIMES_ROMAN,14,Font.BOLD,BaseColor.BLUE));
                 tabla.addCell(column1);
                 tabla.addCell(column2);
                 tabla.addCell(column3);
@@ -203,6 +208,7 @@ public class BTree <T extends Comparable<T>> {
                 tabla.addCell(column5);
                 tabla.addCell(column6);
                 tabla.addCell(column7);
+                tabla.addCell(column8);
                 try {
                     if(root != null)
                         root.traverse();
@@ -226,6 +232,7 @@ public class BTree <T extends Comparable<T>> {
                  JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         }
+        
         private void remove(BTree<T>.BTreeNode node, T k){
             System.out.println("The n is :" + node.n);
             int aux = node.find(search(k));

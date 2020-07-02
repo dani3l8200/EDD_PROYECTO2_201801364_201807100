@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package Customers;
-import Customers.Customers;
+import static  Customers.HashTable.*;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import java.awt.Font;
 import java.math.BigInteger;
 
 /**
@@ -23,15 +26,17 @@ public class DoublyLinkedList {
         public NodeCustomers(Customers customers){
             this.customers = customers;
             this.next = null;
-           
+            this.prev = null;
         }
         
     }
     public NodeCustomers head;
+    public NodeCustomers last;
     private int size;
     public DoublyLinkedList() {
         this.size = 0;
         this.head = null;
+        this.last = null;
     }
     
     public int getSize(){
@@ -49,9 +54,11 @@ public class DoublyLinkedList {
         n = new NodeCustomers(customers);
         if(head == null){
             head = n;
+            last = head;
         }else{
-            n.next = head;
-            head = n;
+            last.next = n;
+            n.prev = last;
+            last = n;
         }
         size++;
     }
@@ -68,22 +75,27 @@ public class DoublyLinkedList {
     }
     
     public void Delete(String _id){
-        NodeCustomers temp = head;
-        NodeCustomers p = null;
-     
-        while(temp != null && !temp.customers.getDPI().equals(_id)){
-            p = temp;
-            temp = temp.next;
-        } 
-        
-        if(temp == null)
+        NodeCustomers p = Search(_id);
+        NodeCustomers q = head; 
+        if(q.customers.getDPI().equals(_id)){
+            last = q.prev;
+            NodeCustomers temp = p.next;
+            head = temp;
+            size--;
             return;
-        if(p == null){
-            head = temp.next;
-        }else{
-            p.next = temp.next;
         }
-        size--;
+        q = q.next;
+        while(!q.customers.getDPI().equals(_id) && q != head){
+            q = q.next;
+        }
+        if(q.customers.getDPI().equals(_id)){
+            last = q.prev;
+            last.next = q.next;
+            size--;
+            
+        }else{
+            System.out.println("Elemento no encontrado");
+        }
     }
     
      
@@ -95,6 +107,30 @@ public class DoublyLinkedList {
         }
         System.out.println();
     }
+     
+     public void generatePDF1(){
+         NodeCustomers aux = head;    
+         while(aux != null){
+             data1 = new Paragraph(Integer.toString(k),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data2 = new Paragraph(aux.customers.getDPI(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data3 = new Paragraph(aux.customers.getName(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data4 = new Paragraph(aux.customers.getLast_name(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data5 = new Paragraph(aux.customers.getGender(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data6 = new Paragraph(aux.customers.getDate(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data7 = new Paragraph(Integer.toString(aux.customers.getPhone()),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       data8 = new Paragraph(aux.customers.getDirection(),FontFactory.getFont(FontFactory.TIMES_ROMAN,12,Font.BOLD));
+                       tabla.addCell(data1);
+                       tabla.addCell(data2);
+                       tabla.addCell(data3);
+                       tabla.addCell(data4);
+                       tabla.addCell(data5);
+                       tabla.addCell(data6);
+                       tabla.addCell(data7);
+                       tabla.addCell(data8);
+                       k++;
+                       aux = aux.next;
+         }
+     }
      
      public String generateNode(int cell){
          String graph  = "";
