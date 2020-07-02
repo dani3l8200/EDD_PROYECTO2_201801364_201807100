@@ -70,7 +70,11 @@ public class ImpresoraDot {
     public String DotGeneral() throws NoSuchAlgorithmException{
         String Dot = "digraph D {\n compound=true;\n\n";
         if(BCViajes!=null && TClientes!=null && AConductores != null && Mapa!=null && AVehiculos!=null){
-            
+            Dot += BCViajes.SubGrafo()
+                + TClientes.SubGrafo()
+                + AConductores.SubGrafo()
+                + Mapa.SubGrafo()
+                + AVehiculos.SubGrafo();
         }
         Dot += "\n}";
         return Dot;

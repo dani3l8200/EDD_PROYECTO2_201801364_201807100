@@ -99,7 +99,7 @@ public class DoublyLinkedList {
      public String generateNode(int cell){
          String graph  = "";
          NodeCustomers aux = head;
-         graph += "subgraph Clientes"+cell+"{\n rankdir=\"LR\";\n node[style=filled, fillcolor=lemonchiffon1, shape=record];\n";
+         graph += "\nsubgraph Clientes"+cell+"{\n rankdir=\"LR\";\n node[style=filled, fillcolor=lemonchiffon1, shape=record];\n";
          while(aux != null){
              graph += aux.customers.getDPI()+ "[label=\"DPI: "+aux.customers.getDPI()+ "\\nNombre: "+ aux.customers.getName() + "\\nApellidos: "+aux.customers.getLast_name() 
                      +"\\nGenerod: "+ aux.customers.getGender() + "\\nTelefono: "+ aux.customers.getPhone() + "\\nDireccion: " + aux.customers.getDirection() +"\"];\n\t";

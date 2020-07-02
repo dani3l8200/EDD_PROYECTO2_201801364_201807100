@@ -262,36 +262,34 @@ public class DoublyLinkedListCircular {
     }
     
     public String SubGrafo(){
-        String myreport1 = "";
-        
+        String myreport1 = "subgraph cluster_LConductores {\n";
         if(start != null){
-            myreport1 += "subgraph Conductores {\n";
             myreport1 += "\t  rankdir=LR;\n\t graph[bgcolor = orange]\n\t node [shape=record,width=0.25,height =0.25,style=filled, fillcolor=lemonchiffon1];\n\t\t";
-            myreport1 += "edge [color=black,tailclip=false];\n\tnodesep=1.5;\n\tranksep = 0.4; \n\t splines=true; \n\t"; 
+            myreport1 += "edge [color=black,tailclip=false];\n\tnodesep=1.5;\n\tranksep = 0.4; \n\t"; 
             node_Driver p = start;
+            
             for(int i = 0;i<size;i++){
-                myreport1 += "Conductor" + p.getDriver().getDPI();
+                myreport1 += "pos" + i;
 		myreport1 += "[fillcolor=yellow,label = ";
 		myreport1 += "\"{<ref1>|<data> ";
 		myreport1 += "DPI " + p.getDriver().getDPI() + "\\n" + "Name " + p.getDriver().getName() + "\\n" +"Last Name : " +p.getDriver().getLast_Name() + "\\n"+  "Type License : " + p.getDriver().getType_Of_License() + "\\n"+ "Gender: " + p.getDriver().getGender() + "\\n"+ "Phone: " + p.getDriver().getPhone() + "\\n"+ "Direction: " + p.getDriver().getDirection()+ " | <ref> }\"];\n\t";          
                 p = p.next;
             }
-            p = start;
+            
             for(int i = 0; i<size-1;i++){
-		myreport1 += "Conductor" + p.getDriver().getDPI() + ":ref:c -> Conductor" + p.getNext().getDriver().getDPI() +":ref1:c"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
-                myreport1 += "Conductor" + p.getNext().getDriver().getDPI() + ":ref1:n -> Conductor" + p.getDriver().getDPI() +":ref:n"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
-                p = p.next;
+		myreport1 += "pos" + i + ":ref:c -> pos" + (i+1) +":ref1:c"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
+
+                myreport1 += "pos" + (i+1) + ":ref1:n -> pos" + (i) +":ref:n"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
+
             }
-            p = start;
             for(int i = 0; i<= size-1;i++){
-		if(i == size-1){
-                    myreport1 += "Conductor" + start.getDriver().getDPI() + ":ref1:n ->  Conductor" + p.getDriver().getDPI() + ":ref:n[dir=forward,arrowhead=vee];\n\t";
-                    myreport1 += "Conductor" + start.getDriver().getDPI() + ":ref1:s ->  Conductor" + p.getDriver().getDPI() + ":ref:s[splines=\"false\",dir=back,arrowhead=vee];\n\t";
-                }
-                p = p.next;
+			if(i == size-1){
+                            myreport1 += "pos0:ref1:n ->  pos" + (i) + ":ref:n[dir=forward,arrowhead=vee];\n\t";
+                            myreport1 += "pos0:ref1:s ->  pos" + (i) + ":ref:s[splines=\"false\",dir=back,arrowhead=vee];\n\t";
+                        }
             }
-            myreport1 += "}";
         }
+        myreport1 += "}";
         return myreport1;
     }
     

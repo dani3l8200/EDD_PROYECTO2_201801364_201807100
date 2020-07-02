@@ -1,11 +1,9 @@
 digraph D {
 
-	Cadiz[label="Cadiz"]
-	Sevilla[label="Sevilla"]
-	Cadiz -> Sevilla [label="125"]
-	Granada[label="Granada"]
-	Sevilla -> Granada [label="256"]
-	Murcia[label="Murcia"]
-	Granada -> Murcia [label="278"]
+	Madrid[label="Madrid"]
+	Zaragoza[label="Zaragoza"]
+	Madrid -> Zaragoza [label="325"]
+	Barcelona[label="Barcelona"]
+	Zaragoza -> Barcelona [label="296"]
 
 }

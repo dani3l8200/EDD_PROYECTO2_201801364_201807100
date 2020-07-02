@@ -196,7 +196,7 @@ public class HashTable{
     
     public String GenerateReportTablaHash(){
         String graph = "digraph TablaHash{\nrankdir=\"LR\";\n node[style=filled, fillcolor=lightskyblue,shape=rect];\n";
-               graph += "graph[label=\"CLIENTES\",fontcolor=black, bgcolor=greenyellow, color=black];\n parent[label=<\n<table border='1' cellborder='1'>\n";
+               graph += "graph[label=\"CLIENTES\"];\n parent[label=<\n<table border='1' cellborder='1'>\n";
                
         int i = 0;
         for (DoublyLinkedList tn : tablaHash) {
@@ -221,8 +221,8 @@ public class HashTable{
     }
     
     public String SubGrafo(){
-        String graph = "subgraph Clientes{\nrankdir=\"LR\";\n node[style=filled, fillcolor=lightskyblue,shape=rect];\n";
-               graph += "graph[label=\"CLIENTES\",fontcolor=black, bgcolor=greenyellow, color=black];\n parent[label=<\n<table border='1' cellborder='1'>\n";
+        String graph = "subgraph cluster_TablaHash{\nrankdir=\"LR\";\n node[style=filled, fillcolor=lightskyblue,shape=rect];\n";
+               graph += "graph[label=\"CLIENTES\"];\n parent[label=<\n<table border='1' cellborder='1'>\n";
                
         int i = 0;
         for (DoublyLinkedList tn : tablaHash) {
@@ -231,18 +231,14 @@ public class HashTable{
         }      
         i = 0;
         graph += "</table>\n>];";   
-        
+        graph += "}";
         for (DoublyLinkedList tn : tablaHash) {
-            if (tn != null) {
-                
+            if (tn != null && tn.head != null) {
                     graph += tn.generateNode(i);
-                    graph += "parent:port_" + i + " -> Cliente" + tn.head.customers.getDPI()+ " [lhead=Clientes" + i + "];\n";
-                
-
+                    graph += "parent:port_" + i + " -> " + tn.head.customers.getDPI()+ " [lhead=Clientes" + i + "];\n";
             }
             i++;
         }
-         graph += "}";
         return graph;
     }
     

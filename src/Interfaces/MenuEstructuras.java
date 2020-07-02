@@ -32,7 +32,6 @@ public class MenuEstructuras extends javax.swing.JFrame {
         initComponents();
         try {
             GenerarImagen();
-            Pintar();
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MenuEstructuras.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,6 +42,7 @@ public class MenuEstructuras extends javax.swing.JFrame {
             BCViajes = new BlockChain();
         }
         Impresora.Imprimir("General", Impresora.DotGeneral());
+        Pintar();
     }
     
     public void Pintar(){

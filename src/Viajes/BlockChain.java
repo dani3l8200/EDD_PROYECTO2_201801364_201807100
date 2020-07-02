@@ -480,7 +480,7 @@ public class BlockChain {
     
     public String SubGrafo(){
         try {
-            String Dot = "subgraph BlockChain {\n\n";
+            String Dot = "subgraph cluster_BlockChain {\n\n";
             if(Cabeza!=null){
                 Dot += "\t BC" + Encriptar(Cabeza.OptenerClave()) + "[label=\"" + Encriptar(Cabeza.OptenerClave()) + "\"]\n";
                 Viaje Aux = Cabeza;

@@ -147,30 +147,6 @@ public class BTree <T extends Comparable<T>> {
                     return graph;
                 }
                 
-                
-                public String SubGrafo(){
-                    String graph = "";
-                     graph  += "nodeArbol" + keys[0].hashCode() + "[label=\"";
-                    for(int i = 0; i < n; i++){
-                       
-                        graph += "<f"+ i + "> |" + keys[i] + "|"; 
-                    }
-                    
-                    graph += "<f" + n + ">\"];\n\t";
-                 
-                    for (int i = 0; i <= n; i++){
-                        if(children[i] == null)
-                            continue;
-                          graph += children[i].generateDot();
-                       
-                       
-                          graph +=  "nodeArbol" + keys[0].hashCode() + ":f" + i + "-> nodeArbol"+ children[i].keys[0].hashCode() + ";\n";
-                    }
-                   
-                    return graph;
-                }
-	
-             
 	}
 
 	public BTree() {
@@ -478,13 +454,13 @@ public class BTree <T extends Comparable<T>> {
         }
         
         public String SubGrafo(){
-            String graph = "subgraph btree {\n";
+            String graph = "subgraph cluster_btree {\n";
             if(root.n != 0){
                         graph+= "rankdir=TB;\n"
                              + "graph[fontcolor=white, bgcolor=black, color=white];\n"
                              + "node[style=filled, fillcolor=lemonchiffon1, shape=record, height=.1];\n"
                              + "edge[color=white];\n"
-                             + root.SubGrafo();
+                             + root.generateDot();
             }
             graph +=  "}";
             return graph;

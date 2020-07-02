@@ -100,23 +100,23 @@ public class Grafo {
     }
     
     public String SubGrafo(){
-        String Dot = "subgraph Mapa {\n\n";
+        String Dot = "subgraph cluster_Mapa {\n\n";
         Nodo AuxN = Nodos.getCabeza();
         while(AuxN != null){
-            Dot += "\tGrafo" + AuxN.getNombre() + "[label=\"" + AuxN.getNombre() + "\"]\n";
+            Dot += "\t" + AuxN.getNombre() + "[label=\"" + AuxN.getNombre() + "\"]\n";
             AuxN = AuxN.getSiguiente();
         }
-        Dot+="\n";
+        Dot+="\n}\n";
         AuxN = Nodos.getCabeza();
         while(AuxN != null){
             Nodo AuxC = AuxN.getCaminos().getCabeza();
             while(AuxC != null){
-                Dot += "\tGrafo" + AuxN.getNombre() + " -> Grafo" + AuxC.getNombre() + " [label=\"" + AuxC.getTiempo() + "\"]\n";
+                Dot += "\t" + AuxN.getNombre() + " -> " + AuxC.getNombre() + " [label=\"" + AuxC.getTiempo() + "\"]\n";
                 AuxC = AuxC.getSiguiente();
             }
             AuxN = AuxN.getSiguiente();
         }
-        Dot += "\n}";
+        Dot += "\n";
         return Dot;
     }
 
