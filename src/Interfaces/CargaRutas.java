@@ -11,6 +11,8 @@ import Rutas.Grafo;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Mapa;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
+import static edd_proyecto2_201801364_201807100.ImpresoraDot.auxArhivoV2;
+import java.awt.Desktop;
 
 public class CargaRutas extends javax.swing.JFrame {
 
@@ -131,6 +133,16 @@ public class CargaRutas extends javax.swing.JFrame {
                 }
             }
             Impresora.Imprimir("Mapa", Mapa.GenerarDot());
+            try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(auxArhivoV2.exists()) desktop.open(auxArhivoV2);
+       } catch (Exception a) {
+            JOptionPane.showMessageDialog(null,a.getCause());
+       }
             ButtonContinuar.setEnabled(true);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error Inesperado, intente de nuevo", "Error", JOptionPane.ERROR_MESSAGE);

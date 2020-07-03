@@ -23,11 +23,13 @@ public class ImpresoraDot {
         
     }
     public static BufferedReader br;
+    public static File auxArhivo,auxArhivoV2;
     public void Imprimir(String Nombre, String Contenido){
         try {
             String RutaDot = System.getProperty("user.dir") + "\\" + Nombre + ".dot";
             String RutaPNG = System.getProperty("user.dir") + "\\" + Nombre + ".png";
             File Archivo = new File(RutaDot);
+            auxArhivoV2 = new File(RutaPNG);
             if (!Archivo.exists()) {
                 Archivo.createNewFile();
             }
@@ -37,6 +39,28 @@ public class ImpresoraDot {
             BW.close();
             ProcessBuilder pbuilder;
             pbuilder = new ProcessBuilder( "dot", "-Tpng", "-o", RutaPNG, RutaDot );
+	    pbuilder.redirectErrorStream( true );
+            pbuilder.start().waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ImprimirV2(String Nombre, String Contenido){
+        try {
+            String RutaDot = System.getProperty("user.dir") + "\\" + Nombre + ".dot";
+            String RutaPNG = System.getProperty("user.dir") + "\\" + Nombre + ".pdf";
+            File Archivo = new File(RutaDot);
+            auxArhivo = new File(RutaPNG);
+            if (!Archivo.exists()) {
+                Archivo.createNewFile();
+            }
+            FileWriter FW = new FileWriter(Archivo);
+            BufferedWriter BW = new BufferedWriter(FW);
+            BW.write(Contenido);
+            BW.close();
+            ProcessBuilder pbuilder;
+            pbuilder = new ProcessBuilder( "dot", "-Tpdf", "-o", RutaPNG, RutaDot );
 	    pbuilder.redirectErrorStream( true );
             pbuilder.start().waitFor();
         } catch (Exception e) {

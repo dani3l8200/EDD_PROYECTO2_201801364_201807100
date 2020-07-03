@@ -6,14 +6,20 @@
 package Interfaces;
 
 import Viajes.BlockChain;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AConductores;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AVehiculos;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MEstructuras;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.TClientes;
+import static edd_proyecto2_201801364_201807100.ImpresoraDot.auxArhivo;
 import static edd_proyecto2_201801364_201807100.ImpresoraDot.br;
+import java.awt.Desktop;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,10 +28,21 @@ import java.util.logging.Logger;
 public class MenuReportes extends javax.swing.JFrame {
     
     public void GenerarImagen() throws NoSuchAlgorithmException{
+        String aux = "";
         if(BCViajes == null){
             BCViajes = new BlockChain();
         }
-        Impresora.Imprimir("General", Impresora.DotGeneral());
+        Impresora.ImprimirV2("General", Impresora.DotGeneral());
+        try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(auxArhivo.exists()) desktop.open(auxArhivo);
+       } catch (Exception a) {
+            JOptionPane.showMessageDialog(null,a.getCause());
+       }
      
     }
     /**

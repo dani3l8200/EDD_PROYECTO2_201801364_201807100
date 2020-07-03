@@ -10,6 +10,9 @@ import Vehicle.Vehicle;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AVehiculos;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
+import static edd_proyecto2_201801364_201807100.ImpresoraDot.auxArhivo;
+import static edd_proyecto2_201801364_201807100.ImpresoraDot.auxArhivoV2;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,6 +46,16 @@ public class MenuVehiculos extends javax.swing.JFrame {
             AVehiculos = new BTree<>();
         }
         Impresora.Imprimir("Vehiculos", AVehiculos.GenerateReportTreeB());
+        try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(auxArhivoV2.exists()) desktop.open(auxArhivoV2);
+       } catch (Exception a) {
+            JOptionPane.showMessageDialog(null,a.getCause());
+       }
     }
     
     public void Pintar(){
