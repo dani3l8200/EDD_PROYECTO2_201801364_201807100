@@ -1,6 +1,7 @@
 //@author Dabs
 package edd_proyecto2_201801364_201807100;
 
+import Rutas.Lista;
 import Viajes.Viaje;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.AVehiculos;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
@@ -67,13 +68,25 @@ public class ImpresoraDot {
     }
     
     public String DotGeneral() throws NoSuchAlgorithmException{
-        String Dot = "digraph D {\n compound=true;\n\n";
+        String Dot = "digraph D {\n compound=true;\ngraph [size = 87];\n\n";
         if(BCViajes!=null && TClientes!=null && AConductores != null && Mapa!=null && AVehiculos!=null){
             Dot += BCViajes.SubGrafo()
                 + TClientes.SubGrafo()
                 + AConductores.SubGrafo()
                 + Mapa.SubGrafo()
                 + AVehiculos.SubGrafo();
+            Viaje Aux = BCViajes.getCabeza();
+            while(Aux!=null){
+                Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave())  + " -> " + Aux.getCliente().getDPI();
+                Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave())  + " -> " + Aux.getConductor().getDPI();
+                Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave())  + " -> " + Aux.getVehiculo().hashCode();
+                Lista Auxiliar = Aux.getRuta();
+                if(Auxiliar != null){
+                    Dot += "\tBC" + BCViajes.Encriptar(Aux.OptenerClave())  + " -> " + BCViajes.Encriptar(Aux.OptenerClave()) + Auxiliar.getCabeza().getNombre();
+                    Auxiliar.SubGrafo(BCViajes.Encriptar(Aux.OptenerClave()));
+                }
+                Aux = Aux.getSiguiente();
+            }
         }
         Dot += "\n}";
         return Dot;

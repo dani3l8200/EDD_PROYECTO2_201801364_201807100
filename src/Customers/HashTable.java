@@ -229,14 +229,15 @@ public class HashTable{
         }      
         i = 0;
         graph += "</table>\n>];";   
-        graph += "}";
+        
         for (DoublyLinkedList tn : tablaHash) {
-            if (tn != null && tn.head != null) {
+            if (tn != null) {
                     graph += tn.generateNode(i);
-                    graph += "parent:port_" + i + " -> " + tn.head.customers.getDPI()+ " [lhead=Clientes" + i + "];\n";
+                    graph += "parent:port_" + i + " -> " + tn.head.customers.getDPI()+ " [lhead=cluster_Clientes" + i + "];\n";
             }
             i++;
         }
+         graph += "}";
         return graph;
     }
     

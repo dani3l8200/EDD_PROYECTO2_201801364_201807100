@@ -279,23 +279,23 @@ public class DoublyLinkedListCircular {
             node_Driver p = start;
             
             for(int i = 0;i<size;i++){
-                myreport1 += "pos" + i;
+                myreport1 += "pos" + p.getDriver().getDPI();
 		myreport1 += "[fillcolor=yellow,label = ";
 		myreport1 += "\"{<ref1>|<data> ";
 		myreport1 += "DPI " + p.getDriver().getDPI() + "\\n" + "Name " + p.getDriver().getName() + "\\n" +"Last Name : " +p.getDriver().getLast_Name() + "\\n"+  "Type License : " + p.getDriver().getType_Of_License() + "\\n"+ "Gender: " + p.getDriver().getGender() + "\\n"+ "Phone: " + p.getDriver().getPhone() + "\\n"+ "Direction: " + p.getDriver().getDirection()+ " | <ref> }\"];\n\t";          
                 p = p.next;
             }
-            
+            p = start;
             for(int i = 0; i<size-1;i++){
-		myreport1 += "pos" + i + ":ref:c -> pos" + (i+1) +":ref1:c"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
+		myreport1 += "pos" + p.getDriver().getDPI() + ":ref:c -> pos" + p.getNext().getDriver().getDPI() +":ref1:c"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
 
-                myreport1 += "pos" + (i+1) + ":ref1:n -> pos" + (i) +":ref:n"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
-
+                myreport1 += "pos" + p.getNext().getDriver().getDPI() + ":ref1:n -> pos" + (p.getDriver().getDPI()) +":ref:n"+ "[arrowhead=vee, arrowtail=dot, dir=both];\n\t";
+                p = p.next;
             }
             for(int i = 0; i<= size-1;i++){
 			if(i == size-1){
-                            myreport1 += "pos0:ref1:n ->  pos" + (i) + ":ref:n[dir=forward,arrowhead=vee];\n\t";
-                            myreport1 += "pos0:ref1:s ->  pos" + (i) + ":ref:s[splines=\"false\",dir=back,arrowhead=vee];\n\t";
+                            myreport1 += "pos"+ start.getDriver().getDPI() +":ref1:n ->  pos" + p.getDriver().getDPI() + ":ref:n[dir=forward,arrowhead=vee];\n\t";
+                            myreport1 += "pos"+ start.getDriver().getDPI() +":ref1:s ->  pos" + p.getDriver().getDPI() + ":ref:s[splines=\"false\",dir=back,arrowhead=vee];\n\t";
                         }
             }
         }

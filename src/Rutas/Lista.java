@@ -97,8 +97,8 @@ public class Lista {
         return Dot;
     }
     
-    public String SubGrafo(String Prefijo){
-        String Dot = "subgraph Rutas" + Prefijo + " {\n\n";
+    public String SubGrafo(String Prefijo) {
+        String Dot = "subgraph cluster_Rutas" + Prefijo + " {\n\n";
         if(Cabeza!=null){
             Dot += "\tRuta" + Prefijo + Cabeza.getNombre() + "[label=\"" + Cabeza.getNombre() + "\"]\n";
             Nodo Aux = Cabeza;
