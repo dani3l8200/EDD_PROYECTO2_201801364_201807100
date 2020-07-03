@@ -20,6 +20,13 @@ subgraph cluster_Clientes15{
 	}
 parent:port_15 -> 2495374578416 [lhead=Clientes15];
 
+subgraph cluster_Clientes20{
+ rankdir="LR";
+ node[style=filled, fillcolor=lemonchiffon1, shape=record];
+0200048746321[label="DPI: 0200048746321\nNombre: Carlos Gomez\nApellidos: Marcos\nGenerod: Masculino\nTelefono: 24321212\nDireccion: 4ta calle A 14-78"];
+	}
+parent:port_20 -> 0200048746321 [lhead=Clientes20];
+
 subgraph cluster_Clientes22{
  rankdir="LR";
  node[style=filled, fillcolor=lemonchiffon1, shape=record];
@@ -45,8 +52,6 @@ subgraph cluster_Clientes33{
  rankdir="LR";
  node[style=filled, fillcolor=lemonchiffon1, shape=record];
 1706798815673[label="DPI: 1706798815673\nNombre: Maris\nApellidos: Mccoy\nGenerod: M\nTelefono: 96634099\nDireccion: Saint-Jean-Geest"];
-	1706798815673->0083192945182;
-0083192945182[label="DPI: 0083192945182\nNombre: Octavia\nApellidos: Velasquez\nGenerod: M\nTelefono: 50264157\nDireccion: Biryuch"];
 	}
 parent:port_33 -> 1706798815673 [lhead=Clientes33];
 }
