@@ -20,6 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
         Image ImagenGrafo = new ImageIcon("Mapa.png").getImage();
         Icon Icono = new ImageIcon(ImagenGrafo.getScaledInstance(JLabelReporte.getWidth(), JLabelReporte.getHeight(), Image.SCALE_SMOOTH));
         JLabelReporte.setIcon(Icono);

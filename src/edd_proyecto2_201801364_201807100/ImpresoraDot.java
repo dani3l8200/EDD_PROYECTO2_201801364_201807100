@@ -11,14 +11,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 public class ImpresoraDot {
     
     public ImpresoraDot(){
+        
     }
-    
+    public static BufferedReader br;
     public void Imprimir(String Nombre, String Contenido){
         try {
             String RutaDot = System.getProperty("user.dir") + "\\" + Nombre + ".dot";
@@ -52,12 +55,8 @@ public class ImpresoraDot {
             BW.write(Contenido);
             BW.close();
             try {
-                if(!Desktop.isDesktopSupported()){
-                    System.out.println("Desktop is not supported");
-                    return;
-                }
-                 Desktop desktop = Desktop.getDesktop();
-                 if(Archivo.exists()) desktop.open(Archivo);
+                FileReader reader = new FileReader(Archivo);
+                br = new BufferedReader(reader);
             } catch (Exception a) {
                 JOptionPane.showMessageDialog(null,a.getCause());
             }

@@ -21,6 +21,7 @@ public class MenuRutas extends javax.swing.JFrame {
      */
     public MenuRutas() {
         initComponents();
+        setLocationRelativeTo(null);
         Image ImagenGrafo = new ImageIcon("Mapa.png").getImage();
         ImagenGrafo.flush();
         Icon Icono = new ImageIcon(ImagenGrafo);

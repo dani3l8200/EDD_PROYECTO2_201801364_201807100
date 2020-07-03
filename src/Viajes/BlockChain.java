@@ -2,11 +2,27 @@
 package Viajes;
 
 import Huffman.Codificador;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.DefaultFontMapper;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfTemplate;
+import com.itextpdf.text.pdf.PdfWriter;
 import edd_proyecto2_201801364_201807100.ImpresoraDot;
+import java.awt.Desktop;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 
 public class BlockChain {
@@ -227,7 +243,45 @@ public class BlockChain {
         }
         return Lcustomers;
     }
-    
+    public void GenerateGraficaReportDrivers(){
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+       CopyDriversOtherList();     
+       while(Ldriver.getCabeza() != null && count_drivers <= 10){
+           dataSet.setValue(Ldriver.getCabeza().getConductor().getGenerate_income(), "No. Ingresos", Ldriver.getCabeza().getConductor().getName());
+           count_drivers++;
+          Ldriver.Cabeza = Ldriver.Cabeza.getSiguiente();
+       }
+       count_drivers = 0;
+       JFreeChart chart = ChartFactory.createBarChart("Conductores Con Mas Ingresos","Conductores","No. Ingresos",dataSet,PlotOrientation.VERTICAL,false,true,false);
+       String RutaEDD = System.getProperty("user.dir") + "\\" + "TopConductoresBarras" + ".pdf";
+        try {
+            FileOutputStream archivo = new FileOutputStream(RutaEDD);
+            File Archivo = new File(RutaEDD);
+            Document doc = new Document();
+            PdfWriter writer = PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            PdfContentByte contentByte = writer.getDirectContent();
+            PdfTemplate template = contentByte.createTemplate(500, 500);
+            Graphics2D gra = template.createGraphics(500, 500, new DefaultFontMapper());
+            Rectangle2D rec = new Rectangle2D.Double(0, 0, 500, 500);
+            chart.draw(gra, rec);
+            gra.dispose();
+            contentByte.addTemplate(template, 0, 0);
+            doc.close();
+            JOptionPane.showMessageDialog(null, "Grafica de Tops Conductores Generada");
+                try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(Archivo.exists()) desktop.open(Archivo);
+                } catch (Exception a) {
+                    JOptionPane.showMessageDialog(null,a.getCause());
+                }
+        } catch (Exception e) {
+        }
+    }
     public void GenerateReportTopDrivers(boolean decOrcom){
         String report1 = "";
         int count = 1;
@@ -236,12 +290,12 @@ public class BlockChain {
             CopyDriversOtherList();
         
         while(Ldriver.getCabeza() != null && count_drivers <= 10){
-            report1 += count + ". " + "Origen: " +Ldriver.getCabeza().getOrigen() +" "
-                    + "Destino: " +Ldriver.getCabeza().getDestino() + " " 
-                    + "Nombre Conductor: "+ Ldriver.getCabeza().getConductor().getName() + " " 
+            report1 += count + ". " + "Origen: " +Ldriver.getCabeza().getOrigen() +", "
+                    + "Destino: " +Ldriver.getCabeza().getDestino() + ", " 
+                    + "Nombre Conductor: "+ Ldriver.getCabeza().getConductor().getName() + ", " 
                     + "Apellidos: "+Ldriver.getCabeza().getConductor().getLast_Name()
-                    + " " + "Direccion "+ Ldriver.getCabeza().getConductor().getDirection()
-                    + " " + "No. veces generado dinero: "+ Ldriver.getCabeza().getConductor().getGenerate_income() +"\n";
+                    + ", " + "Direccion: "+ Ldriver.getCabeza().getConductor().getDirection()
+                    + ", " + "No. veces generado dinero: "+ Ldriver.getCabeza().getConductor().getGenerate_income() +"\n";
             count++;
             count_drivers++;
             Ldriver.Cabeza = Ldriver.Cabeza.getSiguiente();
@@ -272,6 +326,46 @@ public class BlockChain {
         }
     }
     
+    public void GenerarGraficaReportVehicles(){
+       DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+       CopyVehiclesOtherList();     
+       while(Lvehicle.getCabeza() != null && count_vehicles <= 10){
+           dataSet.setValue(Lvehicle.getCabeza().getVehiculo().getGenerate_trips(), "No. Viajes", Lvehicle.getCabeza().getVehiculo().getLicensePlate());
+           count_vehicles++;
+          Lvehicle.Cabeza = Lvehicle.Cabeza.getSiguiente();
+       }
+       count_vehicles = 0;
+       JFreeChart chart = ChartFactory.createBarChart("Vehiculos Con Mas Viajes","Vehiculos","No. Viajes",dataSet,PlotOrientation.VERTICAL,false,true,false);
+       String RutaEDD = System.getProperty("user.dir") + "\\" + "TopVehiculosBarras" + ".pdf";
+        try {
+            FileOutputStream archivo = new FileOutputStream(RutaEDD);
+            File Archivo = new File(RutaEDD);
+            Document doc = new Document();
+            PdfWriter writer = PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            PdfContentByte contentByte = writer.getDirectContent();
+            PdfTemplate template = contentByte.createTemplate(500, 500);
+            Graphics2D gra = template.createGraphics(500, 500, new DefaultFontMapper());
+            Rectangle2D rec = new Rectangle2D.Double(0, 0, 500, 500);
+            chart.draw(gra, rec);
+            gra.dispose();
+            contentByte.addTemplate(template, 0, 0);
+            doc.close();
+            JOptionPane.showMessageDialog(null, "Grafica de Tops Vehiculos Generada");
+                try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(Archivo.exists()) desktop.open(Archivo);
+                } catch (Exception a) {
+                    JOptionPane.showMessageDialog(null,a.getCause());
+                }
+        } catch (Exception e) {
+        }
+    }
+    
     public void GenerateReportTopVehicles(boolean decOrcom){
         String report2 = "";
         int count = 1;
@@ -280,12 +374,14 @@ public class BlockChain {
             CopyVehiclesOtherList();
         
         while(Lvehicle.getCabeza() != null && count_vehicles <= 10){
-            report2 += count + ". " +"No. de viajes: " + Lvehicle.getCabeza().getVehiculo().getGenerate_trips()+" "
-                    +"Placa: " +Lvehicle.getCabeza().getVehiculo().getLicensePlate()+ " "
+            report2 += count + ". " +"No. de viajes: " + Lvehicle.getCabeza().getVehiculo().getGenerate_trips()
+                    +"Origen: "+Lvehicle.getCabeza().getOrigen()+","
+                    +"Destino: "+Lvehicle.getCabeza().getDestino()+", "
+                    +"Placa: " +Lvehicle.getCabeza().getVehiculo().getLicensePlate()+ ", "
                     +"Marca: " +Lvehicle.getCabeza().getVehiculo().getBrand()
-                    + " " +"Modelo: "+ Lvehicle.getCabeza().getVehiculo().getModel()
-                    + " " + "Year: "+Lvehicle.getCabeza().getVehiculo().getColor()
-                    + " "+ "Precio: "+Lvehicle.getCabeza().getVehiculo().getPrice()+ "\n";
+                    + ", " +"Modelo: "+ Lvehicle.getCabeza().getVehiculo().getModel()
+                    + ", " + "Year: "+Lvehicle.getCabeza().getVehiculo().getColor()
+                    + ", "+ "Precio: "+Lvehicle.getCabeza().getVehiculo().getPrice()+ "\n";
             count++;
             count_vehicles++;
             Lvehicle.Cabeza = Lvehicle.Cabeza.getSiguiente();
@@ -316,6 +412,47 @@ public class BlockChain {
         }
     }
     
+    public void GenerarGraficaReportCustomers(){
+       DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+       CopyCustomersOtherList();
+       
+       while(Lcustomers.getCabeza() != null && count_customers <= 10){
+           dataSet.setValue(Lcustomers.getCabeza().getCliente().getGenerate_trips(), "No. Viajes", Lcustomers.getCabeza().getCliente().getName());
+           count_customers++;
+          Lcustomers.Cabeza = Lcustomers.Cabeza.getSiguiente();
+       }
+       count_customers = 0;
+       JFreeChart chart = ChartFactory.createBarChart("Clientes Con Mas Viajes","Clientes","No. Viajes",dataSet,PlotOrientation.VERTICAL,false,true,false);
+       String RutaEDD = System.getProperty("user.dir") + "\\" + "TopClientesBarras" + ".pdf";
+        try {
+            FileOutputStream archivo = new FileOutputStream(RutaEDD);
+            File Archivo = new File(RutaEDD);
+            Document doc = new Document();
+            PdfWriter writer = PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            PdfContentByte contentByte = writer.getDirectContent();
+            PdfTemplate template = contentByte.createTemplate(500, 500);
+            Graphics2D gra = template.createGraphics(500, 500, new DefaultFontMapper());
+            Rectangle2D rec = new Rectangle2D.Double(0, 0, 500, 500);
+            chart.draw(gra, rec);
+            gra.dispose();
+            contentByte.addTemplate(template, 0, 0);
+            doc.close();
+            JOptionPane.showMessageDialog(null, "Tabla con todos los vehiculos generada");
+                try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(Archivo.exists()) desktop.open(Archivo);
+                } catch (Exception a) {
+                    JOptionPane.showMessageDialog(null,a.getCause());
+                }
+        } catch (Exception e) {
+        }
+   }
+    
     public void GenerateReportTopCustomers(boolean decOrcom){
         String report3 = "";
         int count = 1;
@@ -324,18 +461,19 @@ public class BlockChain {
             CopyCustomersOtherList();
         
         while(Lcustomers.getCabeza() != null && count_customers <= 10){
-            report3 += count + ". "+"No. Pedidos de Viajes: "+Lcustomers.getCabeza().getCliente().getGenerate_trips()+" " +"Origen: " +Lcustomers.getCabeza().getOrigen() +" "
-                    +"Destino" + Lcustomers.getCabeza().getDestino() + " "
-                    +"DPI: "+Lcustomers.getCabeza().getCliente().getDPI()+ " "
-                    + "Nombre; "+  Lcustomers.getCabeza().getCliente().getName()
-                    +  " " + "Apellidos"+ Lcustomers.getCabeza().getCliente().getLast_name()+ " " 
-                    + "Conductor: "+ Lcustomers.getCabeza().getConductor().getName() + " "
-                    + "DPI: " + Lcustomers.getCabeza().getConductor().getDPI()+ "\n";
+            report3 += count + ". "+"No. Pedidos de Viajes: "+Lcustomers.getCabeza().getCliente().getGenerate_trips()+", " +"Origen: " +Lcustomers.getCabeza().getOrigen() +", "
+                    +"Destino: " + Lcustomers.getCabeza().getDestino() + ", "
+                    +"DPI: "+Lcustomers.getCabeza().getCliente().getDPI()+ ", "
+                    + "Nombre: "+  Lcustomers.getCabeza().getCliente().getName()
+                    +  ", " + "Apellidos: "+ Lcustomers.getCabeza().getCliente().getLast_name()+ ", " 
+                    + "Conductor: "+ Lcustomers.getCabeza().getConductor().getName() + ", "
+                    + "DPI Conductor: " + Lcustomers.getCabeza().getConductor().getDPI()+ ", "
+                    + "No. Placa de auto: "+Lcustomers.getCabeza().getVehiculo().getLicensePlate()+ "\n";
             count++;
             count_customers++;
             Lcustomers.Cabeza = Lcustomers.Cabeza.getSiguiente();
         }
-        count_vehicles = 0;
+        count_customers = 0;
         if(decOrcom == true){
          
             String total =  "TEXTO COMPRIMIDO\n";
@@ -360,21 +498,54 @@ public class BlockChain {
             }
         }
     }
-    
-    public void GenerateReportTopViajes(boolean decOrcom){
+    public void GenerarGraficaReportViajes(){
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+       Viaje[] aux = TopViajes();
        
+        for (Viaje aux1 : aux) {
+            dataSet.setValue(aux1.getRuta().CantidadNodos(), "No. Destinos", aux1.getDestino());
+           
+        }
+       JFreeChart chart = ChartFactory.createBarChart("VIajes mas Largos","Viajes","No. Destinos",dataSet,PlotOrientation.VERTICAL,false,true,false);
+       String RutaEDD = System.getProperty("user.dir") + "\\" + "TopViajesBarras" + ".pdf";
+        try {
+            FileOutputStream archivo = new FileOutputStream(RutaEDD);
+            File Archivo = new File(RutaEDD);
+            Document doc = new Document();
+            PdfWriter writer = PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            PdfContentByte contentByte = writer.getDirectContent();
+            PdfTemplate template = contentByte.createTemplate(500, 500);
+            Graphics2D gra = template.createGraphics(500, 500, new DefaultFontMapper());
+            Rectangle2D rec = new Rectangle2D.Double(0, 0, 500, 500);
+            chart.draw(gra, rec);
+            gra.dispose();
+            contentByte.addTemplate(template, 0, 0);
+            doc.close();
+            JOptionPane.showMessageDialog(null, "Grafica de Barras de Viajes generada");
+                try {
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(Archivo.exists()) desktop.open(Archivo);
+                } catch (Exception a) {
+                    JOptionPane.showMessageDialog(null,a.getCause());
+                }
+        } catch (Exception e) {
+        }
+    }
+    public void GenerateReportTopViajes(boolean decOrcom){
+       report4 = "";
         Codificador Prueba = new Codificador();
         TopViajes();
         String report4Aux = report4;
         if(decOrcom == true){
-         
             String total =  "TEXTO COMPRIMIDO\n";
             String aux = Prueba.Datos(report4Aux);
-            total += "\nTodo codificado\n" + Prueba.Generar(report4Aux) + "\n\nFrecuencias y valores de cada caracter:\n";
-            
+            total += "\nTodo codificado\n" + Prueba.Generar(report4Aux) + "\n\nFrecuencias y valores de cada caracter:\n";        
             total += aux;
-           
-            
             ImpresoraDot Impresora = new ImpresoraDot();
             Impresora.ImprimirTxT("ReporteTopCustomers", total);
         }else{
@@ -383,13 +554,13 @@ public class BlockChain {
                 String decode =  Prueba.Generar(report4Aux);
                 aux += Prueba.Desencriptar(decode);
              
-                 ImpresoraDot Impresora = new ImpresoraDot();
+                ImpresoraDot Impresora = new ImpresoraDot();
                 Impresora.ImprimirTxT("ReporteTopCustomersDescomprimido",aux );
             } catch (Exception e) {
                 System.err.println("No hay texto para codificar");
             }
         }
-        report4 = "";
+        
     }
     
     public void OrderListDriver(){
@@ -534,18 +705,23 @@ public class BlockChain {
             }
             Aux = Aux.getSiguiente();
         }
-        Aux = Cabeza;
+        
         int count = 1;
-         while(Aux != null){
+         
             for(int i =0; i<10; i++){
+                if(TopViajes[i] != null){
                 report4 += count + ". "  +TopViajes[i].getDia() + " " + TopViajes[i].getOrigen() + " " + TopViajes[i].getDestino()+" "+ TopViajes[i].getRuta().TiempoTotal() +" "+ TopViajes[i].getConductor().getName()+ " " + TopViajes[i].getCliente().getName()
                     + " " + TopViajes[i].getVehiculo().getBrand()+ "\n";
                  count++;
+                }
             }
-            Aux = Aux.getSiguiente();
-        }
+           
+        
         return TopViajes;
     }
+    
+    
+   
 
     public Viaje getCabeza() {
         return Cabeza;

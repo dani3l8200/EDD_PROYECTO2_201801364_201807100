@@ -11,6 +11,7 @@ import Vehicle.*;
 import Rutas.*;
 import Interfaces.*;
 import Viajes.*;
+import javax.swing.UIManager;
 
 /**
  *
@@ -55,7 +56,16 @@ public class EDD_PROYECTO2_201801364_201807100 {
         Mapa = null;
         Impresora = new ImpresoraDot();
         CRutas = new CargaRutas();
-        CRutas.setVisible(true);
+        
+                try {
+                    // Plastic3DLookAndFeel.setPlasticTheme(new DarkStar());
+                    UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+                } catch (Exception e) {
+                }
+                CRutas.setVisible(true);
+            
+      
+        
     }
     
 }

@@ -41,6 +41,7 @@ public class NuevoViaje extends javax.swing.JFrame {
      */
     public NuevoViaje() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     public void GenerarImagen(Lista Ruta){

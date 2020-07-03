@@ -20,7 +20,8 @@ public class CargaRutas extends javax.swing.JFrame {
      * Creates new form CargaRutas
      */
     public CargaRutas() {
-        initComponents();
+        initComponents(); 
+        setLocationRelativeTo(null);
         JFileChooserCargar.setFileFilter(Filtro);
     }
 
@@ -166,6 +167,11 @@ public class CargaRutas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    // Plastic3DLookAndFeel.setPlasticTheme(new DarkStar());
+                  //  UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+                } catch (Exception e) {
+                }
                 new CargaRutas().setVisible(true);
             }
         });

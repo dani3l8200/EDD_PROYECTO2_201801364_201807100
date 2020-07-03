@@ -26,6 +26,7 @@ public class MenuViajes extends javax.swing.JFrame {
      */
     public MenuViajes() {
         initComponents();
+        setLocationRelativeTo(null);
         Pintar();
     }
     

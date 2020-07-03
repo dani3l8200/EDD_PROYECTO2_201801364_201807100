@@ -35,6 +35,7 @@ public class MenuEstructuras extends javax.swing.JFrame {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MenuEstructuras.class.getName()).log(Level.SEVERE, null, ex);
         }
+       setLocationRelativeTo(null);
     }
     
     public void GenerarImagen() throws NoSuchAlgorithmException{

@@ -8,6 +8,7 @@ package Interfaces;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MEstructuras;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
+import static edd_proyecto2_201801364_201807100.ImpresoraDot.br;
 
 /**
  *
@@ -20,6 +21,7 @@ public class MenuReportes extends javax.swing.JFrame {
      */
     public MenuReportes() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -40,6 +42,7 @@ public class MenuReportes extends javax.swing.JFrame {
         JButtonCompleta = new javax.swing.JButton();
         JButtonRutaViaje = new javax.swing.JButton();
         JVerifyAction = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,24 +89,34 @@ public class MenuReportes extends javax.swing.JFrame {
 
         JVerifyAction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Encode", "Decoder" }));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("Ver Grafica de Barras");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JButtonHuffman, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(JButtonCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JButtonHuffman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JVerifyAction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JComboBoxReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JVerifyAction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButtonRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,7 +135,8 @@ public class MenuReportes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JButtonCompleta, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(JButtonCompleta, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JButtonRegresar)
                 .addContainerGap())
@@ -153,8 +167,18 @@ public class MenuReportes extends javax.swing.JFrame {
                     if(BCViajes != null){
                         if(JVerifyAction.getSelectedIndex() == 0){
                             BCViajes.GenerateReportTopViajes(true);
+                            if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                            }
                     }else if(JVerifyAction.getSelectedIndex() == 1){
                        BCViajes.GenerateReportTopViajes(false);
+                       if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                        }
                     }
                }
                } catch (Exception e) {
@@ -167,8 +191,18 @@ public class MenuReportes extends javax.swing.JFrame {
                     if(BCViajes != null){
                         if(JVerifyAction.getSelectedIndex() == 0){
                             BCViajes.GenerateReportTopCustomers(true);
+                            if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                            }
                     }else if(JVerifyAction.getSelectedIndex() == 1){
                        BCViajes.GenerateReportTopCustomers(false);
+                       if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                        }
                     }
                }
                } catch (Exception e) {
@@ -181,8 +215,18 @@ public class MenuReportes extends javax.swing.JFrame {
                     if(BCViajes != null){
                         if(JVerifyAction.getSelectedIndex() == 0){
                             BCViajes.GenerateReportTopDrivers(true);
+                            if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                            }
                     }else if(JVerifyAction.getSelectedIndex() == 1){
                        BCViajes.GenerateReportTopDrivers(false);
+                       if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                        }
                     }
                }
                } catch (Exception e) {
@@ -195,8 +239,18 @@ public class MenuReportes extends javax.swing.JFrame {
                     if(BCViajes != null){
                         if(JVerifyAction.getSelectedIndex() == 0){
                             BCViajes.GenerateReportTopVehicles(true);
+                            if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                            }
                     }else if(JVerifyAction.getSelectedIndex() == 1){
                        BCViajes.GenerateReportTopVehicles(false);
+                       if(br != null){
+                                jTextArea1.read(br,null);
+                                br.close();
+                                jTextArea1.requestFocus();
+                        }
                     }
                }
                } catch (Exception e) {
@@ -208,6 +262,41 @@ public class MenuReportes extends javax.swing.JFrame {
                break;
        }
     }//GEN-LAST:event_JButtonHuffmanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            switch(JComboBoxReporte.getSelectedIndex()){
+                case 0:
+                    if(BCViajes != null){
+                        BCViajes.GenerarGraficaReportViajes();
+                    }else{
+                        System.out.println("F");
+                    }
+                    break;
+                case 1:
+                    if(BCViajes != null){
+                        BCViajes.GenerarGraficaReportCustomers();
+                    }else{
+                        System.out.println("F");
+                    }
+                    break;
+                case 2:
+                    if(BCViajes != null){
+                        BCViajes.GenerateGraficaReportDrivers();
+                    }else{
+                        System.out.println("F");
+                    }
+                    break;
+                case 3:
+                    if(BCViajes != null){
+                        BCViajes.GenerarGraficaReportVehicles();
+                    }else{
+                        System.out.println("F");
+                    }
+                    break;
+                default:
+                    break;
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +341,7 @@ public class MenuReportes extends javax.swing.JFrame {
     private javax.swing.JButton JButtonRutaViaje;
     private javax.swing.JComboBox<String> JComboBoxReporte;
     private javax.swing.JComboBox<String> JVerifyAction;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
