@@ -43,7 +43,7 @@ public class MenuEstructuras extends javax.swing.JFrame {
             BCViajes = new BlockChain();
         }
         Impresora.Imprimir("General", Impresora.DotGeneral());
-        Pintar();
+     
     }
     
     public void Pintar(){

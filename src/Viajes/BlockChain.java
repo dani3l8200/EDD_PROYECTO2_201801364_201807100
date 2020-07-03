@@ -30,6 +30,7 @@ public class BlockChain {
     public Viaje Cabeza;
     public int count_drivers, count_vehicles,count_customers;
     public static String report4 = "";
+     public static JFreeChart charViajes; 
     public BlockChain(){
         Cabeza = null;
         count_drivers = 0;
@@ -498,15 +499,7 @@ public class BlockChain {
             }
         }
     }
-    public void GenerarGraficaReportViajes(){
-        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-       Viaje[] aux = TopViajes();
-       
-        for (Viaje aux1 : aux) {
-            dataSet.setValue(aux1.getRuta().CantidadNodos(), "No. Destinos", aux1.getDestino());
-           
-        }
-       JFreeChart chart = ChartFactory.createBarChart("VIajes mas Largos","Viajes","No. Destinos",dataSet,PlotOrientation.VERTICAL,false,true,false);
+    public void GenerarGraficaReportViajes(){      
        String RutaEDD = System.getProperty("user.dir") + "\\" + "TopViajesBarras" + ".pdf";
         try {
             FileOutputStream archivo = new FileOutputStream(RutaEDD);
@@ -518,7 +511,7 @@ public class BlockChain {
             PdfTemplate template = contentByte.createTemplate(500, 500);
             Graphics2D gra = template.createGraphics(500, 500, new DefaultFontMapper());
             Rectangle2D rec = new Rectangle2D.Double(0, 0, 500, 500);
-            chart.draw(gra, rec);
+            charViajes.draw(gra, rec);
             gra.dispose();
             contentByte.addTemplate(template, 0, 0);
             doc.close();
@@ -715,8 +708,14 @@ public class BlockChain {
                  count++;
                 }
             }
-           
-        
+         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+         for(int i = 0; i<10; i++){
+             if(TopViajes[i] != null){
+                 dataSet.setValue(TopViajes[i].getRuta().TiempoTotal(), "Recorrido (KM)", TopViajes[i].getDestino());
+             }
+         }
+         charViajes = ChartFactory.createBarChart("VIajes mas Largos","Viajes","Recorrido (KM)",dataSet,PlotOrientation.VERTICAL,false,true,false);
+            
         return TopViajes;
     }
     
