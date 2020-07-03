@@ -5,17 +5,29 @@
  */
 package Interfaces;
 
+import Viajes.BlockChain;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.BCViajes;
+import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Impresora;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.MEstructuras;
 import static edd_proyecto2_201801364_201807100.EDD_PROYECTO2_201801364_201807100.Principal;
 import static edd_proyecto2_201801364_201807100.ImpresoraDot.br;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Barillas
  */
 public class MenuReportes extends javax.swing.JFrame {
-
+    
+    public void GenerarImagen() throws NoSuchAlgorithmException{
+        if(BCViajes == null){
+            BCViajes = new BlockChain();
+        }
+        Impresora.Imprimir("General", Impresora.DotGeneral());
+     
+    }
     /**
      * Creates new form Reportes
      */
@@ -106,12 +118,12 @@ public class MenuReportes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(JButtonCompleta, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JButtonCompleta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(JButtonHuffman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JVerifyAction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JComboBoxReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,10 +145,10 @@ public class MenuReportes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JButtonRutaViaje, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JButtonCompleta, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JButtonRutaViaje)
+                    .addComponent(JButtonCompleta)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JButtonRegresar)
                 .addContainerGap())
@@ -146,13 +158,19 @@ public class MenuReportes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JButtonCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonCompletaActionPerformed
-        MEstructuras = new MenuEstructuras();
-        MEstructuras.setVisible(true);
-        this.setVisible(false);
+        try {
+            GenerarImagen();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(MenuEstructuras.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_JButtonCompletaActionPerformed
 
     private void JButtonRutaViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRutaViajeActionPerformed
-        
+        if(MEstructuras==null){
+            MEstructuras = new MenuEstructuras();
+        }
+        MEstructuras.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_JButtonRutaViajeActionPerformed
 
     private void JButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegresarActionPerformed

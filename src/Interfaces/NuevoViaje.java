@@ -35,7 +35,7 @@ public class NuevoViaje extends javax.swing.JFrame {
     String Origen;
     String Destino;
     Lista RutaViaje;
-    
+
     /**
      * Creates new form NuevoViaje
      */
@@ -43,15 +43,15 @@ public class NuevoViaje extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    public void GenerarImagen(Lista Ruta){
-        if(Ruta == null){
+
+    public void GenerarImagen(Lista Ruta) {
+        if (Ruta == null) {
             Ruta = new Lista();
         }
         Impresora.Imprimir("RutaN", Ruta.GenerarDot());
     }
-    
-    public void Pintar(){
+
+    public void Pintar() {
         Image ImagenGrafo = new ImageIcon("RutaN.png").getImage();
         ImagenGrafo.flush();
         Icon Icono = new ImageIcon(ImagenGrafo);
@@ -331,11 +331,11 @@ public class NuevoViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_JButtonBuscarRutaActionPerformed
 
     private void JTextFieldDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldDiaActionPerformed
-        
+
     }//GEN-LAST:event_JTextFieldDiaActionPerformed
 
     private void JButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonNuevoActionPerformed
-        try{
+        try {
             int Dia = Integer.parseInt(JTextFieldDia.getText());
             int Mes = Integer.parseInt(JTextFieldMes.getText());
             int Año = Integer.parseInt(JTextFieldAño.getText());
@@ -344,22 +344,22 @@ public class NuevoViaje extends javax.swing.JFrame {
             String Cliente = JTextFieldCliente.getText();
             String Conductor = JTextFieldConductor.getText();
             String Placa = JTextFieldPlaca.getText();
-            if(TClientes == null){
+            if (TClientes == null) {
                 TClientes = new HashTable();
             }
             Customers Client = TClientes.search(Cliente);
-            if(AConductores == null){
+            if (AConductores == null) {
                 AConductores = new DoublyLinkedListCircular();
             }
             Drivers ConductorAux = AConductores.SearchForUpdate(Conductor);
-            if(AVehiculos == null){
+            if (AVehiculos == null) {
                 AVehiculos = new BTree();
             }
             Vehicle Auto = AVehiculos.search(new Vehicle(Placa));
-            if(Client != null){
-                if(ConductorAux != null){
-                    if(Auto != null){
-                        if(BCViajes == null){
+            if (Client != null) {
+                if (ConductorAux != null) {
+                    if (Auto != null) {
+                        if (BCViajes == null) {
                             BCViajes = new BlockChain();
                         }
                         BCViajes.Insertar(new Viaje(Origen, Destino, Dia, Mes, Año, Hora, Minuto, Client, ConductorAux, Auto, RutaViaje));
@@ -369,7 +369,7 @@ public class NuevoViaje extends javax.swing.JFrame {
                         System.out.println(BCViajes.BuscarCliente(Client.getDPI()).getCliente().getGenerate_trips());
                         System.out.println(BCViajes.BuscarConductor(ConductorAux.getDPI()).getConductor().getGenerate_income());
                         System.out.println(BCViajes.BuscarVehiculo(Auto.getLicensePlate()).getVehiculo().getGenerate_trips());
-                        JOptionPane.showMessageDialog(null, "Viaje registrado con exito", "REgistrado",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Viaje registrado con exito", "REgistrado", JOptionPane.INFORMATION_MESSAGE);
                         JTextFieldDia.setText("");
                         JTextFieldMes.setText("");
                         JTextFieldAño.setText("");
@@ -378,21 +378,32 @@ public class NuevoViaje extends javax.swing.JFrame {
                         JTextFieldCliente.setText("");
                         JTextFieldConductor.setText("");
                         JTextFieldPlaca.setText("");
+                        JTextFieldOrigen.setText("");
+                        JTextFieldDestino.setText("");
+                        JTextFieldDia.setEnabled(false);
+                        JTextFieldMes.setEnabled(false);
+                        JTextFieldAño.setEnabled(false);
+                        JTextFieldHora.setEnabled(false);
+                        JTextFieldMinuto.setEnabled(false);
+                        JTextFieldCliente.setEnabled(false);
+                        JTextFieldConductor.setEnabled(false);
+                        JTextFieldPlaca.setEnabled(false);
+                        JButtonNuevo.setEnabled(false);
                         MViajes = new MenuViajes();
                         MViajes.setVisible(true);
                         this.setVisible(false);
                         dispose();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Auto no registrado", "No registrado",JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Auto no registrado", "No registrado", JOptionPane.ERROR_MESSAGE);
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Conductor no registrado", "No registrado",JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Conductor no registrado", "No registrado", JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                JOptionPane.showMessageDialog(null, "Cliente no registrado", "No registrado",JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente no registrado", "No registrado", JOptionPane.ERROR_MESSAGE);
             }
-        }catch(Exception E){
-            
+        } catch (Exception E) {
+
         }
     }//GEN-LAST:event_JButtonNuevoActionPerformed
 

@@ -38,17 +38,16 @@ public class BlockChain {
         count_customers = 0;
     }
     
-    public void Insertar(Viaje Nuevo){ 
+    public void Insertar(Viaje Nuevo) throws NoSuchAlgorithmException{ 
         if(Cabeza == null){
             Cabeza = Nuevo;
         }else{
-           
-            
-            Viaje n = Cabeza;
+           Viaje n = Cabeza;
             while(n.getSiguiente()!=null){
                 n = n.getSiguiente();
             }
             n.setSiguiente(Nuevo);
+            System.out.println(Encriptar(Nuevo.OptenerClave()));
         }
     }
     
@@ -123,10 +122,10 @@ public class BlockChain {
     
     public Viaje Buscar(String Clave){
         try {
-            Clave = Encriptar(Clave);
-            if(Cabeza == null){
+            if(Cabeza != null){
                 Viaje Aux = Cabeza;
-                while(Aux != null && Clave.equals(Encriptar(Aux.OptenerClave()))){
+                while(Aux != null && !Clave.equals(Encriptar(Aux.OptenerClave()))){
+                    System.out.println(Encriptar(Aux.OptenerClave()));
                     Aux = Aux.getSiguiente();
                 }
                 return Aux;
